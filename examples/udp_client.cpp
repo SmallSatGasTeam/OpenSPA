@@ -1,26 +1,8 @@
 /*
     Simple udp client
 */
-#include<stdio.h> //printf
-#include<string.h> //memset
-#include<stdlib.h> //exit(0);
+#include "../lib/PA_Socket/socket.hpp"
 
-#include<arpa/inet.h>
-// #include<sys/socket.h>
-// #include <sys/types.h>
-// #include <netinet/in.h>
-
-
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <string>
-#include <unistd.h>
-#include <cerrno>
-
-#include <cstdint>
-#include <string>
-#include <iostream>
 
 #define SERVER "127.0.0.1"
 #define BUFLEN 512  //Max length of buffer
@@ -31,87 +13,6 @@ void die(char *s)
     perror(s);
     exit(1);
 }
-
-class SocketAddress{
-public:
-  SocketAddress(std::string addr = "", int port = -1): address(addr), port(port){}
-  void handleFailure(){
-    std::cout << "Socket Address Failure" << std::endl;
-    exit(1);
-  }
-
-  struct sockaddr_in to_sockaddr_in() {
-    struct sockaddr_in addr;
-		memset(&addr, 0, sizeof addr);
-
-		addr.sin_family = AF_INET;
-		addr.sin_port = htons(port);
-
-		if(inet_aton(address.c_str(), &addr.sin_addr) == 0){
-      handleFailure();
-    }
-
-		return addr;
-  }
-protected:
-  std::string address;
-  int port;
-};
-
-//__________
-
-class Socket{
-public:
-  Socket():fd(-1){
-    if(init() == false){
-      handleFailure();
-    }
-  }
-
-  ~Socket(){
-    if(fd >= 0) {close(fd);}
-  }
-
-  bool send(std::string address, uint16_t port, std::string message){
-
-    if(fd < 1){ handleFailure(); }
-
-    SocketAddress addr(address, port);
-    struct sockaddr_in saddr = addr.to_sockaddr_in();
-    int8_t result = sendto(
-      fd,
-      message.c_str(),
-      strlen(message.c_str()),
-      0,
-      (struct sockaddr *) &saddr,
-      sizeof(saddr)
-    );
-
-    if(result == -1) {
-      handleFailure();
-      return false;
-    }
-    return true;
-  }
-  // void bind();
-
-protected:
-  bool init(){
-    if ( (fd=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
-      return false;
-    }
-    return true;
-  }
-
-  void handleFailure(){
-    // TODO not sure how to die just yet :)
-    std::cout << "Socket Failure" << std::endl;
-    exit(1);
-  }
-
-  int32_t fd;
-};
-
 
 int main(void)
 {
@@ -135,7 +36,7 @@ int main(void)
 
 
 /*
-    Simple udp client
+    Simple udp client example code from the interwebs
 */
 // #include<stdio.h> //printf
 // #include<string.h> //memset

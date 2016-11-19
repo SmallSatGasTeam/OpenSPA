@@ -1,12 +1,7 @@
 #ifndef SOCKET_ADDRESS_HPP
 #define SOCKET_ADDRESS_HPP
 
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <string>
-#include <unistd.h>
-#include <cerrno>
+#include<arpa/inet.h>
 
 #include <cstdint>
 #include <string>

@@ -12,13 +12,13 @@ run_client: client
 	./client.bin
 
 client:
-	g++ udp_client.cpp -o client.bin
+	g++ -std=c++11 udp_client.cpp -o client.bin
 
 run_server: server
 	./server.bin
 
 server:
-	g++ udp_server.cpp -o server.bin
+	g++ -std=c++11 udp_server.cpp -o server.bin
 
 clean:
 	rm *.bin

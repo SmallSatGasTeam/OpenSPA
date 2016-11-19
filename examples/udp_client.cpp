@@ -16,6 +16,10 @@ void die(char *s)
 
 int main(void)
 {
+    // Socket is an abstraction class that we have built. This makes it so Unix
+    // specific code can live in only one place. As well as allowing us to not
+    // litter gross C code everywhere. You can find the source in
+    // lib/PA_Socket/socket.hpp 
     Socket s;
 
     while(true){

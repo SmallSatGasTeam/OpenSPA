@@ -18,7 +18,7 @@ run_server: server
 	./server.bin
 
 server:
-	gcc udp_server.c -o server.bin
+	g++ udp_server.cpp -o server.bin
 
 clean:
 	rm *.bin

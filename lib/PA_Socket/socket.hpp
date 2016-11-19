@@ -1,12 +1,12 @@
 #ifndef SOCKET_HPP
 #define SOCKET_HPP
 
+#include <cstdint>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <unistd.h>
 
-#include <cstdint>
 #include <string>
 #include <iostream>
 
@@ -45,7 +45,6 @@ public:
     }
     return true;
   }
-  // void bind();
 
 protected:
   bool init(){

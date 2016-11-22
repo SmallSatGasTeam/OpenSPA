@@ -13,7 +13,6 @@ public:
 
 
 void routing_table_insert(void) {
-  std::vector<bool> results;
   _RoutingTable rt;
   LogicalAddress l1(1,1);
   LogicalAddress l2(2,2);
@@ -32,4 +31,24 @@ void routing_table_insert(void) {
 
   // Should return iterator to end if key does not exist in map
   TEST_ASSERT_TRUE(table.find(l4) == table.end());
+}
+
+void routing_table_exists(void){
+  _RoutingTable rt;
+  LogicalAddress l1(1,1);
+  LogicalAddress l2(2,1);
+  rt.insert(l1, 1);
+
+  TEST_ASSERT_TRUE(rt.exists(l1));
+  TEST_ASSERT_FALSE(rt.exists(l2));
+}
+
+void routing_table_get_physical_address(void){
+  _RoutingTable rt;
+  LogicalAddress l1(1,1);
+  LogicalAddress l2(1,2);
+  rt.insert(l1, 9);
+
+  TEST_ASSERT_EQUAL(rt.getPhysicalAddress(l1), 9);
+  TEST_ASSERT_EQUAL(rt.getPhysicalAddress(l2), -1);
 }

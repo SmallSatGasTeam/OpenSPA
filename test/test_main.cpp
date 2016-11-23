@@ -27,9 +27,11 @@ int main(int argc, char **argv) {
   RUN_TEST(routing_table_exists);
   RUN_TEST(routing_table_get_physical_address);
 
+  // RUN_TEST(spa_communicator_isLocal);
+
   UNITY_END(); // Important! Must occur at end of test file
 
   return 0;
-}
+};
 
 #endif

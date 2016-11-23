@@ -16,19 +16,30 @@
 //
 // };
 
-// class ComMap {
-// std::map<uin, value> map;
-// };
-
-
 class SpaCommunicator {
 public:
 
   SpaCommunicator(LogicalAddress currentAddress):currentAddress(currentAddress){;}
+  SpaCommunicator(LogicalAddress currentAddress, PhysicalCommunicator const & com)
+    :currentAddress(currentAddress){
+      communicators.push_back(std::make_shared<PhysicalCommunicator>(com));
+    }
 
   void handleFailure(){
     std::cout << "Spa Communicator Failed" << '\n';
     exit(1);
+  }
+
+  std::shared_ptr<PhysicalCommunicator> selectCommunicator(
+  LogicalAddress address,
+  std::vector<std::shared_ptr <PhysicalCommunicator> > communicators){
+    for(auto com : communicators){
+      if(com == nullptr){ continue; }
+      if(com->getSubnetAddress().isOnSameSubnet(address)){
+        return com;
+      }
+    }
+    return nullptr;
   }
 
   bool send(SpaMessage message){
@@ -45,14 +56,15 @@ public:
     return true;
   }
 
-  std::shared_ptr<PhysicalCommunicator> selectCommunicator(LogicalAddress address, std::vector<std::shared_ptr <PhysicalCommunicator> > communicators){
-    for(auto com : communicators){
-      if(com == nullptr){ continue; }
-      if(com->getSubnetAddress().isOnSameSubnet(address)){
-        return com;
-      }
-    }
-    return nullptr;
+  void listen(){
+    std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
+      currentAddress,
+      communicators
+    );
+
+    if(com == nullptr){ handleFailure(); }
+
+    com->listen();
   }
 
 

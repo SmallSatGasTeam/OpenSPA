@@ -7,21 +7,6 @@ void test_test_another(void) {
     TEST_ASSERT_EQUAL(0,0);
 }
 
-// class _SpaCommunicator: public SpaCommunicator {
-//   bool _isLocal(){return isLocal(SpaMessage message, LogicalAddress currentAddress, RoutingTable const & routingTable);}
-// };
-//
-// void spa_communicator_isLocal(void){
-//   SpaCommunicator com;
-//   LogicalAddress current(0,0);
-//   SpaMessage localMessage(LogicalAddress(0,1), 1);
-//   SpaMessage foreignMessage(LogicalAddress(1,1), 1);
-//   RoutingTable rt;
-//
-//   TEST_ASSERT_TRUE(com.isLocal(localMessage, current, routingTable));
-//   // TEST_ASSERT_EQUAL(0,1);
-// }
-
 void spa_communicator_selectCommunicator(void){
   LogicalAddress l1(1,1);
   LogicalAddress l2(2,2);
@@ -32,7 +17,6 @@ void spa_communicator_selectCommunicator(void){
 
   comms.push_back(std::make_shared<PhysicalCommunicator>(ph_1));
   comms.push_back(std::make_shared<PhysicalCommunicator>(ph_2));
-  // SpaMessage message(l3, 1);
 
   SpaCommunicator com(l1);
 
@@ -44,4 +28,10 @@ void spa_communicator_selectCommunicator(void){
 
   selected = com.selectCommunicator(l3, comms);
   TEST_ASSERT_TRUE(selected == nullptr);
+}
+
+void spa_communicator_send(void){
+  PhysicalCommunicator ph(l1);
+  SpaCommunicator com(l1, ph);
+  
 }

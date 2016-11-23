@@ -2,7 +2,7 @@
 
 #ifdef UNIT_TEST
 
-#include "spa_local_communicator.hpp"
+#include "spa_communicator.hpp"
 #include "routing_table.hpp"
 
 // void setUp(void) {

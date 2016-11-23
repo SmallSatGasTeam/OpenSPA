@@ -1,6 +1,6 @@
 #include <memory>
 
-#include "../lib/spa_local_communicator.hpp"
+#include "../lib/spa_communicator.hpp"
 
 
 void test_test_another(void) {
@@ -31,7 +31,8 @@ void spa_communicator_selectCommunicator(void){
 }
 
 void spa_communicator_send(void){
+  LogicalAddress l1(1,1);
   PhysicalCommunicator ph(l1);
   SpaCommunicator com(l1, ph);
-  
+
 }

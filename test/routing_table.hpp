@@ -1,7 +1,7 @@
 #include <vector>
 #include <map>
 #include <cstdint>
-#include "../lib/spa_local_communicator.hpp"
+#include "../lib/routing_table.hpp"
 
 /**
  *  Sub class with added testing functionality

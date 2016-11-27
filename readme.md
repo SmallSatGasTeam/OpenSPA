@@ -22,6 +22,12 @@ other with UDP sockets through the local subnet manager.
 
 ## Getting Started
 ##### Build Docs
+
+##### TLDR
+  * Install Doxygen
+  * Run doxygen with project doxyfile `doxygen ./Doxyfile`
+  * View your docs. They should now live in `docs/`
+
 OpenSPA uses the documentation generator Doxygen to build documentation. Annotated source code is parsed by doxygen, and latex, and html files are generated.
 
  Doxygen can be built from source, or a precompiled binary
@@ -58,15 +64,35 @@ If the documentation is successfully built, there should be a new directory titl
   * Open up `docs/html/index.html` in your web browser to browse docs
 
 ##### Running Tests
-  * Install google test
-  * run Google Test
+OpenSPA uses Google Test testing framework for unit testing. To run OpenSPA's test suite you will first have to install google test.
 
-<!-- ## Developer Notes
+Installing GoogleTest can be an arduous process, and one that has already been documented decently well. Instead of giving a step by step example, we link to helpful resources.
+  * Install google test
+    * For Mac - Here is a link to a tutorial
+      * http://ysonggit.github.io/system/2015/01/01/install-gtest-on-mac-os-yosemite.html
+    * For Linux - Here is another good resource
+      * https://www.eriksmistad.no/getting-started-with-google-test-on-ubuntu/
+    * For Windows - Here is a good resource
+      * https://blog.jetbrains.com/rscpp/unit-testing-google-test/
+
+  * run Google Test
+    * TODO document how to run specs
+
+## Developer Notes
 #####  Abstraction Layer
-* Abstract platform specific functionality like sockets
-##### Testing
-##### Documentation -->
-  <!-- //! I am the brief message, I give a short overview of what a method does
-  //! \param myParam - I describe a parameter
+OpenSPA is currently being developed for embedded linux systems. In order to keep system portability an option we employ the use of what we call a 'Platform Abstration Layer'. Essentially this means that whenever you would need to rely on a system call, or some system specific functionality (I.E. Linux Socket), you would build a wrapper around that system specific functionality. This limits the platform dependance to a single file, which allows OpenSPA to be usable on a wide variety of platforms.
+
+<!-- * Platform Abstrations live ... TODO document where these live -->
+<!-- ##### Testing -->
+<!-- TODO document testing  -->
+##### Documentation
+OpenSPA uses doxygen to build documentation from source code. Essentially this means that you add comments with a special format in the code, and then doxygen can build pretty html docs can be referenced by all other developers and users.
+
+Here is an example of what this might look like to document a function.
+```cpp
+  //! I am the brief message, I give a short overview of what a method does. I need to be followed by a whitespace
+
+  //! \param myParam - I describe myParameter
   //! \return - I describe a return value
-  bool example(int myParam){return true;} -->
+  bool example(int myParam){return true;}
+```

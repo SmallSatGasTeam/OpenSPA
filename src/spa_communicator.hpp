@@ -10,7 +10,6 @@
 #include "routing_table.hpp"
 
 class SpaCommunicator {
-  typedef std::shared_ptr <PhysicalCommunicator> Com;
 public:
   //! Construct SpaCommunicator with only the address of the owning subnet manager
 
@@ -31,6 +30,8 @@ public:
 
   //TODO figure out how listen should work
   // void listen();
+
+  typedef std::shared_ptr <PhysicalCommunicator> Com;
 
 protected:
   //! Method called when something unexpected occurs.

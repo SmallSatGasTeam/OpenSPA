@@ -12,9 +12,9 @@ void SpaCommunicator::handleFailure(){
   exit(1);
 }
 
- Com SpaCommunicator::selectCommunicator(
+ SpaCommunicator::Com SpaCommunicator::selectCommunicator(
   LogicalAddress address,
-  std::vector<Com> communicators){
+  std::vector<Com> const & communicators){
     for(auto com : communicators){
       if(com == nullptr){ continue; }
       if(com->getSubnetAddress().isOnSameSubnet(address)){
@@ -39,13 +39,14 @@ void SpaCommunicator::handleFailure(){
     return true;
   }
 
-void SpaCommunicator::listen(){
-    std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
-      currentAddress,
-      communicators
-    );
-
-    if(com == nullptr){ handleFailure(); }
-
-    com->listen();
-  }
+// TODO 
+// void SpaCommunicator::listen(){
+//     std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
+//       currentAddress,
+//       communicators
+//     );
+//
+//     if(com == nullptr){ handleFailure(); }
+//
+//     com->listen();
+//   }

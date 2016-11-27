@@ -13,12 +13,6 @@ struct LogicalAddress {
     return other.subnetId == subnetId;
   }
 
-  std::vector<uint8_t> marshal(){
-    // int a[] = {1,2};
-    // reinterpret_cast<char*>(a);
-    std::vector<uint16_t> address = {subnetId, componentId};
-    reinterpret_cast<std::vector <uint8_t> > (address);
-  }
 };
 
 bool operator==(const LogicalAddress& lhs, const LogicalAddress& rhs){

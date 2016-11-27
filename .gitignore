@@ -4,10 +4,6 @@
 .pioenvs
 .piolibdeps
 
-notes.md
-docs/
-build/
-
 ##
 # CMake
 ##
@@ -15,3 +11,11 @@ CMakeFiles/
 CMakeCache.txt
 Makefile
 cmake_install.cmake
+
+##
+# Project Files
+##
+notes.md
+docs/
+build/
+runTests

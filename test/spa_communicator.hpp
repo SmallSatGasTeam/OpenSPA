@@ -1,13 +1,16 @@
 #include <memory>
 
-#include "../lib/spa_communicator.hpp"
+#include "../src/spa_communicator.hpp"
 
+class _SpaCommunicator: public SpaCommunicator {
+public:
+  _SpaCommunicator(LogicalAddress currentAddress):SpaCommunicator(currentAddress){}
+  Com _selectCommunicator(LogicalAddress address, std::vector<Com> const & communicators){
+    return selectCommunicator(address, communicators);
+  }
+};
 
-void test_test_another(void) {
-    TEST_ASSERT_EQUAL(0,0);
-}
-
-void spa_communicator_selectCommunicator(void){
+TEST(SpaCommunicator, selectCommunicator){
   LogicalAddress l1(1,1);
   LogicalAddress l2(2,2);
   LogicalAddress l3(3,3);
@@ -18,21 +21,14 @@ void spa_communicator_selectCommunicator(void){
   comms.push_back(std::make_shared<PhysicalCommunicator>(ph_1));
   comms.push_back(std::make_shared<PhysicalCommunicator>(ph_2));
 
-  SpaCommunicator com(l1);
+  _SpaCommunicator com(l1);
 
-  std::shared_ptr <PhysicalCommunicator> selected = com.selectCommunicator(l2, comms);
-  TEST_ASSERT_TRUE(selected->getSubnetAddress() == l2);
+  std::shared_ptr <PhysicalCommunicator> selected = com._selectCommunicator(l2, comms);
+  EXPECT_TRUE(selected->getSubnetAddress() == l2);
 
-  selected = com.selectCommunicator(l1, comms);
-  TEST_ASSERT_TRUE(selected->getSubnetAddress() == l1);
+  selected = com._selectCommunicator(l1, comms);
+  EXPECT_TRUE(selected->getSubnetAddress() == l1);
 
-  selected = com.selectCommunicator(l3, comms);
-  TEST_ASSERT_TRUE(selected == nullptr);
-}
-
-void spa_communicator_send(void){
-  LogicalAddress l1(1,1);
-  PhysicalCommunicator ph(l1);
-  SpaCommunicator com(l1, ph);
-
+  selected = com._selectCommunicator(l3, comms);
+  EXPECT_TRUE(selected == nullptr);
 }

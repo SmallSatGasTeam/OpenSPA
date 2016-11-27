@@ -21,9 +21,25 @@ subnet manager is a separate software process. Subnet managers communicate with 
 other with UDP sockets through the local subnet manager.
 
 ## Getting Started
+<!-- ##### Developer Tools  -->
+<!-- TODO  -->
+##### Build Project
+###### TLDR
+  * Install Cmake
+  * Run Cmake in project directory `cmake .`
+  * Run generated makefile  `make [optional-target]`
+
+OpenSPA uses Cmake for a build system. Makefiles are generally platform dependent,
+so to allow cross platform builds a makefile for each system. Cmake will generate those
+make files for us.
+
+There are numerous cmake installation tutorials out there in the wild. It may be worth checking to see if your system package manager has a cmake package before trying to build cmake from source.
+* Install Cmake
+  * Installing cmake from source - https://cmake.org/install/
+
 ##### Build Docs
 
-##### TLDR
+###### TLDR
   * Install Doxygen
   * Run doxygen with project doxyfile `doxygen ./Doxyfile`
   * View your docs. They should now live in `docs/`
@@ -83,8 +99,46 @@ Installing GoogleTest can be an arduous process, and one that has already been d
 OpenSPA is currently being developed for embedded linux systems. In order to keep system portability an option we employ the use of what we call a 'Platform Abstration Layer'. Essentially this means that whenever you would need to rely on a system call, or some system specific functionality (I.E. Linux Socket), you would build a wrapper around that system specific functionality. This limits the platform dependance to a single file, which allows OpenSPA to be usable on a wide variety of platforms.
 
 <!-- * Platform Abstrations live ... TODO document where these live -->
-<!-- ##### Testing -->
-<!-- TODO document testing  -->
+##### Testing
+OpenSPA uses google test for unit testing, as well as cmake for a build system. The short version of running tests is:
+
+* Ensure Cmake is installed
+* Ensure Google Test is installed
+* Generate a makefile with Cmake `cmake .`
+* Build tests with makefile `make runTests`
+* Run test executable `./runTests`
+
+Classes should be kept small, and have functioning unit tests. When adding a new header file for a class, a header file of the same name should be added to the `test/` directory.
+ It will also need to be included in th
+
+To add a new class to the project:
+  * Create header file `my_class_name.hpp` (File names should be snake case - lowercase words seperated with underscores)
+    * Define class
+    ```cpp
+    #ifndef MY_CLASS_NAME_HPP
+    #define MY_CLASS_NAME_HPP
+      class MyClassName{};
+    #endif
+    ```
+      * Must have include guards
+      * Class name should be UpperCamelCase, where each first letter of a words is capitalized. Including the first word.  
+  * Add new testing file `test/my_class_name.hpp`
+  * Write tests for your class
+    ```cpp
+    #include "../path/to/my_class_name.hpp"
+
+    TEST(MyClassName, myMethod){
+      MyClassName myClass;
+      EXPECT_EQ(myClass.myMethod(),0);
+    }
+    ```
+      * Be sure to include class header in test file
+  * Include your test header in main test file
+    * Open `test/gtest_main.cpp`
+    * Include your new test header file
+  * Hooray! Now you can run your tests! :D 
+
+
 ##### Documentation
 OpenSPA uses doxygen to build documentation from source code. Essentially this means that you add comments with a special format in the code, and then doxygen can build pretty html docs can be referenced by all other developers and users.
 

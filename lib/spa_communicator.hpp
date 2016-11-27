@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <vector>
-#include <iostream>
 
 
 #include "spa_message.hpp"
@@ -11,60 +10,41 @@
 #include "routing_table.hpp"
 
 class SpaCommunicator {
+  typedef std::shared_ptr <PhysicalCommunicator> Com;
 public:
+  //! Construct SpaCommunicator with only the address of the owning subnet manager
 
+  //! \param currentAddress - logical address of the subnet manager who owns SpaCommunicator
   SpaCommunicator(LogicalAddress currentAddress):currentAddress(currentAddress){;}
-  SpaCommunicator(LogicalAddress currentAddress, PhysicalCommunicator const & com)
-    :currentAddress(currentAddress){
-      communicators.push_back(std::make_shared<PhysicalCommunicator>(com));
-    }
 
-  void handleFailure(){
-    std::cout << "Spa Communicator Failed" << '\n';
-    exit(1);
-  }
+  //! Construct SpaCommunicator, and set a physical communicator
 
-  std::shared_ptr<PhysicalCommunicator> selectCommunicator(
-  LogicalAddress address,
-  std::vector<std::shared_ptr <PhysicalCommunicator> > communicators){
-    for(auto com : communicators){
-      if(com == nullptr){ continue; }
-      if(com->getSubnetAddress().isOnSameSubnet(address)){
-        return com;
-      }
-    }
-    return nullptr;
-  }
+  //! \param currentAddress - logical address of the subnet manager who owns SpaCommunicator
+  //! \param communicator - physical communicator that should belong to SpaCommunicator
+  SpaCommunicator(LogicalAddress currentAddress, PhysicalCommunicator const & communicator);
 
-  bool send(SpaMessage message){
-    std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
-      message.logicalAddress,
-      communicators
-    );
+  //! Sends a spa message over the network
 
-    if(com == nullptr){
-      handleFailure();
-      return false;
-    }
-    com->send(message);
-    return true;
-  }
+  //! \param message - Specialization of a Message to be sent over the network.
+  //! \return true if message is successfully sent, false otherwise.
+  bool send(SpaMessage message);
 
-  void listen(){
-    std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
-      currentAddress,
-      communicators
-    );
+  //TODO figure out how listen should work
+  // void listen();
 
-    if(com == nullptr){ handleFailure(); }
+protected:
+  //! Method called when something unexpected occurs.
+  void handleFailure();
 
-    com->listen();
-  }
+  //! Selects the appropriate physical communicator from list of physical communicators
+  //! to send message.
 
+  //! \param address - logical address where message is going to be sent
+  //! \param communicators - vector of communicators to be selected from
+  Com selectCommunicator(LogicalAddress address, std::vector<Com> const & communicators);
 
-  RoutingTable routingTable;
   LogicalAddress currentAddress;
-  std::vector<std::shared_ptr <PhysicalCommunicator> > communicators;
+  std::vector<Com> communicators;
 };
 
 #endif

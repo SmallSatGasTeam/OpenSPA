@@ -21,7 +21,7 @@ subnet manager is a separate software process. Subnet managers communicate with 
 other with UDP sockets through the local subnet manager.
 
 ## Getting Started
-##### Developer Tools
+### Developer Tools
 OpenSPA relies on a handful of developer tools. Here is a list of things that should be set up on your system.
 * Git - Version control system
 * Google Test - Unit testing framework
@@ -29,8 +29,8 @@ OpenSPA relies on a handful of developer tools. Here is a list of things that sh
 * Cmake - Build system automation
 * Make - Build automation
 
-##### Build Project
-###### TLDR
+### Build Project
+#### TLDR
   * Install Cmake
   * Run Cmake in project directory `cmake .`
   * Run generated makefile  `make [optional-target]`
@@ -43,9 +43,9 @@ There are numerous cmake installation tutorials out there in the wild. It may be
 * Install Cmake
   * Installing cmake from source - https://cmake.org/install/
 
-##### Build Docs
+### Build Docs
 
-###### TLDR
+#### TLDR
   * Install Doxygen
   * Run doxygen with project doxyfile `doxygen ./Doxyfile`
   * View your docs. They should now live in `docs/`
@@ -85,7 +85,7 @@ If the documentation is successfully built, there should be a new directory titl
 * Read Docs
   * Open up `docs/html/index.html` in your web browser to browse docs
 
-##### Running Tests
+### Running Tests
 OpenSPA uses Google Test testing framework for unit testing. To run OpenSPA's test suite you will first have to install google test.
 
 Installing GoogleTest can be an arduous process, and one that has already been documented decently well. Instead of giving a step by step example, we link to helpful resources.
@@ -99,7 +99,7 @@ Installing GoogleTest can be an arduous process, and one that has already been d
 
 OpenSPA uses CMake for build system. To run tests you must first have both Cmake and Google Test installed.
 
-  * To run test suite: 
+  * To run test suite:
     * Ensure Cmake is installed
     * Ensure Google Test is installed
     * Generate a makefile with Cmake `cmake .`
@@ -107,11 +107,11 @@ OpenSPA uses CMake for build system. To run tests you must first have both Cmake
     * Run test executable `./runTests`
 
 ## Developer Notes
-#####  Abstraction Layer
+###  Abstraction Layer
 OpenSPA is currently being developed for embedded linux systems. In order to keep system portability an option we employ the use of what we call a 'Platform Abstration Layer'. Essentially this means that whenever you would need to rely on a system call, or some system specific functionality (I.E. Linux Socket), you would build a wrapper around that system specific functionality. This limits the platform dependance to a single file, which allows OpenSPA to be usable on a wide variety of platforms.
 
 <!-- * Platform Abstrations live ... TODO document where these live -->
-##### Testing
+### Testing
 OpenSPA uses google test for unit testing, as well as cmake for a build system. The short version of running tests is:
 
 Classes should be kept small, and have functioning unit tests. When adding a new header file for a class, a header file of the same name should be added to the `test/` directory.
@@ -145,7 +145,7 @@ To add a new class to the project:
   * Hooray! Now you can run your tests! :D
 
 
-##### Documentation
+### Documentation
 OpenSPA uses doxygen to build documentation from source code. Essentially this means that you add comments with a special format in the code, and then doxygen can build pretty html docs can be referenced by all other developers and users.
 
 Here is an example of what this might look like to document a function.

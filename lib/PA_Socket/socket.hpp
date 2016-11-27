@@ -24,6 +24,10 @@ public:
     if(fd >= 0) {close(fd);}
   }
 
+  //! Send message to port
+
+  //! \param address - ip address of destination
+  //! \return true if successful, false otherwise
   bool send(std::string address, uint16_t port, std::string message){
 
     if(fd < 1){ handleFailure(); }

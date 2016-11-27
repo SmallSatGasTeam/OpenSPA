@@ -1,12 +1,12 @@
 #ifndef SERVER_SOCKET_HPP
 #define SERVER_SOCKET_HPP
-#include<stdio.h> //printf
-#include<string.h> //memset
+#include <stdio.h> //printf
+#include <string.h> //memset
+#include <thread>
 
 #include "socket.hpp"
 
 #define BUFLEN 512  //Max length of buffer
-#define PORT 8888   //The port on which to listen for incoming data
 
 
 class ServerSocket: public Socket{
@@ -25,8 +25,9 @@ public:
     return true;
   }
 
-  
-  void listen(){
+
+  template <typename Func>
+  void listen(Func connectionHandler){
     //TODO check fd for errors
     uint8_t buf[BUFLEN];
 
@@ -35,7 +36,6 @@ public:
 
     for(;;){
       memset(buf, 0, BUFLEN);
-      printf("Waiting for data...");
       fflush(stdout);
 
       uint32_t addr_len = sizeof(si_other);
@@ -54,17 +54,11 @@ public:
         handleFailure();
       }
 
+      uint8_t* buffCopy = new uint8_t[BUFLEN];
+      memcpy(buffCopy, buf, BUFLEN);
 
-      // //print details of the client/peer and the data received
-      printf("Received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
-      printf("Data: %s\n" , buf);
-
-      // //now reply the client with the same data
-      // if (sendto(fd, buf, recv_len, 0, (struct sockaddr*) &si_other, slen) == -1)
-      // {
-      //   handleFailure();
-      // }
-    }
+      new std::thread(connectionHandler, buffCopy, BUFLEN);
+  }
 }
 
 };

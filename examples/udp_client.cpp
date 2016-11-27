@@ -1,8 +1,7 @@
 /*
     Simple udp client
 */
-#include "../lib/PA_Socket/socket.hpp"
-
+#include "../src/platform_abstraction/socket/socket.hpp"
 
 #define SERVER "127.0.0.1"
 #define BUFLEN 512  //Max length of buffer
@@ -19,7 +18,7 @@ int main(void)
     // Socket is an abstraction class that we have built. This makes it so Unix
     // specific code can live in only one place. As well as allowing us to not
     // litter gross C code everywhere. You can find the source in
-    // lib/PA_Socket/socket.hpp 
+    // lib/PA_Socket/socket.hpp
     Socket s;
 
     while(true){

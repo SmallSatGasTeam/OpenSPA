@@ -21,8 +21,14 @@ subnet manager is a separate software process. Subnet managers communicate with 
 other with UDP sockets through the local subnet manager.
 
 ## Getting Started
-<!-- ##### Developer Tools  -->
-<!-- TODO  -->
+##### Developer Tools
+OpenSPA relies on a handful of developer tools. Here is a list of things that should be set up on your system.
+* Git - Version control system
+* Google Test - Unit testing framework
+* Doxygen - Documentation generator
+* Cmake - Build system automation
+* Make - Build automation
+
 ##### Build Project
 ###### TLDR
   * Install Cmake
@@ -91,8 +97,14 @@ Installing GoogleTest can be an arduous process, and one that has already been d
     * For Windows - Here is a good resource
       * https://blog.jetbrains.com/rscpp/unit-testing-google-test/
 
-  * run Google Test
-    * TODO document how to run specs
+OpenSPA uses CMake for build system. To run tests you must first have both Cmake and Google Test installed.
+
+  * To run test suite: 
+    * Ensure Cmake is installed
+    * Ensure Google Test is installed
+    * Generate a makefile with Cmake `cmake .`
+    * Build tests with makefile `make runTests`
+    * Run test executable `./runTests`
 
 ## Developer Notes
 #####  Abstraction Layer
@@ -101,12 +113,6 @@ OpenSPA is currently being developed for embedded linux systems. In order to kee
 <!-- * Platform Abstrations live ... TODO document where these live -->
 ##### Testing
 OpenSPA uses google test for unit testing, as well as cmake for a build system. The short version of running tests is:
-
-* Ensure Cmake is installed
-* Ensure Google Test is installed
-* Generate a makefile with Cmake `cmake .`
-* Build tests with makefile `make runTests`
-* Run test executable `./runTests`
 
 Classes should be kept small, and have functioning unit tests. When adding a new header file for a class, a header file of the same name should be added to the `test/` directory.
  It will also need to be included in th
@@ -136,7 +142,7 @@ To add a new class to the project:
   * Include your test header in main test file
     * Open `test/gtest_main.cpp`
     * Include your new test header file
-  * Hooray! Now you can run your tests! :D 
+  * Hooray! Now you can run your tests! :D
 
 
 ##### Documentation

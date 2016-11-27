@@ -11,16 +11,19 @@ address (I.E. I2C address, or some other physical address).
 Logic is separated in a layered manner, with each layer operating at a higher level
 than those below it. OpenSPA will separate logic into the following layers:
 
-* SPA Component (Performs a specific action. I.E. Collects data with a sensor)
-* SPA API   
-  * SPA Message Layer (Handles serializing and deserializing SPA messages)
-* SPA Middleware
-  * SPA Data Layer ( Adds support for asynchronous message transmission )
-  * SPA Network Layer (Handles routing and transmission of data between nodes in SPA network)
-* Platform Abstraction Layer (Abstracts platform specific APIs I.E. Threading, Sockets)
-
 For a basic overview of Space Plug and Play Architecture See:
 http://digitalcommons.usu.edu/cgi/viewcontent.cgi?article=1408&context=gradreports
 
-To run tests `platformio run test`
-To build native program `platformio run`
+A SPA network is composed of several different subnets, each communicating via
+a different protocol. SPA has typically supported communication via I2C, USB,
+SpaceWire, and UDP Sockets. At the head of each subnet is a subnet manager. Each
+subnet manager is a separate software process. Subnet managers communicate with each
+other with UDP sockets through the local subnet manager.
+
+<!-- ## Getting Started -->
+<!-- ## Running Tests -->
+
+<!-- ## Developer Notes
+#####  Abstraction Layer
+* Abstract platform specific functionality like sockets
+##### -->

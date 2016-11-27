@@ -1,7 +1,8 @@
 #include <iostream>
 
-#include "spa_communicator.hpp"
+#include <spa_communicator.hpp>
 
+SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress):currentAddress(currentAddress){}
 SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress, PhysicalCommunicator const & com)
   :currentAddress(currentAddress){
     communicators.push_back(std::make_shared<PhysicalCommunicator>(com));
@@ -39,7 +40,7 @@ void SpaCommunicator::handleFailure(){
     return true;
   }
 
-// TODO 
+// TODO
 // void SpaCommunicator::listen(){
 //     std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
 //       currentAddress,

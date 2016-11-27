@@ -1,10 +1,6 @@
 #include <gtest/gtest.h>
 
-// #include "spa_communicator.hpp"
-
-TEST(test, test){
-  EXPECT_EQ(0,0);
-}
+#include "spa_communicator.hpp"
 
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);

@@ -1,6 +1,6 @@
 #include <memory>
 
-#include "../src/spa_communicator.hpp"
+#include <spa_communicator.hpp>
 
 class _SpaCommunicator: public SpaCommunicator {
 public:

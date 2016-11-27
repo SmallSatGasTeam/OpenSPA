@@ -20,10 +20,21 @@ SpaceWire, and UDP Sockets. At the head of each subnet is a subnet manager. Each
 subnet manager is a separate software process. Subnet managers communicate with each
 other with UDP sockets through the local subnet manager.
 
-<!-- ## Getting Started -->
-<!-- ## Running Tests -->
+## Getting Started
+##### Build Docs
+  * Install doxygen
+  * Run doxygen Doxyfile
+
+##### Running Tests
+  * Install google test
+  * run Google Test
 
 <!-- ## Developer Notes
 #####  Abstraction Layer
 * Abstract platform specific functionality like sockets
-##### -->
+##### Testing
+##### Documentation -->
+  <!-- //! I am the brief message, I give a short overview of what a method does
+  //! \param myParam - I describe a parameter
+  //! \return - I describe a return value
+  bool example(int myParam){return true;} -->

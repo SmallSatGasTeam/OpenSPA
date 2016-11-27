@@ -40,14 +40,14 @@ void SpaCommunicator::handleFailure(){
     return true;
   }
 
-// TODO
-// void SpaCommunicator::listen(){
-//     std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
-//       currentAddress,
-//       communicators
-//     );
-//
-//     if(com == nullptr){ handleFailure(); }
-//
-//     com->listen();
-//   }
+//TODO document 
+void SpaCommunicator::listen(){
+    std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
+      currentAddress,
+      communicators
+    );
+
+    if(com == nullptr){ handleFailure(); }
+
+    com->listen();
+  }

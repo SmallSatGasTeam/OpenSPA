@@ -4,7 +4,7 @@
 
 #include "logical_address.hpp"
 #include "spa_message.hpp"
-  
+
   class PhysicalCommunicator {
   public:
     PhysicalCommunicator(){}

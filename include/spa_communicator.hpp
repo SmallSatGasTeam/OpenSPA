@@ -28,8 +28,7 @@ public:
   //! \return true if message is successfully sent, false otherwise.
   bool send(SpaMessage message);
 
-  //TODO figure out how listen should work
-  // void listen();
+  void listen();
 
   typedef std::shared_ptr <PhysicalCommunicator> Com;
 

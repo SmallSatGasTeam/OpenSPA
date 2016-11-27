@@ -1,2 +1,17 @@
+##
+# Platformio
+##
 .pioenvs
 .piolibdeps
+
+notes.md
+docs/
+build/
+
+##
+# CMake
+##
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake

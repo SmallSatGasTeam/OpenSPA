@@ -1,4 +1,4 @@
-#include <local_communicator.hpp>
+#include "local_communicator.hpp"
 
 void LocalCommunicator::handleFailure(){
   std::cout << "Local Communicator failure" << '\n';

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <spa_communicator.hpp>
+#include "spa_communicator.hpp"
 
 SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress):currentAddress(currentAddress){}
 SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress, PhysicalCommunicator const & com)

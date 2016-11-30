@@ -42,5 +42,9 @@ class SubnetManager {
 template<typename Func>
     void runTask(Func task);
 
+protected:
+  
+  SpaCommunicator com;
+
 };
 #endif

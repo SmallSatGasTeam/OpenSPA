@@ -16,16 +16,19 @@
 
 class LocalCommunicator: public PhysicalCommunicator{
 public:
-  void handleFailure();
-  bool send(Socket const & sock, SpaMessage message);
-  LogicalAddress getSubnetAddress();
+  // LocalCommunicator():PhysicalCommunicator(){;}
 
-  template <typename Func>
-  void listen(Func messageHandler);
+  // void handleFailure();
+  // bool send(SpaMessage message){ return false; }
+  // bool send(Socket const & sock, SpaMessage message);
+  // LogicalAddress getSubnetAddress();
+  //
+  // // void listen(Func messageHandler);
+  // virtual void listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen));
 
 protected:
-  RoutingTable routingTable;
-  ServerSocket sock;
+  // RoutingTable routingTable;
+  // ServerSocket sock;
 };
 
 #endif

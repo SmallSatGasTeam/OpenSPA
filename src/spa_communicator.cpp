@@ -8,6 +8,11 @@ SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress, PhysicalCommunic
     communicators.push_back(std::make_shared<PhysicalCommunicator>(com));
   }
 
+SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress, std::vector<Com> comms)
+:currentAddress(currentAddress){
+  communicators.insert(communicators.end(), comms.begin(), comms.end());
+}
+
 void SpaCommunicator::handleFailure(){
   std::cout << "Spa Communicator Failed" << '\n';
   exit(1);
@@ -40,8 +45,9 @@ void SpaCommunicator::handleFailure(){
     return true;
   }
 
-//TODO document 
-void SpaCommunicator::listen(){
+//TODO document
+template <typename Func>
+void SpaCommunicator::listen(Func messageHandler){
     std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
       currentAddress,
       communicators
@@ -49,5 +55,5 @@ void SpaCommunicator::listen(){
 
     if(com == nullptr){ handleFailure(); }
 
-    com->listen();
+    com->listen(messageHandler);
   }

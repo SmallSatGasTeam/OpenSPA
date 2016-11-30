@@ -7,13 +7,13 @@
 
   class PhysicalCommunicator {
   public:
-    PhysicalCommunicator(){}
     PhysicalCommunicator(LogicalAddress la):subnetAddress(la){}
-
+    virtual ~PhysicalCommunicator(){}
     virtual bool send(SpaMessage message){ return false; }
-    virtual void listen(){}
 
-    virtual LogicalAddress getSubnetAddress(){
+    virtual void listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen)){}
+
+    LogicalAddress getSubnetAddress(){
       return subnetAddress;
     }
 

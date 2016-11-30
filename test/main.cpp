@@ -2,6 +2,7 @@
 
 #include "spa_communicator.hpp"
 #include "routing_table.hpp"
+#include "network_communicator.hpp"
 
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);

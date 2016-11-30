@@ -12,4 +12,4 @@ add_executable(tests main.cpp)
 target_link_libraries(tests ${GTEST_LIBRARIES} ${GMOCK_LIBRARIES} pthread)
 
 include_directories(../lib)
-target_link_libraries(tests libOpenSpa)
+target_link_libraries(tests OpenSpa)

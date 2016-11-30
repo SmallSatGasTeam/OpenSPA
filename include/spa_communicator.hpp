@@ -27,6 +27,9 @@ public:
   //TODO document
   SpaCommunicator(LogicalAddress currentAddress, std::vector<Com> comms);
 
+  //TODO document
+  void addCommunicators(std::vector<Com> comms);
+
   //! Sends a spa message over the network
 
   //! \param message - Specialization of a Message to be sent over the network.

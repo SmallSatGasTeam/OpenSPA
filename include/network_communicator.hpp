@@ -1,13 +1,19 @@
 #ifndef NETWORK_COMMUNICATOR_HPP
 #define NETWORK_COMMUNICATOR_HPP
+#include <memory>
+#include <vector>
+
 #include "spa_communicator.hpp"
 #include "local_communicator.hpp"
-class NetworkCommunicator : public SpaCommunicator {
+class NetworkCommunicator {
 public:
-  // NetworkCommunicator(LogicalAddress addr):SpaCommunicator(addr, localCom){
+  NetworkCommunicator(LogicalAddress la):spaCom(la), localCom(la){
+    std::vector<SpaCommunicator::Com> comms;
+    comms.push_back(std::make_shared<PhysicalCommunicator>(localCom));
+    spaCom.addCommunicators(comms);
+  }
 
-  // }
-
-  // LocalCommunicator localCom;
+  SpaCommunicator spaCom;
+  LocalCommunicator localCom;
 };
 #endif

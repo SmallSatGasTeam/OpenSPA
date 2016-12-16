@@ -4,19 +4,18 @@
 
 #include "logical_address.hpp"
 #include "spa_message.hpp"
-  
+
   class PhysicalCommunicator {
   public:
-    PhysicalCommunicator(){}
     PhysicalCommunicator(LogicalAddress la):subnetAddress(la){}
 
+    virtual ~PhysicalCommunicator(){}
     virtual bool send(SpaMessage message){ return false; }
-    virtual void listen(){}
+    virtual void listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen)){}
 
-    virtual LogicalAddress getSubnetAddress(){
-      return subnetAddress;
-    }
+    LogicalAddress getSubnetAddress(){ return subnetAddress; }
 
+    
     LogicalAddress subnetAddress;
   };
 #endif

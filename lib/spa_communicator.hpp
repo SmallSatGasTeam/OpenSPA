@@ -11,6 +11,8 @@
 
 class SpaCommunicator {
 public:
+  typedef std::shared_ptr <PhysicalCommunicator> Com;
+
   //! Construct SpaCommunicator with only the address of the owning subnet manager
 
   //! \param currentAddress - logical address of the subnet manager who owns SpaCommunicator
@@ -22,16 +24,21 @@ public:
   //! \param communicator - physical communicator that should belong to SpaCommunicator
   SpaCommunicator(LogicalAddress currentAddress, PhysicalCommunicator const & communicator);
 
+  //TODO document
+  SpaCommunicator(LogicalAddress currentAddress, std::vector<Com> comms);
+
+  //TODO document
+  void addCommunicators(std::vector<Com> comms);
+
   //! Sends a spa message over the network
 
   //! \param message - Specialization of a Message to be sent over the network.
   //! \return true if message is successfully sent, false otherwise.
   bool send(SpaMessage message);
 
-  //TODO figure out how listen should work
-  // void listen();
+template <typename Func>
+  void listen(Func messageHandler);
 
-  typedef std::shared_ptr <PhysicalCommunicator> Com;
 
 protected:
   //! Method called when something unexpected occurs.

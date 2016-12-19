@@ -1,24 +1,12 @@
-# Open SPA (Space Plug and Play Architecture)
+# OpenSPA
 
-OpenSPA is an open source, minimalist implementation of the Space Plug and Play Architecture
-developed by and for university, and other small scale space missions. We are on a mission
-to make university space missions, less costly, require less development time, and
-have a higher success rate.
+OpenSPA is an open-source **Space Plug and Play Architecture (SPA)** services manager for Linux-based (and, eventually, non-Linux) spacecraft systems. OpenSPA allows for a more standardized and streamlined method of handling systems with many connected components. Developed with undergraduate CubeSat teams using systems such as Beaglebone Blacks, Arduinos, and Raspberry Pis in mind, OpenSPA's purpose is to make missions less costly, require less development time, and have higher success rates.
 
-SPA is a specification for a modular satellite software architecture. Each
-part of satellite functionality is separated into a SPA component. SPA components
-all reside in a network, components communicate with each other in a standard
-way, and contact each other with their network address as opposed to their physical
-address (I.E. I2C address, or some other physical address).
+SPA itself is a specification for a kind of modular satellite software architecture. It is a set of standardized protocols based on the Open Systems Interconnection networking model. 
 
-A SPA network is composed of several different subnets, each communicating via
-a different protocol. SPA has typically supported communication via I2C, USB,
-SpaceWire, and UDP Sockets. At the head of each subnet is a subnet manager. Each
-subnet manager is a separate software process. Subnet managers communicate with each
-other with UDP sockets through the local subnet manager.
+For a brief introduction on the interworkings of OpenSPA, see [this writeup](https://drive.google.com/file/d/0ByiGNyJUAlpISUo5WDFwSkh3YU0/view?usp=sharing)
 
-For a basic overview of Space Plug and Play Architecture See:
-http://digitalcommons.usu.edu/cgi/viewcontent.cgi?article=1408&context=gradreports
+For a very detailed look into the machinations of SPA in general, see [Jacob Holt Christensen's dissertation.](http://digitalcommons.usu.edu/etd/1422/)
 
 ## Project Status
   * Version Alpha 0.0.1
@@ -41,8 +29,7 @@ OpenSPA relies on a handful of developer tools. Here is a list of things that sh
   * Run Cmake in project directory `cmake .`
   * Run generated makefile  `make [optional-target]`
 
-OpenSPA uses Cmake for a build system. Makefiles are generally platform dependent,
-so to allow cross platform builds a makefile for each system. Cmake will generate those
+OpenSPA uses Cmake for a build system. Makefiles are generally platform dependent as to allow cross platform builds a makefile for each system. Cmake will generate those
 make files for us.
 
 There are numerous cmake installation tutorials out there in the wild. It may be worth checking to see if your system package manager has a cmake package before trying to build cmake from source.

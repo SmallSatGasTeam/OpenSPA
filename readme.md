@@ -10,7 +10,7 @@ For a very detailed look into the machinations of SPA in general, see [Jacob Hol
 
 ## Project Status
   * Version Alpha 0.0.1
-  * Planning API's and project planning
+    * Planning API's and project planning
 
 ## Getting Started
 ### Developer Tools
@@ -18,52 +18,50 @@ OpenSPA relies on a handful of developer tools. Here is a list of things that sh
 * Git - Version control system
 * Google Test - Unit testing framework
 * Doxygen - Documentation generator
-* Cmake - Build system automation
+* CMake - Build system automation
 * Make - Build automation
 
 <!-- ## How to Contribute  -->
 <!-- TODO -->
 ### Build Project
 #### TLDR
-  * Install Cmake
-  * Run Cmake in project directory `cmake .`
+  * Install CMake
+  * Run CMake in project directory `cmake .`
   * Run generated makefile  `make [optional-target]`
 
-OpenSPA uses Cmake for a build system. Makefiles are generally platform dependent as to allow cross platform builds a makefile for each system. Cmake will generate those
-make files for us.
+OpenSPA uses CMake for a build system. Makefiles are generally platform-dependent, so CMake generates a different Makefile for each system in order to allow for cross-plaform functionality.
 
-There are numerous cmake installation tutorials out there in the wild. It may be worth checking to see if your system package manager has a cmake package before trying to build cmake from source.
-* Install Cmake
-  * Installing cmake from source - https://cmake.org/install/
+There are numerous CMake installation tutorials out there in the wild. It may be worth checking to see if your system package manager has a CMake package before trying to build cmake from source (e.g., `apt-get install cmake` ).
+
+* Install CMake
+  * Installing CMake from source - https://cmake.org/install/
 
 ### Build Docs
 
 #### TLDR
   * Install Doxygen
-  * Run doxygen with project doxyfile `doxygen ./Doxyfile`
+  * Run Soxygen with project doxyfile `doxygen ./Doxyfile`
   * View your docs. They should now live in `docs/`
 
-OpenSPA uses the documentation generator Doxygen to build documentation. Annotated source code is parsed by doxygen, and latex, and html files are generated.
+OpenSPA uses the documentation generator Doxygen to build documentation. Annotated source code is parsed by Doxygen to generate LaTeX and HTML files.
 
  Doxygen can be built from source, or a precompiled binary
 can be downloaded from your favorite package manager.
-  * To Install from package manager
+  * To install from package manager
       * Mac with Homebrew setup
         * `brew install doxygen`
       * Linux from package manager
-        * If you are not using ubuntu, mint, or debian, your linux distrobution might not use apt-get. Search for doxygen on your distrobutions package manager
+        * If you are not using Ubuntu, Mint, or Debian, your Linux distribution might not use apt-get. Search for doxygen on your distribution's package manager
         * `apt-get install doxygen`
-      * Windows Chocolatey (package manager) also has a doxygen package that has not been tested by the maintainers, but does exist.
+      * Windows Chocolatey (package manager) also has a Doxygen package that has not been tested by the maintainers, but does exist.
         * With chocolatey installed
         * `choco install doxygen.install`
   * To install from source - If installing from a package manager is not working out.
-    * Here is a link to the doxygen project download package
+    * Here is a link to the Doxygen project download package
       * http://www.stack.nl/~dimitri/doxygen/download.html
-    * Follow directions to download, compile, and install doxygen
+    * Follow directions to download, compile, and install Doxygen
 
-  Now doxygen should be available to you on the commandline. You can test this by running `doxygen --version`. This should print out the doxygen version number. If this does not work, you have missed something above.
-
-  Doxygen is a documentation generator that will parse the source code, and build html and latex documentation from the source code. Now that you have doxygen running we need to generate the documentation.
+  Now Doxygen should be available to you on the command line. You can test this by running `doxygen --version`. This should print out the doxygen version number. If this does not work, you have missed something above.
 
   Doxygen is configured with a file titled `Doxyfile`.
 
@@ -73,17 +71,17 @@ can be downloaded from your favorite package manager.
 
 This will read all configuration options from the Doxyfile, find and parse the source code, and generate the documentation.
 
-If the documentation is successfully built, there should be a new directory title `docs/` that should contain both html, and latex documentation.
+If the documentation is successfully built, there should be a new directory title `docs/` that should contain both HTML and LaTeX documentation.
 
 * Read Docs
   * Open up `docs/html/index.html` in your web browser to browse docs
 
 ### Running Tests
-OpenSPA uses Google Test testing framework for unit testing. To run OpenSPA's test suite you will first have to install google test.
+OpenSPA uses Google Test testing framework for unit testing. To run OpenSPA's test suite you will first have to install Google Test.
 
-Installing GoogleTest can be an arduous process, and one that has already been documented decently well. Instead of giving a step by step example, we link to helpful resources.
+Installing Google Test can be an arduous process, and one that has already been documented decently well. Instead of giving a step by step example, we will link to helpful resources.
   * Install google test
-    * For Mac - Here is a link to a tutorial
+    * Mac - Here is a link to a tutorial
       * http://ysonggit.github.io/system/2015/01/01/install-gtest-on-mac-os-yosemite.html
     * For Linux - Here is another good resource
       * https://www.eriksmistad.no/getting-started-with-google-test-on-ubuntu/
@@ -95,20 +93,20 @@ OpenSPA uses CMake for build system. To run tests you must first have both Cmake
   * To run test suite:
     * Ensure Cmake is installed
     * Ensure Google Test is installed
-    * Generate a makefile with Cmake `cmake .`
+    * Generate a makefile with CMake `cmake .`
     * Build tests with makefile `make runTests`
     * Run test executable `./runTests`
 
 ## Developer Notes
 ###  Abstraction Layer
-OpenSPA is currently being developed for embedded linux systems. In order to keep system portability an option we employ the use of what we call a 'Platform Abstration Layer'. Essentially this means that whenever you would need to rely on a system call, or some system specific functionality (I.E. Linux Socket), you would build a wrapper around that system specific functionality. This limits the platform dependance to a single file, which allows OpenSPA to be usable on a wide variety of platforms.
+OpenSPA is currently being developed for embedded Linux systems. In order to keep system portability an option, we employ the use of what we call a "Platform Abstration Layer." Essentially this means that whenever we need to rely on a system call or some system-specific functionality (e.g, a Linux socket), we build a wrapper around that system-specific functionality. This limits the platform dependance to a single file, which allows OpenSPA to be usable on a wide variety of platforms.
 
 <!-- * Platform Abstrations live ... TODO document where these live -->
 ### Testing
-OpenSPA uses google test for unit testing, as well as cmake for a build system. The short version of running tests is:
+OpenSPA uses Google Test for unit testing and CMake for a build system. The short version of running tests is this:
 
 Classes should be kept small, and have functioning unit tests. When adding a new header file for a class, a header file of the same name should be added to the `test/` directory.
- It will also need to be included in th
+ It will also need to be included in th <!-- TODO finish this sentence lol -->
 
 To add a new class to the project:
   * Create header file `my_class_name.hpp` (File names should be snake case - lowercase words seperated with underscores)
@@ -139,7 +137,7 @@ To add a new class to the project:
 
 
 ### Documentation
-OpenSPA uses doxygen to build documentation from source code. Essentially this means that you add comments with a special format in the code, and then doxygen can build pretty html docs can be referenced by all other developers and users.
+OpenSPA uses Doxygen to build documentation from source code. This means that one can add comments with a special format in the code so that Doxygen may build pretty HTML docs that can be referenced by all other developers and users.
 
 Here is an example of what this might look like to document a function.
 ```cpp

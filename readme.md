@@ -4,7 +4,7 @@ OpenSPA is an open-source **Space Plug and Play Architecture (SPA)** services ma
 
 SPA itself is a specification for a kind of modular satellite software architecture. It is a set of standardized protocols based on the Open Systems Interconnection networking model. 
 
-For a brief introduction on the interworkings of OpenSPA, see [this writeup](https://drive.google.com/file/d/0ByiGNyJUAlpISUo5WDFwSkh3YU0/view?usp=sharing)
+For a brief introduction on the inner workings of OpenSPA, see [this writeup.](https://drive.google.com/file/d/0ByiGNyJUAlpISUo5WDFwSkh3YU0/view?usp=sharing)
 
 For a very detailed look into the machinations of SPA in general, see [Jacob Holt Christensen's dissertation.](http://digitalcommons.usu.edu/etd/1422/)
 

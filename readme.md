@@ -26,17 +26,17 @@ OpenSPA relies on a handful of developer tools. Here is a list of things that sh
 <!-- TODO -->
 ### Set up Vagrant
 #### TL;DR
-  * Be sure you've cloned in the repository
-  * `sudo apt-get install virtualbox`
-	* `sudo apt-get install vagrant`
-	* `vagrant up`
+* Be sure you've cloned in the repository and are in the /OpenSPA directory
+* `sudo apt-get install virtualbox`
+* `sudo apt-get install vagrant`
+* `vagrant up`
 
 To avoid being affected by cross-platform incompatibility issues, OpenSPA development relies on Vagrant to create a virtual development environment.
 
 For Vagrant to work properly, ensure you have the following BIOS settings:
-  * UEFI Secure boot disabled
-	* Virtualization Technology (VTx) enabled
-	* Virtualization Technology Directed I/O (VTd) enabled
+* UEFI Secure boot disabled
+* Virtualization Technology (VTx) enabled
+* Virtualization Technology Directed I/O (VTd) enabled
 
 ### Build Project
 #### TL;DR

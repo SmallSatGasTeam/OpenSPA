@@ -16,6 +16,7 @@ For a very detailed look into the machinations of SPA in general, see [Jacob Hol
 ### Developer Tools
 OpenSPA relies on a handful of developer tools. Here is a list of things that should be set up on your system.
 * Git - Version control system
+* Vagrant - Virtual development environment
 * Google Test - Unit testing framework
 * Doxygen - Documentation generator
 * CMake - Build system automation
@@ -23,8 +24,22 @@ OpenSPA relies on a handful of developer tools. Here is a list of things that sh
 
 <!-- ## How to Contribute  -->
 <!-- TODO -->
+### Set up Vagrant
+#### TL;DR
+  * Be sure you've cloned in the repository
+  * `sudo apt-get install virtualbox`
+	* `sudo apt-get install vagrant`
+	* `vagrant up`
+
+To avoid being affected by cross-platform incompatibility issues, OpenSPA development relies on Vagrant to create a virtual development environment.
+
+For Vagrant to work properly, ensure you have the following BIOS settings:
+  * UEFI Secure boot disabled
+	* Virtualization Technology (VTx) enabled
+	* Virtualization Technology Directed I/O (VTd) enabled
+
 ### Build Project
-#### TLDR
+#### TL;DR
   * Install CMake
   * Run CMake in project directory `cmake .`
   * Run generated makefile  `make [optional-target]`
@@ -37,8 +52,7 @@ There are numerous CMake installation tutorials out there in the wild. It may be
   * Installing CMake from source - https://cmake.org/install/
 
 ### Build Docs
-
-#### TLDR
+#### TL;DR
   * Install Doxygen
   * Run Soxygen with project doxyfile `doxygen ./Doxyfile`
   * View your docs. They should now live in `docs/`

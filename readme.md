@@ -1,6 +1,6 @@
 # OpenSPA
 
-OpenSPA is an open-source **Space Plug and Play Architecture (SPA)** services manager for Linux-based (and, eventually, non-Linux) spacecraft systems. OpenSPA allows for a more standardized and streamlined method of handling systems with many connected components. Developed with undergraduate CubeSat teams using systems such as Beaglebone Blacks, Arduinos, and Raspberry Pis in mind, OpenSPA's purpose is to make missions less costly, require less development time, and have higher success rates.
+OpenSPA is an open-source **Space Plug and Play Architecture (SPA)** services manager for Linux-based (and, eventually, non-Linux) spacecraft systems. OpenSPA allows for a more standardized and streamlined method of handling systems with many connected components by providing the neccesarry network to allow automatic discovery and communication between components. Developed with undergraduate CubeSat teams using systems such as Beaglebone Blacks, Arduinos, and Raspberry Pis in mind, OpenSPA's purpose is to make missions less costly, require less development time, and have higher success rates.
 
 SPA itself is a specification for a kind of modular satellite software architecture. It is a set of standardized protocols based on the Open Systems Interconnection networking model. 
 
@@ -9,75 +9,56 @@ For a brief introduction on the inner workings of OpenSPA, see [this writeup.](h
 For a very detailed look into the machinations of SPA in general, see [Jacob Holt Christensen's dissertation.](http://digitalcommons.usu.edu/etd/1422/)
 
 ## Project Status
+  * Version Alpha 0.0.2
+    * Debian dev environment complete
   * Version Alpha 0.0.1
     * Planning API's and project planning
 
 ## Getting Started
 ### Developer Tools
-OpenSPA relies on a handful of developer tools. Here is a list of things that should be set up on your system.
-* Git - Version control system
+OpenSPA relies on a handful of developer tools. The following is a list of things we'll be using:
 * Vagrant - Virtual development environment
+* Git - Version control system
 * Google Test - Unit testing framework
 * Doxygen - Documentation generator
 * CMake - Build system automation
-* Make - Build automation
 
 <!-- ## How to Contribute  -->
 <!-- TODO -->
 ### Set up Vagrant
-#### TL;DR
+OpenSPA uses Vagrant to create a development environment to match the devices that OpenSPA will run on. It also eliminiates "well, it works on my system" bugs 
+#### Instructions
 * Be sure you've cloned in the repository and are in the /OpenSPA directory
-* `sudo apt-get install virtualbox`
-* `sudo apt-get install vagrant`
-* `vagrant up`
-
-To avoid being affected by cross-platform incompatibility issues, OpenSPA development relies on Vagrant to create a virtual development environment.
-
-For Vagrant to work properly, ensure you have the following BIOS settings:
-* UEFI Secure boot disabled
-* Virtualization Technology (VTx) enabled
-* Virtualization Technology Directed I/O (VTd) enabled
-
+* Install VirtualBox if you haven't already
+  * Linux: `sudo apt-get install virtualbox`
+  * Mac & Windows: https://www.virtualbox.org/wiki/Downloads 
+* For Vagrant to work properly, ensure you have the following BIOS settings:
+  * UEFI Secure boot disabled
+  * Virtualization Technology (VTx) enabled
+  * Virtualization Technology Directed I/O (VTd) enabled
+* Install Vagrant
+  * Linux: `sudo apt-get install vagrant`
+  * Max & Windows: https://www.vagrantup.com/downloads.html
+* Type `vagrant up` into your terminal
+* Allow vagrant to finish setting everything up before attempting to login in the VM. This may take several minutes, and it might appear to be stuck at times. Just give it time.
+  * Login: vagrant
+  * Password: vagrant
+  
 ### Build Project
 #### TL;DR
-  * Install CMake
   * Run CMake in project directory `cmake .`
   * Run generated makefile  `make [optional-target]`
 
 OpenSPA uses CMake for a build system. Makefiles are generally platform-dependent, so CMake generates a different Makefile for each system in order to allow for cross-plaform functionality.
 
-There are numerous CMake installation tutorials out there in the wild. It may be worth checking to see if your system package manager has a CMake package before trying to build cmake from source (e.g., `apt-get install cmake` ).
-
-* Install CMake
-  * Installing CMake from source - https://cmake.org/install/
-
 ### Build Docs
 #### TL;DR
-  * Install Doxygen
-  * Run Soxygen with project doxyfile `doxygen ./Doxyfile`
+  * Run Doxygen with project doxyfile `doxygen ./Doxyfile`
   * View your docs. They should now live in `docs/`
 
 OpenSPA uses the documentation generator Doxygen to build documentation. Annotated source code is parsed by Doxygen to generate LaTeX and HTML files.
 
- Doxygen can be built from source, or a precompiled binary
-can be downloaded from your favorite package manager.
-  * To install from package manager
-      * Mac with Homebrew setup
-        * `brew install doxygen`
-      * Linux from package manager
-        * If you are not using Ubuntu, Mint, or Debian, your Linux distribution might not use apt-get. Search for doxygen on your distribution's package manager
-        * `apt-get install doxygen`
-      * Windows Chocolatey (package manager) also has a Doxygen package that has not been tested by the maintainers, but does exist.
-        * With chocolatey installed
-        * `choco install doxygen.install`
-  * To install from source - If installing from a package manager is not working out.
-    * Here is a link to the Doxygen project download package
-      * http://www.stack.nl/~dimitri/doxygen/download.html
-    * Follow directions to download, compile, and install Doxygen
-
-  Now Doxygen should be available to you on the command line. You can test this by running `doxygen --version`. This should print out the doxygen version number. If this does not work, you have missed something above.
-
-  Doxygen is configured with a file titled `Doxyfile`.
+Doxygen is configured with a file titled `Doxyfile`.
 
   * Build Documentation
     * Invoke commandline tool
@@ -91,29 +72,15 @@ If the documentation is successfully built, there should be a new directory titl
   * Open up `docs/html/index.html` in your web browser to browse docs
 
 ### Running Tests
-OpenSPA uses Google Test testing framework for unit testing. To run OpenSPA's test suite you will first have to install Google Test.
-
-Installing Google Test can be an arduous process, and one that has already been documented decently well. Instead of giving a step by step example, we will link to helpful resources.
-  * Install google test
-    * Mac - Here is a link to a tutorial
-      * http://ysonggit.github.io/system/2015/01/01/install-gtest-on-mac-os-yosemite.html
-    * For Linux - Here is another good resource
-      * https://www.eriksmistad.no/getting-started-with-google-test-on-ubuntu/
-    * For Windows - Here is a good resource
-      * https://blog.jetbrains.com/rscpp/unit-testing-google-test/
-
-OpenSPA uses CMake for build system. To run tests you must first have both Cmake and Google Test installed.
-
+OpenSPA uses Google Test testing framework for unit testing. 
   * To run test suite:
-    * Ensure Cmake is installed
-    * Ensure Google Test is installed
     * Generate a makefile with CMake `cmake .`
     * Build tests with makefile `make runTests`
     * Run test executable `./runTests`
 
 ## Developer Notes
 ###  Abstraction Layer
-OpenSPA is currently being developed for embedded Linux systems. In order to keep system portability an option, we employ the use of what we call a "Platform Abstration Layer." Essentially this means that whenever we need to rely on a system call or some system-specific functionality (e.g, a Linux socket), we build a wrapper around that system-specific functionality. This limits the platform dependance to a single file, which allows OpenSPA to be usable on a wide variety of platforms.
+OpenSPA is currently being developed for embedded Linux systems. In order to keep system-portability an option, we employ the use of what we call a "Platform Abstration Layer." Essentially this means that whenever we need to rely on a system call or some system-specific functionality (e.g, a Linux socket), we build a wrapper around that system-specific functionality. This limits the platform dependance to a single file, which allows OpenSPA to be usable on a wide variety of platforms.
 
 <!-- * Platform Abstrations live ... TODO document where these live -->
 ### Testing

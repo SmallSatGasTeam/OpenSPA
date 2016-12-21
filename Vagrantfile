@@ -71,14 +71,18 @@ Vagrant.configure(2) do |config|
      sudo apt-get -y update
      sudo apt-get -y install xfce4
      sudo apt-get -y install iceweasel
-     sudo apt-get -y install cmake
-     sudo apt-get -y install doxygen
+		 sudo apt-get -y install cmake
+		 sudo apt-get -y install doxygen
   #=== Installing and configuring GTest ==
-     sudo apt-get -y install build-essential
-     sudo apt-get -y install libgtest-dev
+		 sudo apt-get -y install build-essential
+		 sudo apt-get -y install libgtest-dev
 		 cd /usr/src/gtest
 		 sudo cmake CMakeLists.txt
 		 sudo make
 		 sudo cp *.a /usr/lib
+  #=== Upgrading wallpaper ==
+	   cd /usr/share/images/desktop-base 
+		 sudo wget https://dl.dropboxusercontent.com/s/tj4oab5rzlm4bwp/default.svg 
+		 sudo mv default.svg lines-wallpaper_1920x1080.svg 
    SHELL
 end

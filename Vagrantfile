@@ -13,8 +13,6 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "debian/jessie64"
-  # config.ssh.username = "vagrant"
-  # config.ssh.password = "vagrant"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -90,7 +88,7 @@ Vagrant.configure(2) do |config|
 # Example for VirtualBox:
  config.vm.provider "virtualbox" do |vb|
    # Display the VirtualBox GUI when booting the machine
-  #  vb.gui = true
+   vb.gui = true
    vb.name = "Vagrant_OpenSPA_Debian_Jessie64"
    #  Customize the amount of memory on the VM:
    #  vb.memory = "1024"

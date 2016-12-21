@@ -33,7 +33,7 @@ Vagrant.configure(2) do |config|
   # your network.
   # config.vm.network "public_network"
 
-  config.vm.synced_folder ".", "/vagrant", type: "rsync",
+  config.vm.synced_folder ".", "/home/OpenSPA", type: "rsync",
    rsync__exclude: ".git/", rsync__auto: true
 
   # Share an additional folder to the guest VM. The first argument is

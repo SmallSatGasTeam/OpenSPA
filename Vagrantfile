@@ -35,6 +35,9 @@ Vagrant.configure(2) do |config|
   # your network.
   # config.vm.network "public_network"
 
+  config.vm.synced_folder ".", "/vagrant", type: "rsync",
+   rsync__exclude: ".git/", rsync__auto: true
+
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
@@ -67,7 +70,7 @@ Vagrant.configure(2) do |config|
      apt-get -y install doxygen
      apt-get -y install git
      apt-get -y install vim
-     aptitude install lightdm
+     apt-get -y install lightdm
 
   #=== Installing and configuring GTest ==
      apt-get -y install build-essential
@@ -79,7 +82,6 @@ Vagrant.configure(2) do |config|
      cp -r include/gtest /usr/include
 		 cp *.a /usr/lib
 
-    #  reboot
      # TODO add google mock
    SHELL
 
@@ -88,7 +90,7 @@ Vagrant.configure(2) do |config|
 # Example for VirtualBox:
  config.vm.provider "virtualbox" do |vb|
    # Display the VirtualBox GUI when booting the machine
-   vb.gui = true
+  #  vb.gui = true
    vb.name = "Vagrant_OpenSPA_Debian_Jessie64"
    #  Customize the amount of memory on the VM:
    #  vb.memory = "1024"

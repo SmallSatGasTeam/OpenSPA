@@ -80,6 +80,12 @@ Vagrant.configure(2) do |config|
      cp -r include/gtest /usr/include
 		 cp *.a /usr/lib
 
+     #=== Upgrading wallpaper ==
+     cd /usr/share/images/desktop-base
+     wget https://dl.dropboxusercontent.com/s/tj4oab5rzlm4bwp/default.svg
+     mv default.svg lines-wallpaper_1920x1080.svg
+
+
      # TODO add google mock
    SHELL
 

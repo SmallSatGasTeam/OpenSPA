@@ -40,7 +40,7 @@ OpenSPA uses Vagrant to create a development environment to match the devices th
   * Linux: `sudo apt-get install vagrant`
   * Max & Windows: https://www.vagrantup.com/downloads.html
 * Type `vagrant up` into your terminal
-* Allow vagrant to finish setting everything up before attempting to login in the VM. This may take several minutes, and it might appear to be stuck at times. Just give it time.
+* Allow vagrant to finish setting everything up before attempting to login to the VM. This may take several minutes, and it might appear to be stuck at times. Just give it time. Sometimes it may be a bit finnicky and fail to initialize with some error; if that happens, just enter `vagrant destroy` and try again.
   * Login: vagrant
   * Password: vagrant
   

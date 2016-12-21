@@ -5,6 +5,11 @@
 .piolibdeps
 
 ##
+# Vagrant
+##
+.vagrant
+
+##
 # CMake
 ##
 CMakeFiles/

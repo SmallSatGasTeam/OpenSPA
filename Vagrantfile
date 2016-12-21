@@ -13,11 +13,13 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "debian/jessie64"
+  # config.ssh.username = "vagrant"
+  # config.ssh.password = "vagrant"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
+  config.vm.box_check_update = true
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -39,18 +41,6 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-   config.vm.provider "virtualbox" do |vb|
-     # Display the VirtualBox GUI when booting the machine
-     vb.gui = true
-		 vb.name = "Vagrant_OpenSPA_Debian_Jessie64"
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-   end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -67,18 +57,40 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
 
    config.vm.provision "shell", inline: <<-SHELL
-	#=== Installing dev dependencies == 
-     sudo apt-get -y update
-     sudo apt-get -y install xfce4
-     sudo apt-get -y install iceweasel
-     sudo apt-get -y install cmake
-     sudo apt-get -y install doxygen
+     sudo -i
+	#=== Installing dev dependencies ==
+     apt-get -y update
+     apt-get -y upgrade
+     apt-get -y install xfce4
+     apt-get -y install iceweasel
+     apt-get -y install cmake
+     apt-get -y install doxygen
+     apt-get -y install git
+     apt-get -y install vim
+     aptitude install lightdm
+
   #=== Installing and configuring GTest ==
-     sudo apt-get -y install build-essential
-     sudo apt-get -y install libgtest-dev
+     apt-get -y install build-essential
+     apt-get -y install libgtest-dev
 		 cd /usr/src/gtest
-		 sudo cmake CMakeLists.txt
-		 sudo make
-		 sudo cp *.a /usr/lib
+		 cmake CMakeLists.txt
+		 make
+
+     cp -r include/gtest /usr/include
+		 cp *.a /usr/lib
+
+    #  reboot
+     # TODO add google mock
    SHELL
+
+# Provider-specific configuration so you can fine-tune various
+# backing providers for Vagrant. These expose provider-specific options.
+# Example for VirtualBox:
+ config.vm.provider "virtualbox" do |vb|
+   # Display the VirtualBox GUI when booting the machine
+   vb.gui = true
+   vb.name = "Vagrant_OpenSPA_Debian_Jessie64"
+   #  Customize the amount of memory on the VM:
+   #  vb.memory = "1024"
+ end
 end

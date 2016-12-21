@@ -65,9 +65,20 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
+
    config.vm.provision "shell", inline: <<-SHELL
+	#=== Installing dev dependencies == 
      sudo apt-get -y update
-		 sudo apt-get -y install xfce4
-		 sudo apt-get -y install iceweasel
+     sudo apt-get -y install xfce4
+     sudo apt-get -y install iceweasel
+     sudo apt-get -y install cmake
+     sudo apt-get -y install doxygen
+  #=== Installing and configuring GTest ==
+     sudo apt-get -y install build-essential
+     sudo apt-get -y install libgtest-dev
+		 cd /usr/src/gtest
+		 sudo cmake CMakeLists.txt
+		 sudo make
+		 sudo cp *.a /usr/lib
    SHELL
 end

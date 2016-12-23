@@ -28,6 +28,17 @@ Vagrant.configure(2) do |config|
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
 
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    vb.gui = true
+    vb.name = "Vagrant_OpenSPA_Debian_Jessie64"
+    #  Customize the amount of memory on the VM:
+    #  vb.memory = "1024"
+  end
+
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
@@ -88,14 +99,4 @@ Vagrant.configure(2) do |config|
      # TODO add google mock
    SHELL
 
-# Provider-specific configuration so you can fine-tune various
-# backing providers for Vagrant. These expose provider-specific options.
-# Example for VirtualBox:
- config.vm.provider "virtualbox" do |vb|
-   # Display the VirtualBox GUI when booting the machine
-   vb.gui = true
-   vb.name = "Vagrant_OpenSPA_Debian_Jessie64"
-   #  Customize the amount of memory on the VM:
-   #  vb.memory = "1024"
- end
 end

@@ -26,23 +26,15 @@ OpenSPA relies on a handful of developer tools. The following is a list of thing
 <!-- ## How to Contribute  -->
 <!-- TODO -->
 ### Set up Vagrant
-OpenSPA uses Vagrant to create a development environment to match the devices that OpenSPA will run on. It also eliminiates "well, it works on my system" bugs 
-#### Instructions
+OpenSPA uses Vagrant to create a development environment to match the devices that OpenSPA will run on. It also eliminiates "well, it works on my system" bugs. See the [wiki page](https://github.com/SmallSatGasTeam/OpenSPA/wiki/OpenSPA-Development-Environment) for instructions on how to install and use Vagrant. 
+
+#### TL;DR if you know what you're doing
 * Be sure you've cloned in the repository and are in the /OpenSPA directory
 * Install VirtualBox if you haven't already
-  * Linux: `sudo apt-get install virtualbox`
-  * Mac & Windows: https://www.virtualbox.org/wiki/Downloads 
-* For Vagrant to work properly, ensure you have the following BIOS settings:
-  * UEFI Secure boot disabled
-  * Virtualization Technology (VTx) enabled
-  * Virtualization Technology Directed I/O (VTd) enabled
 * Install Vagrant
-  * Linux: `sudo apt-get install vagrant`
-  * Max & Windows: https://www.vagrantup.com/downloads.html
 * Type `vagrant up` into your terminal
-* Allow vagrant to finish setting everything up before attempting to login to the VM. This may take several minutes, and it might appear to be stuck at times. Just give it time. Sometimes it may be a bit finnicky and fail to initialize with some error; if that happens, just enter `vagrant destroy` and try again.
-  * Login: vagrant
-  * Password: vagrant
+* Allow vagrant to finish setting everything up before attempting to login to the VM. 
+* `vagrant rsync-auto`
   
 ### Build Project
 #### TL;DR

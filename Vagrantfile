@@ -72,6 +72,7 @@ Vagrant.configure(2) do |config|
 	#=== Installing dev dependencies ==
      apt-get -y update
      apt-get -y upgrade
+     apt-get -y install build-essential
      apt-get -y install xfce4
      apt-get -y install iceweasel
      apt-get -y install cmake
@@ -80,23 +81,20 @@ Vagrant.configure(2) do |config|
      apt-get -y install vim
      apt-get -y install lightdm
 
-  #=== Installing and configuring GTest ==
-     apt-get -y install build-essential
+
+  # #=== Installing and configuring GTest/GMock ==
+     apt-get -y install google-mock
      apt-get -y install libgtest-dev
 		 cd /usr/src/gtest
 		 cmake CMakeLists.txt
 		 make
-
      cp -r include/gtest /usr/include
-		 cp *.a /usr/lib
+     cp *.a /usr/lib
 
      #=== Upgrading wallpaper ==
      cd /usr/share/images/desktop-base
      wget https://dl.dropboxusercontent.com/s/tj4oab5rzlm4bwp/default.svg
      mv default.svg lines-wallpaper_1920x1080.svg
-
-
-     # TODO add google mock
    SHELL
 
 end

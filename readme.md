@@ -34,7 +34,6 @@ OpenSPA uses Vagrant to create a development environment to match the devices th
 * Install Vagrant
 * Type `vagrant up` into your terminal
 * Allow vagrant to finish setting everything up before attempting to login to the VM. 
-* `vagrant rsync-auto`
   
 ### Build Project
 #### TL;DR

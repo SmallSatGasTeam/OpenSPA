@@ -20,7 +20,7 @@ public:
     }
   }
 
-  ~Socket(){
+  virtual ~Socket(){
     if(fd >= 0) {close(fd);}
   }
 
@@ -28,7 +28,7 @@ public:
 
   //! \param address - ip address of destination
   //! \return true if successful, false otherwise
-  bool send(std::string address, uint16_t port, std::string message){
+  virtual bool send(std::string address, uint16_t port, std::string message){
 
     if(fd < 1){ handleFailure(); }
 
@@ -51,14 +51,14 @@ public:
   }
 
 protected:
-  bool init(){
+  virtual bool init(){
     if ( (fd=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
       return false;
     }
     return true;
   }
 
-  void handleFailure(){
+  virtual void handleFailure(){
     // TODO not sure how to die just yet :)
     std::cout << "Socket Failure" << std::endl;
     exit(1);

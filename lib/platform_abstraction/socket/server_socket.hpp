@@ -13,7 +13,7 @@ class ServerSocket: public Socket{
 public:
   ServerSocket():Socket(){}
 
-  bool bindSocket(uint32_t port){
+  virtual bool bindSocket(uint32_t port){
     //TODO check fd for errors
 
     SocketAddress addr("", port);
@@ -27,7 +27,7 @@ public:
 
 
   template <typename Func>
-  void listen(Func connectionHandler){
+  virtual void listen(Func connectionHandler){
     //TODO check fd for errors
     uint8_t buf[BUFLEN];
 

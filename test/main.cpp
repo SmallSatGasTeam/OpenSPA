@@ -1,12 +1,13 @@
 #include <cstdint>
 #include <string>
 #include <memory>
+#include <vector>
 
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-// #include "spa_communicator_test.hpp"
+#include "spa_communicator_test.hpp"
 // #include "routing_table_test.hpp"
 // #include "network_communicator_test.hpp"
 #include "local_communicator_test.hpp"

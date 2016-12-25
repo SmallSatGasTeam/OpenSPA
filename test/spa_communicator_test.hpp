@@ -1,6 +1,38 @@
-#include <memory>
-
 #include <spa_communicator.hpp>
+
+#include "mocks/local_communicator.hpp"
+
+class SpaCommunicatorTest : public ::testing::Test {
+public:
+  virtual void SetUp(){
+    comms.push_back(
+      localCom = std::make_shared<MockLocalCommunicator>(LogicalAddress(1,0)));
+    comms.push_back(
+      foreignCom = std::make_shared<MockLocalCommunicator>(LogicalAddress(2,0)));
+
+    localMessage = std::make_shared<SpaMessage>(LogicalAddress(1,2), 1);
+    foreignMessage = std::make_shared<SpaMessage>(LogicalAddress(2,1), 1);
+    nonConnectedMessage = std::make_shared<SpaMessage>(LogicalAddress(3,1), 1);
+  }
+
+  std::shared_ptr<MockLocalCommunicator> localCom;
+  std::shared_ptr<MockLocalCommunicator> foreignCom;
+  std::vector<SpaCommunicator::Com> comms;
+  std::shared_ptr<SpaMessage> localMessage;
+  std::shared_ptr<SpaMessage> foreignMessage;
+  std::shared_ptr<SpaMessage> nonConnectedMessage;
+};
+
+TEST_F(SpaCommunicatorTest, send__to_same_network){
+  SpaCommunicator spaCom(LogicalAddress(1,0), comms);
+  EXPECT_CALL(*localCom, send(localMessage)).Times(1);
+
+  bool result = spaCom.send(localMessage);
+  EXPECT_TRUE(result);
+}
+// TEST(SpaCommunicatorTest, send__to_other_network){}
+// TEST(SpaCommunicatorTest, listen){}
+
 
 class _SpaCommunicator: public SpaCommunicator {
 public:

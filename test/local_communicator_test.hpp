@@ -8,12 +8,16 @@ public:
   virtual void SetUp(){
     opcode = 0;
     port = 9;
+
     addr = std::make_shared<LogicalAddress>(1,1);
+    fullTable = std::make_shared<RoutingTable>();
+    emptyTable = std::make_shared<RoutingTable>();
     fullTable->insert(*addr, port);
-    message = std::make_shared<SpaMessage>(*addr, 0);
+    message = std::make_shared<SpaMessage>(*addr, opcode);
+    socket = std::make_shared<MockServerSocket>();
   }
 
-
+  std::shared_ptr<MockServerSocket> socket;
   std::shared_ptr<RoutingTable> fullTable;
   std::shared_ptr<RoutingTable> emptyTable;
   std::shared_ptr<LogicalAddress> addr;
@@ -23,22 +27,19 @@ public:
 };
 
 
-TEST(LocalCommunicator, send__address_exists_in_table){
-  std::shared_ptr<MockServerSocket> sock = std::make_shared<MockServerSocket>();
-  std::shared_ptr<RoutingTable> rt = std::make_shared<RoutingTable>();
-  LogicalAddress la(1,1);
-  rt->insert(la, 2);
-  SpaMessage message(la, 0);
-
+TEST_F(LocalCommunicatorTest, send__address_exists_in_table){
   LocalCommunicator lc(
-    sock,
-    rt,
-    la
+    socket,
+    fullTable,
+    *addr
   );
 
-  EXPECT_CALL(*sock, send(SERVER, 2, nullptr, 0)).Times(1);
+  uint8_t* expectedBuff = nullptr;
+  uint32_t expectedBuffLen = message->marshal(expectedBuff);
 
-  lc.send(message);
+  EXPECT_CALL(*socket, send(SERVER, port, expectedBuff, expectedBuffLen)).Times(1);
+
+  lc.send(*message);
 }
 
 TEST(LocalCommunicator, send__not_in_table){

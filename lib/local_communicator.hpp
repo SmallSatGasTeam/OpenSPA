@@ -18,13 +18,11 @@ class LocalCommunicator: public PhysicalCommunicator{
 public:
   LocalCommunicator(
     std::shared_ptr<ServerSocket> sock,
-    // ServerSocket* sock,
     std::shared_ptr<RoutingTable> routingTable,
     LogicalAddress la
   ):sock(sock), routingTable(routingTable), PhysicalCommunicator(la){;}
 
   void handleFailure();
-  // bool send(SpaMessage message){ return false; }
   bool send(SpaMessage message);
   // LogicalAddress getSubnetAddress();
 
@@ -33,7 +31,6 @@ public:
 protected:
   std::shared_ptr<RoutingTable> routingTable;
   std::shared_ptr<ServerSocket> const sock;
-  // ServerSocket* sock;
 };
 
 #endif

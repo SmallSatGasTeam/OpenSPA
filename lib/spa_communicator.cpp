@@ -33,16 +33,17 @@ void SpaCommunicator::handleFailure(){
   }
 
 
-  bool SpaCommunicator::send(SpaMessage message){
+  bool SpaCommunicator::send(std::shared_ptr<SpaMessage> message){
+    if(message == nullptr){ return false; }
     std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
-      message.logicalAddress,
+      message->logicalAddress,
       communicators
     );
-
     if(com == nullptr){
       handleFailure();
       return false;
     }
+
     com->send(message);
     return true;
   }

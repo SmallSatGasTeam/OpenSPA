@@ -34,7 +34,7 @@ public:
 
   //! \param message - Specialization of a Message to be sent over the network.
   //! \return true if message is successfully sent, false otherwise.
-  bool send(SpaMessage message);
+  bool send(std::shared_ptr<SpaMessage> message);
 
 template <typename Func>
   void listen(Func messageHandler);

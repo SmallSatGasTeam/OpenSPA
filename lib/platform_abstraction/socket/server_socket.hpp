@@ -27,7 +27,7 @@ public:
 
 
   template <typename Func>
-  virtual void listen(Func connectionHandler){
+  void listen(Func connectionHandler){
     //TODO check fd for errors
     uint8_t buf[BUFLEN];
 

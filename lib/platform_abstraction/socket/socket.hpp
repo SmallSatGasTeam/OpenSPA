@@ -28,26 +28,26 @@ public:
 
   //! \param address - ip address of destination
   //! \return true if successful, false otherwise
-  virtual bool send(std::string address, uint16_t port, std::string message){
-
-    if(fd < 1){ handleFailure(); }
-
-    SocketAddress addr(address, port);
-    struct sockaddr_in saddr = addr.to_sockaddr_in();
-    int8_t result = sendto(
-      fd,
-      message.c_str(),
-      strlen(message.c_str()),
-      0,
-      (struct sockaddr *) &saddr,
-      sizeof(saddr)
-    );
-
-    if(result == -1) {
-      handleFailure();
-      return false;
-    }
-    return true;
+  virtual bool send(std::string address, uint16_t port, uint8_t* buff, uint32_t buffLen){
+    // 
+    // if(fd < 1){ handleFailure(); }
+    //
+    // SocketAddress addr(address, port);
+    // struct sockaddr_in saddr = addr.to_sockaddr_in();
+    // int8_t result = sendto(
+    //   fd,
+    //   message.c_str(),
+    //   strlen(message.c_str()),
+    //   0,
+    //   (struct sockaddr *) &saddr,
+    //   sizeof(saddr)
+    // );
+    //
+    // if(result == -1) {
+    //   handleFailure();
+    //   return false;
+    // }
+    // return true;
   }
 
 protected:

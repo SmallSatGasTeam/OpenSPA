@@ -5,17 +5,19 @@ void LocalCommunicator::handleFailure(){
   exit(1);
 }
 
-bool LocalCommunicator::send(Socket const & sock, SpaMessage message){
-  int32_t port = routingTable.getPhysicalAddress(message.logicalAddress);
+bool LocalCommunicator::send(SpaMessage message){
+  int32_t port = routingTable->getPhysicalAddress(message.logicalAddress);
   if(port < 0){ handleFailure(); }
-  // sock.send(SERVER, port, message.marshal());
+  uint8_t* buff = nullptr;
+  uint32_t buffLen = message.marshal(buff);
+  sock->send(SERVER, port, buff, buffLen);
   return true;
 }
 
-
-void LocalCommunicator::listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen)){
-  sock.listen(messageHandler);
-}
+//
+// void LocalCommunicator::listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen)){
+//   sock.listen(messageHandler);
+// }
 
 LogicalAddress getSubnetAddress(){
   return LogicalAddress(1,0);

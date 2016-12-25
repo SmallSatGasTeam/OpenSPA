@@ -16,17 +16,18 @@
 
 class LocalCommunicator: public PhysicalCommunicator{
 public:
+  // LocalCommunicator():PhysicalCommunicator(LogicalAddress()){}
   LocalCommunicator(
     std::shared_ptr<ServerSocket> sock,
     std::shared_ptr<RoutingTable> routingTable,
     LogicalAddress la
   ):sock(sock), routingTable(routingTable), PhysicalCommunicator(la){;}
 
-  void handleFailure();
-  bool send(SpaMessage message);
-  LogicalAddress getSubnetAddress();
+  virtual void handleFailure();
+  virtual bool send(std::shared_ptr<SpaMessage> message);
+  virtual LogicalAddress getSubnetAddress();
 
-  void listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen));
+  virtual void listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen));
 
 protected:
   std::shared_ptr<RoutingTable> routingTable;

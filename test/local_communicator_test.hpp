@@ -39,7 +39,7 @@ TEST_F(LocalCommunicatorTest, send__address_exists_in_table){
 
   EXPECT_CALL(*socket, send(SERVER, port, expectedBuff, expectedBuffLen)).Times(1);
 
-  bool result = lc.send(*message);
+  bool result = lc.send(message);
   EXPECT_TRUE(result);
 
 }
@@ -56,6 +56,6 @@ TEST_F(LocalCommunicatorTest, send__not_in_table){
 
   EXPECT_CALL(*socket, send(SERVER, -1, expectedBuff, expectedBuffLen)).Times(0);
 
-  bool result = lc.send(*message);
+  bool result = lc.send(message);
   EXPECT_FALSE(result);
 }

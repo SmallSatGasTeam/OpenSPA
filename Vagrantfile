@@ -84,11 +84,14 @@ Vagrant.configure(2) do |config|
 
   # #=== Installing and configuring GTest/GMock ==
      apt-get -y install google-mock
-     apt-get -y install libgtest-dev
 		 cd /usr/src/gtest
 		 cmake CMakeLists.txt
 		 make
-     cp -r include/gtest /usr/include
+     cp *.a /usr/lib
+
+     cd /usr/src/gmock
+     cmake CMakeLists.txt
+     make
      cp *.a /usr/lib
 
      #=== Upgrading wallpaper ==

@@ -1,13 +1,16 @@
 #include "local_communicator.hpp"
 
 void LocalCommunicator::handleFailure(){
+  //TODO how should this be handled?
   std::cout << "Local Communicator failure" << '\n';
-  exit(1);
 }
 
 bool LocalCommunicator::send(SpaMessage message){
   int32_t port = routingTable->getPhysicalAddress(message.logicalAddress);
-  if(port < 0){ handleFailure(); }
+  if(port < 0){
+    handleFailure();
+    return false;
+  }
   uint8_t* buff = nullptr;
   uint32_t buffLen = message.marshal(buff);
   sock->send(SERVER, port, buff, buffLen);

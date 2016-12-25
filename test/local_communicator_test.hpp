@@ -59,5 +59,3 @@ TEST_F(LocalCommunicatorTest, send__not_in_table){
   bool result = lc.send(*message);
   EXPECT_FALSE(result);
 }
-
-// TEST(LocalCommunicator, listen){}

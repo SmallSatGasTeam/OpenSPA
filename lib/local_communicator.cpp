@@ -11,17 +11,18 @@ bool LocalCommunicator::send(SpaMessage message){
     handleFailure();
     return false;
   }
+
   uint8_t* buff = nullptr;
   uint32_t buffLen = message.marshal(buff);
   sock->send(SERVER, port, buff, buffLen);
   return true;
 }
 
-//
-// void LocalCommunicator::listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen)){
-//   sock.listen(messageHandler);
-// }
+void LocalCommunicator::listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen)){
+  sock->listen(messageHandler);
+}
 
-LogicalAddress getSubnetAddress(){
+LogicalAddress LocalCommunicator::getSubnetAddress(){
+  // Local communicators are always on the local subnet(address 1)
   return LogicalAddress(1,0);
 }

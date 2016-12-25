@@ -24,9 +24,9 @@ public:
 
   void handleFailure();
   bool send(SpaMessage message);
-  // LogicalAddress getSubnetAddress();
+  LogicalAddress getSubnetAddress();
 
-  // void listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen));
+  void listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen));
 
 protected:
   std::shared_ptr<RoutingTable> routingTable;

@@ -30,7 +30,7 @@ public:
 
 protected:
   std::shared_ptr<RoutingTable> routingTable;
-  std::shared_ptr<ServerSocket> const sock;
+  std::shared_ptr<ServerSocket> sock;
 };
 
 #endif

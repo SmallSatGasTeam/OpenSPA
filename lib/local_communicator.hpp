@@ -16,7 +16,6 @@
 
 class LocalCommunicator: public PhysicalCommunicator{
 public:
-  // LocalCommunicator():PhysicalCommunicator(LogicalAddress()){}
   LocalCommunicator(
     std::shared_ptr<ServerSocket> sock,
     std::shared_ptr<RoutingTable> routingTable,

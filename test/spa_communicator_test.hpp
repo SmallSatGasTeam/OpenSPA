@@ -39,6 +39,14 @@ TEST_F(SpaCommunicatorTest, send__to_other_network){
   EXPECT_TRUE(result);
 }
 
+TEST_F(SpaCommunicatorTest, send__to_non_connected_network){
+  SpaCommunicator spaCom(LogicalAddress(1,0), comms);
+  EXPECT_CALL(*foreignCom, send(nonConnectedMessage)).Times(0);
+  EXPECT_CALL(*localCom, send(nonConnectedMessage)).Times(0);
+
+  bool result = spaCom.send(nonConnectedMessage);
+  EXPECT_FALSE(result);
+}
 
 // TEST(SpaCommunicatorTest, listen){}
 

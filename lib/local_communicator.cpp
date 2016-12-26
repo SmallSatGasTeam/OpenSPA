@@ -22,8 +22,3 @@ bool LocalCommunicator::send(std::shared_ptr<SpaMessage> message){
 void LocalCommunicator::listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen)){
   sock->listen(messageHandler);
 }
-
-LogicalAddress LocalCommunicator::getSubnetAddress(){
-  // Local communicators are always on the local subnet(address 1)
-  return LogicalAddress(1,0);
-}

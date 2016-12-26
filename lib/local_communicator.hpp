@@ -25,7 +25,6 @@ public:
 
   virtual void handleFailure();
   virtual bool send(std::shared_ptr<SpaMessage> message);
-  virtual LogicalAddress getSubnetAddress();
 
   virtual void listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen));
 

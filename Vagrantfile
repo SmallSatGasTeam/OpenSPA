@@ -44,7 +44,10 @@ Vagrant.configure(2) do |config|
   # your network.
   # config.vm.network "public_network"
 
-  config.vm.synced_folder ".", "/vagrant/OpenSPA", type: "virtualbox"
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+
+  # Set post-vagrant-up message
+	config.vm.post_up_message = "[SUCCESS] OpenSPA dev environment initizaled. You may now access the VM!"
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is

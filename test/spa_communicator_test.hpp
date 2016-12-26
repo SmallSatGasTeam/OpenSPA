@@ -10,7 +10,7 @@ public:
     comms.push_back(
       foreignCom = std::make_shared<MockLocalCommunicator>(LogicalAddress(2,0)));
 
-    localMessage = std::make_shared<SpaMessage>(LogicalAddress(1,2), 1);
+    localMessage = std::make_shared<SpaMessage>(LogicalAddress(1,1), 1);
     foreignMessage = std::make_shared<SpaMessage>(LogicalAddress(2,1), 1);
     nonConnectedMessage = std::make_shared<SpaMessage>(LogicalAddress(3,1), 1);
   }
@@ -30,7 +30,16 @@ TEST_F(SpaCommunicatorTest, send__to_same_network){
   bool result = spaCom.send(localMessage);
   EXPECT_TRUE(result);
 }
-// TEST(SpaCommunicatorTest, send__to_other_network){}
+
+TEST_F(SpaCommunicatorTest, send__to_other_network){
+  SpaCommunicator spaCom(LogicalAddress(1,0), comms);
+  EXPECT_CALL(*foreignCom, send(foreignMessage)).Times(1);
+
+  bool result = spaCom.send(foreignMessage);
+  EXPECT_TRUE(result);
+}
+
+
 // TEST(SpaCommunicatorTest, listen){}
 
 

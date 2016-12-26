@@ -17,7 +17,6 @@ void SpaCommunicator::addCommunicators(std::vector<SpaCommunicator::Com> comms){
 
 void SpaCommunicator::handleFailure(){
   std::cout << "Spa Communicator Failed" << '\n';
-  exit(1);
 }
 
  SpaCommunicator::Com SpaCommunicator::selectCommunicator(
@@ -25,7 +24,7 @@ void SpaCommunicator::handleFailure(){
   std::vector<Com> const & communicators){
     for(auto com : communicators){
       if(com == nullptr){ continue; }
-      if(com->getSubnetAddress().isOnSameSubnet(address)){
+      else if(com->getSubnetAddress().isOnSameSubnet(address)){
         return com;
       }
     }

@@ -9,6 +9,8 @@
 #include "physical_communicator.hpp"
 #include "routing_table.hpp"
 
+#define LOCAL_SUBNET_ADDRESS 1
+
 class SpaCommunicator {
 public:
   typedef std::shared_ptr <PhysicalCommunicator> Com;
@@ -36,9 +38,8 @@ public:
   //! \return true if message is successfully sent, false otherwise.
   bool send(std::shared_ptr<SpaMessage> message);
 
-template <typename Func>
-  void listen(Func messageHandler);
-
+  //TODO document
+  void listen(PhysicalCommunicator::MessageCallback);
 
 protected:
   //! Method called when something unexpected occurs.
@@ -50,6 +51,9 @@ protected:
   //! \param address - logical address where message is going to be sent
   //! \param communicators - vector of communicators to be selected from
   Com selectCommunicator(LogicalAddress address, std::vector<Com> const & communicators);
+
+  //TODO document
+  Com getLocalCommunicator();
 
   LogicalAddress currentAddress;
   std::vector<Com> communicators;

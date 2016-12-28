@@ -31,6 +31,11 @@ void SpaCommunicator::handleFailure(){
     return nullptr;
   }
 
+  SpaCommunicator::Com SpaCommunicator::getLocalCommunicator(){
+    return selectCommunicator(
+      LogicalAddress(LOCAL_SUBNET_ADDRESS, 0), communicators
+    );
+  }
 
   bool SpaCommunicator::send(std::shared_ptr<SpaMessage> message){
     if(message == nullptr){ return false; }
@@ -48,13 +53,8 @@ void SpaCommunicator::handleFailure(){
   }
 
 //TODO document
-template <typename Func>
-void SpaCommunicator::listen(Func messageHandler){
-    std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
-      currentAddress,
-      communicators
-    );
-
+void SpaCommunicator::listen(PhysicalCommunicator::MessageCallback messageHandler){
+    SpaCommunicator::Com com = getLocalCommunicator();
     if(com == nullptr){ handleFailure(); }
 
     com->listen(messageHandler);

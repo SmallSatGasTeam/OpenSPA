@@ -7,11 +7,13 @@
 
   class PhysicalCommunicator {
   public:
+    typedef void (*MessageCallback)(uint8_t*, uint32_t);
+
     PhysicalCommunicator(LogicalAddress la):subnetAddress(la){}
 
     virtual ~PhysicalCommunicator(){}
     virtual bool send(std::shared_ptr<SpaMessage> message){ return false; }
-    virtual void listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen)){}
+    virtual void listen(MessageCallback){}
 
     virtual LogicalAddress getSubnetAddress(){ return subnetAddress; }
 

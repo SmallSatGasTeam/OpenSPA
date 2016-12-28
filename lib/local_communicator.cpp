@@ -20,6 +20,9 @@ bool LocalCommunicator::send(std::shared_ptr<SpaMessage> message){
 }
 
 void LocalCommunicator::listen(PhysicalCommunicator::MessageCallback messageHandler){
-  if(sock == nullptr){ return; }
+  if(sock == nullptr){
+    handleFailure();
+    return;
+  }
   sock->listen(messageHandler);
 }

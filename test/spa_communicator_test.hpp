@@ -48,7 +48,14 @@ TEST_F(SpaCommunicatorTest, send__to_non_connected_network){
   EXPECT_FALSE(result);
 }
 
-// TEST(SpaCommunicatorTest, listen){}
+TEST_F(SpaCommunicatorTest, listen){
+  SpaCommunicator spaCom(LogicalAddress(1,0), comms);
+
+  PhysicalCommunicator::MessageCallback callback = [](uint8_t* buff, uint32_t size){return;};
+  EXPECT_CALL(*localCom, listen(callback)).Times(1);
+
+  spaCom.listen(callback);
+}
 
 
 class _SpaCommunicator: public SpaCommunicator {

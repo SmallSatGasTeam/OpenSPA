@@ -25,7 +25,7 @@ public:
   virtual void handleFailure();
   virtual bool send(std::shared_ptr<SpaMessage> message);
 
-  virtual void listen(void(*messageHandler)(uint8_t* buff, uint32_t bufflen));
+  virtual void listen(PhysicalCommunicator::MessageCallback);
 
 protected:
   std::shared_ptr<RoutingTable> routingTable;

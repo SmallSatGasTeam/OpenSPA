@@ -5,8 +5,6 @@
 
 #include <spa_communicator.hpp>
 
-void messageCallback(uint8_t*, uint32_t);
-
 class SubnetManager {
 public:
   SubnetManager(std::shared_ptr<SpaCommunicator> com):communicator(com){
@@ -14,6 +12,8 @@ public:
       com->listen(messageCallback);
     }
   }
+
+  static void messageCallback(uint8_t*, uint32_t);
 
 // Specialization methods
 //

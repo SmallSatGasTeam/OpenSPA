@@ -32,18 +32,6 @@ public:
   //TODO document
   void addCommunicators(std::vector<Com> comms);
 
-
-  virtual void handleMessage(SpaMessage message){
-    // TODO
-    // If addressed to me :D
-    // Otherwise call send (which will handle routing)
-  }
-
-  virtual void handleRawMessage(uint8_t* buff, uint32_t len){
-    // TODO
-    // convert to SpaMessage and pass to handleMessage
-  }
-
   //! Sends a spa message over the network
 
   //! \param message - Specialization of a Message to be sent over the network.
@@ -51,8 +39,7 @@ public:
   bool send(std::shared_ptr<SpaMessage> message);
 
   //TODO document
-  void listen(PhysicalCommunicator::MessageCallback);
-
+  virtual void listen(PhysicalCommunicator::MessageCallback);
 protected:
   //! Method called when something unexpected occurs.
   void handleFailure();

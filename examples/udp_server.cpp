@@ -2,7 +2,7 @@
     Simple udp server
 */
 
-#include "../src/platform_abstraction/socket/server_socket.hpp"
+#include "../lib/platform_abstraction/socket/server_socket.hpp"
 
 #define BUFLEN 512  //Max length of buffer
 #define PORT 8888   //The port on which to listen for incoming data

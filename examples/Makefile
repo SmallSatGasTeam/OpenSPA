@@ -18,7 +18,7 @@ run_server: server
 	./server.bin
 
 server:
-	g++ -std=c++11 udp_server.cpp -o server.bin
+	g++ -std=c++11 udp_server.cpp -o server.bin -lpthread
 
 clean:
 	rm *.bin

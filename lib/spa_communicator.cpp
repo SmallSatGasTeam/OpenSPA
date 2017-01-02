@@ -3,11 +3,6 @@
 #include "spa_communicator.hpp"
 
 SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress):currentAddress(currentAddress){}
-SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress, PhysicalCommunicator const & com)
-  :currentAddress(currentAddress){
-    communicators.push_back(std::make_shared<PhysicalCommunicator>(com));
-  }
-
 SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress, std::vector<Com> comms)
 :currentAddress(currentAddress){ addCommunicators(comms); }
 
@@ -56,6 +51,5 @@ void SpaCommunicator::handleFailure(){
 void SpaCommunicator::listen(PhysicalCommunicator::MessageCallback messageHandler){
     SpaCommunicator::Com com = getLocalCommunicator();
     if(com == nullptr){ handleFailure(); }
-
     com->listen(messageHandler);
   }

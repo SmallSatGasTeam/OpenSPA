@@ -7,8 +7,8 @@ public:
 };
 
 
-TEST_F(SubnetManagerTest, constructor){
-  std::shared_ptr<MockSpaCommunicator> com = std::make_shared<MockSpaCommunicator>();
-  EXPECT_CALL(*com, listen(testing::_)).Times(1);
-  SubnetManager manager(com);
-}
+// TEST_F(SubnetManagerTest, constructor){
+  // std::shared_ptr<MockSpaCommunicator> com = std::make_shared<MockSpaCommunicator>();
+  // EXPECT_CALL(*com, listen(testing::_)).Times(1);
+  // SubnetManager manager(com);
+// }

@@ -7,11 +7,7 @@
 
 class SubnetManager {
 public:
-  SubnetManager(std::shared_ptr<SpaCommunicator> com):communicator(com){
-    if(communicator){
-      com->listen(messageCallback);
-    }
-  }
+  SubnetManager(std::shared_ptr<SpaCommunicator> com):communicator(com){}
 
   static void messageCallback(uint8_t*, uint32_t);
 
@@ -41,7 +37,11 @@ public:
 
     //! Continuously listen for messages. Will call receiveMessage with each received
     //! message. A call to this method should not return while the subnet manager is running.
-    // void listenMessages();
+    void listenMessages(){
+      if(communicator){
+        communicator->listen(messageCallback);
+      }
+    }
 
 // Subnet Manager Utilities
 //

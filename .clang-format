@@ -1,0 +1,8 @@
+AlwaysBreakTemplateDeclarations: true
+BreakBeforeBraces: Allman
+IndentWidth: 2
+Language: Cpp
+SpacesInParentheses: false
+Standard: Cpp11
+TabWidth: 2
+UseTab: Never

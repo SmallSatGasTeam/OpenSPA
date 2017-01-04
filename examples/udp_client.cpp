@@ -4,39 +4,42 @@
 #include "../lib/platform_abstraction/socket/socket.hpp"
 
 #define SERVER "127.0.0.1"
-#define BUFLEN 512  //Max length of buffer
-#define PORT 8888   //The port on which to send data
+#define BUFLEN 512 //Max length of buffer
+#define PORT 8888  //The port on which to send data
 
 void die(char *s)
 {
-    perror(s);
-    exit(1);
+  perror(s);
+  exit(1);
 }
 
 int main(void)
 {
-    // Socket is an abstraction class that we have built. This makes it so Unix
-    // specific code can live in only one place. As well as allowing us to not
-    // litter gross C code everywhere. You can find the source in
-    // lib/PA_Socket/socket.hpp
-    Socket s;
+  // Socket is an abstraction class that we have built. This makes it so Unix
+  // specific code can live in only one place. As well as allowing us to not
+  // litter gross C code everywhere. You can find the source in
+  // lib/PA_Socket/socket.hpp
+  Socket s;
 
-    while(true){
-      std::string message;
-      std::cout << "Enter message to send: " << std::endl;
-      std::cin >> message;
-      bool result = s.send(SERVER, PORT, (uint8_t*)message.c_str(), strlen(message.c_str()));
-      if(result) {
-        std::cout << "Message successfully sent" << std::endl;
-        std::cout << "Message: " << message << std::endl;
-      } else {
-        std::cout << "Message was not sent..." << std::endl;
-      }
+  while (true)
+  {
+    std::string message;
+    std::cout << "Enter message to send: " << std::endl;
+    std::cin >> message;
+    bool result = s.send(SERVER, PORT, (uint8_t *)message.c_str(), strlen(message.c_str()));
+    if (result)
+    {
+      std::cout << "Message successfully sent" << std::endl;
+      std::cout << "Message: " << message << std::endl;
     }
+    else
+    {
+      std::cout << "Message was not sent..." << std::endl;
+    }
+  }
 
-    return 0;
+  return 0;
 }
-
 
 /*
     Simple udp client example code from the interwebs

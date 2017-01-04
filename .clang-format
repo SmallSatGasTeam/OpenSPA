@@ -1,5 +1,6 @@
 AlwaysBreakTemplateDeclarations: true
 BreakBeforeBraces: Allman
+ColumnLimit: 0
 IndentWidth: 2
 Language: Cpp
 SpacesInParentheses: false

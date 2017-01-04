@@ -1,11 +1,11 @@
 #include <spa_message.hpp>
+#include <messages/test_type.hpp>
 
 class SpaMessageTest : public ::testing::Test {
 public:
   virtual void SetUp(){
     opcode = 9;
   }
-
   uint8_t opcode;
 };
 
@@ -22,4 +22,16 @@ TEST_F(SpaMessageTest, marshal){
   EXPECT_EQ(original.logicalAddress.subnetId, clone->logicalAddress.subnetId);
   EXPECT_EQ(original.logicalAddress.componentId, clone->logicalAddress.componentId);
   EXPECT_EQ(length, sizeof(SpaMessage));
+}
+
+TEST_F(SpaMessageTest, unmarshal){
+  LogicalAddress la(1,1);
+  TestDerivedMessage original(la, opcode);
+  uint8_t buff[512];
+  uint32_t length = original.marshal(buff);
+
+  // std::shared_ptr<SpaMessage> result =
+  SpaMessage::unmarshal(buff, length);
+  std::cout << "/* message */" << '\n';
+  // EXPECT_TRUE(result != nullptr);
 }

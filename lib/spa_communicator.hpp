@@ -20,12 +20,6 @@ public:
   //! \param currentAddress - logical address of the subnet manager who owns SpaCommunicator
   SpaCommunicator(LogicalAddress currentAddress);
 
-  //! Construct SpaCommunicator, and set a physical communicator
-
-  //! \param currentAddress - logical address of the subnet manager who owns SpaCommunicator
-  //! \param communicator - physical communicator that should belong to SpaCommunicator
-  SpaCommunicator(LogicalAddress currentAddress, PhysicalCommunicator const & communicator);
-
   //TODO document
   SpaCommunicator(LogicalAddress currentAddress, std::vector<Com> comms);
 
@@ -39,8 +33,7 @@ public:
   bool send(std::shared_ptr<SpaMessage> message);
 
   //TODO document
-  void listen(PhysicalCommunicator::MessageCallback);
-
+  virtual void listen(PhysicalCommunicator::MessageCallback);
 protected:
   //! Method called when something unexpected occurs.
   void handleFailure();

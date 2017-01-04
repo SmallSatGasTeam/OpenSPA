@@ -1,7 +1,15 @@
 #ifndef SUBNET_MANAGER
 #define SUBNET_MANAGER
 
+#include <memory>
+
+#include <spa_communicator.hpp>
+
 class SubnetManager {
+public:
+  SubnetManager(std::shared_ptr<SpaCommunicator> com):communicator(com){}
+
+  static void messageCallback(uint8_t*, uint32_t);
 
 // Specialization methods
 //
@@ -15,7 +23,7 @@ class SubnetManager {
     //! entry point for logic that handles recieving mesages
 
     //! \param message - message that has been received
-    virtual void recieveMessage(SpaMessage message);
+    // virtual void recieveMessage(SpaMessage message);
 
 // Subnet lifecycle methods
 //
@@ -25,11 +33,15 @@ class SubnetManager {
     //! Continuously ping components checking to make sure they are still responsive.
     //! Should report component failture to logging service. This function should
     //! not return while the subnet manager is running.
-    void monitorHealth();
+    // void monitorHealth();
 
     //! Continuously listen for messages. Will call receiveMessage with each received
     //! message. A call to this method should not return while the subnet manager is running.
-    void listenMessages();
+    void listenMessages(){
+      if(communicator){
+        communicator->listen(messageCallback);
+      }
+    }
 
 // Subnet Manager Utilities
 //
@@ -39,12 +51,12 @@ class SubnetManager {
 //! Run a long running task on a new thread
 
 //! \param task - lambda function to run on a seperate thread
-template<typename Func>
-    void runTask(Func task);
+// template<typename Func>
+    // void runTask(Func task);
 
 protected:
-  
-  SpaCommunicator com;
 
+  std::shared_ptr<SpaCommunicator> communicator;
+  // TODO add component list to store data about component health
 };
 #endif

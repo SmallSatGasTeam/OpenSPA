@@ -1,7 +1,7 @@
 /*
     Simple udp client
 */
-#include "../src/platform_abstraction/socket/socket.hpp"
+#include "../lib/platform_abstraction/socket/socket.hpp"
 
 #define SERVER "127.0.0.1"
 #define BUFLEN 512  //Max length of buffer
@@ -25,7 +25,7 @@ int main(void)
       std::string message;
       std::cout << "Enter message to send: " << std::endl;
       std::cin >> message;
-      bool result = s.send(SERVER, PORT, message);
+      bool result = s.send(SERVER, PORT, (uint8_t*)message.c_str(), strlen(message.c_str()));
       if(result) {
         std::cout << "Message successfully sent" << std::endl;
         std::cout << "Message: " << message << std::endl;
@@ -41,6 +41,10 @@ int main(void)
 /*
     Simple udp client example code from the interwebs
 */
+/**
+ * Our code basically wraps this socket API
+ */
+
 // #include<stdio.h> //printf
 // #include<string.h> //memset
 // #include<stdlib.h> //exit(0);

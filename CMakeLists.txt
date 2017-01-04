@@ -13,3 +13,4 @@ include_directories(lib)
 # Include sub directories, each with their own CMakeLists.txt file
 add_subdirectory(test)
 add_subdirectory(lib)
+add_subdirectory(src)

@@ -11,6 +11,7 @@
 #include "routing_table_test.hpp"
 // #include "network_communicator_test.hpp"
 #include "local_communicator_test.hpp"
+#include "subnet_manager_test.hpp"
 
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);

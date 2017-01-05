@@ -13,6 +13,8 @@ class ServerSocket : public Socket
 public:
   ServerSocket() : Socket() {}
 
+  typedef void (*MessageCallback)(uint8_t *, uint32_t);
+
   virtual bool bindSocket(uint32_t port)
   {
     //TODO check fd for errors
@@ -27,8 +29,7 @@ public:
     return true;
   }
 
-  template <typename Func>
-  void listen(Func connectionHandler)
+  virtual void listen(ServerSocket::MessageCallback connectionHandler)
   {
     //TODO check fd for errors
     uint8_t buf[BUFLEN];

@@ -1,6 +1,7 @@
 #ifndef COMPONENT_HPP
 #define COMPONENT_HPP
-class Component{
+class Component
+{
   // virtual void appInit();
   // virtual void appShutdown();
   // virtual int32_t publish();

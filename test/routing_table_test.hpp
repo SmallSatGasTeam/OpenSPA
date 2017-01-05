@@ -1,23 +1,25 @@
-#include <vector>
-#include <map>
 #include <cstdint>
+#include <map>
+#include <vector>
 
 #include <routing_table.hpp>
 
 /**
  *  Sub class with added testing functionality
  */
-class _RoutingTable : public RoutingTable {
+class _RoutingTable : public RoutingTable
+{
 public:
-  std::map<LogicalAddress, uint32_t, LogicalAddressCompare> getTable(){return routingTable;}
+  std::map<LogicalAddress, uint32_t, LogicalAddressCompare> getTable() { return routingTable; }
 };
 
-TEST(RoutingTable, insert){
+TEST(RoutingTable, insert)
+{
   _RoutingTable rt;
-  LogicalAddress l1(1,1);
-  LogicalAddress l2(2,2);
-  LogicalAddress l3(1,2);
-  LogicalAddress l4(0,0);
+  LogicalAddress l1(1, 1);
+  LogicalAddress l2(2, 2);
+  LogicalAddress l3(1, 2);
+  LogicalAddress l4(0, 0);
 
   rt.insert(l1, 1);
   rt.insert(l2, 2);
@@ -33,20 +35,22 @@ TEST(RoutingTable, insert){
   EXPECT_TRUE(table.find(l4) == table.end());
 }
 
-TEST(RoutingTable, exists){
+TEST(RoutingTable, exists)
+{
   _RoutingTable rt;
-  LogicalAddress l1(1,1);
-  LogicalAddress l2(2,1);
+  LogicalAddress l1(1, 1);
+  LogicalAddress l2(2, 1);
   rt.insert(l1, 1);
 
   EXPECT_TRUE(rt.exists(l1));
   EXPECT_FALSE(rt.exists(l2));
 }
 
-TEST(RoutingTable, getPhysicalAddress){
+TEST(RoutingTable, getPhysicalAddress)
+{
   _RoutingTable rt;
-  LogicalAddress l1(1,1);
-  LogicalAddress l2(1,2);
+  LogicalAddress l1(1, 1);
+  LogicalAddress l2(1, 2);
   rt.insert(l1, 9);
 
   EXPECT_EQ(rt.getPhysicalAddress(l1), 9);

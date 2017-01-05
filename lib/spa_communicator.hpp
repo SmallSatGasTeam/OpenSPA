@@ -4,16 +4,16 @@
 #include <memory>
 #include <vector>
 
-
-#include "spa_message.hpp"
 #include "physical_communicator.hpp"
 #include "routing_table.hpp"
+#include "spa_message.hpp"
 
 #define LOCAL_SUBNET_ADDRESS 1
 
-class SpaCommunicator {
+class SpaCommunicator
+{
 public:
-  typedef std::shared_ptr <PhysicalCommunicator> Com;
+  typedef std::shared_ptr<PhysicalCommunicator> Com;
 
   //! Construct SpaCommunicator with only the address of the owning subnet manager
 
@@ -34,6 +34,7 @@ public:
 
   //TODO document
   virtual void listen(PhysicalCommunicator::MessageCallback);
+
 protected:
   //! Method called when something unexpected occurs.
   void handleFailure();
@@ -43,7 +44,7 @@ protected:
 
   //! \param address - logical address where message is going to be sent
   //! \param communicators - vector of communicators to be selected from
-  Com selectCommunicator(LogicalAddress address, std::vector<Com> const & communicators);
+  Com selectCommunicator(LogicalAddress address, std::vector<Com> const &communicators);
 
   //TODO document
   Com getLocalCommunicator();

@@ -14,23 +14,11 @@ uint32_t SpaMessage::marshal(uint8_t* target){
 
 std::shared_ptr<SpaMessage> SpaMessage::unmarshal(uint8_t* serialized, uint32_t size){
   auto msg = reinterpret_cast<SpaMessage*>(serialized);
-  std::cout << (int)msg->opcode << '\n';
-
   switch (msg->messageType) {
     case SpaMessage::TEST_TYPE:
-    uint8_t buff[512];
-    auto cpy = memcpy(buff, serialized, size);
-    auto message = new(cpy) TestDerivedMessage;
-    // MyObject *obj = new(bytes) MyObject;
-
-
-    // message = reinterpret_cast<TestDerivedMessage*>(cpy);
-    // std::cout << (int)message->opcode << '\n';
-    // auto ptr = std::shared_ptr<TestDerivedMessage>(message);
-      // return std::shared_ptr<TestDerivedMessage>(
-        // reinterpret_cast<TestDerivedMessage*>(serialized)
-        // message
-      // );
+      return std::shared_ptr<TestDerivedMessage>(
+        reinterpret_cast<TestDerivedMessage*>(serialized)
+      );
     break;
   }
   return nullptr;

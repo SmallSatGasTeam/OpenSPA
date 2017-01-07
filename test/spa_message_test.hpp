@@ -27,11 +27,14 @@ TEST_F(SpaMessageTest, marshal){
 TEST_F(SpaMessageTest, unmarshal){
   LogicalAddress la(1,1);
   TestDerivedMessage original(la, opcode);
-  uint8_t buff[512];
+  uint8_t* buff = new uint8_t[512];
   uint32_t length = original.marshal(buff);
 
-  // std::shared_ptr<SpaMessage> result =
-  SpaMessage::unmarshal(buff, length);
-  std::cout << "/* message */" << '\n';
-  // EXPECT_TRUE(result != nullptr);
+  std::shared_ptr<SpaMessage> clone = SpaMessage::unmarshal(buff, length);
+
+  EXPECT_TRUE(clone != nullptr);
+  EXPECT_EQ(original.opcode, clone->opcode);
+  EXPECT_EQ(original.logicalAddress.subnetId, clone->logicalAddress.subnetId);
+  EXPECT_EQ(original.logicalAddress.componentId, clone->logicalAddress.componentId);
+  EXPECT_EQ(length, sizeof(SpaMessage));
 }

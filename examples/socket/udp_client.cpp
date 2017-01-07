@@ -1,7 +1,7 @@
 /*
     Simple udp client
 */
-#include "../lib/platform_abstraction/socket/socket.hpp"
+#include "../../lib/platform_abstraction/socket/socket.hpp"
 
 #define SERVER "127.0.0.1"
 #define BUFLEN 512  //Max length of buffer

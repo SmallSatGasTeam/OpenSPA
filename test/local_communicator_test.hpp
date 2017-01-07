@@ -1,4 +1,3 @@
-
 #include "mocks/platform_abstraction/socket/server_socket.hpp"
 #include <local_communicator.hpp>
 #include <routing_table.hpp>

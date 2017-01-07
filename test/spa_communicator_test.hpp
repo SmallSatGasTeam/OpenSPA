@@ -1,6 +1,6 @@
 #include <spa_communicator.hpp>
 
-#include "mocks/local_communicator.hpp"
+#include "mocks/physical_communicator.hpp"
 
 class SpaCommunicatorTest : public ::testing::Test
 {
@@ -8,17 +8,17 @@ public:
   virtual void SetUp()
   {
     comms.push_back(
-        localCom = std::make_shared<MockLocalCommunicator>(LogicalAddress(1, 0)));
+        localCom = std::make_shared<MockPhysicalCommunicator>(LogicalAddress(1, 0)));
     comms.push_back(
-        foreignCom = std::make_shared<MockLocalCommunicator>(LogicalAddress(2, 0)));
+        foreignCom = std::make_shared<MockPhysicalCommunicator>(LogicalAddress(2, 0)));
 
     localMessage = std::make_shared<SpaMessage>(LogicalAddress(1, 1), 1);
     foreignMessage = std::make_shared<SpaMessage>(LogicalAddress(2, 1), 1);
     nonConnectedMessage = std::make_shared<SpaMessage>(LogicalAddress(3, 1), 1);
   }
 
-  std::shared_ptr<MockLocalCommunicator> localCom;
-  std::shared_ptr<MockLocalCommunicator> foreignCom;
+  std::shared_ptr<MockPhysicalCommunicator> localCom;
+  std::shared_ptr<MockPhysicalCommunicator> foreignCom;
   std::vector<SpaCommunicator::Com> comms;
   std::shared_ptr<SpaMessage> localMessage;
   std::shared_ptr<SpaMessage> foreignMessage;
@@ -67,6 +67,13 @@ TEST_F(SpaCommunicatorTest, listen)
 
   spaCom.listen(callback);
 }
+
+/*
+TEST_F(SpaCommunicatorTest, selectCommunicator)
+{
+  // TODO
+}
+*/
 
 class _SpaCommunicator : public SpaCommunicator
 {

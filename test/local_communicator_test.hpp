@@ -2,6 +2,7 @@
 #include "mocks/platform_abstraction/socket/server_socket.hpp"
 #include <local_communicator.hpp>
 #include <routing_table.hpp>
+using ::testing::DefaultValue;
 
 class LocalCommunicatorTest : public ::testing::Test
 {
@@ -38,7 +39,7 @@ TEST_F(LocalCommunicatorTest, send__address_exists_in_table)
   uint8_t *expectedBuff = nullptr;
   uint32_t expectedBuffLen = message->marshal(expectedBuff);
 
-  EXPECT_CALL(*socket, send(SERVER, port, expectedBuff, expectedBuffLen))
+  EXPECT_CALL(*socket, send(SERVER, port, ::testing::_, expectedBuffLen))
       .Times(1);
 
   bool result = lc.send(message);

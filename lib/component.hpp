@@ -20,5 +20,5 @@ public:
 protected:
   // LogicalAddress address;
   Com communicator;
-}x;
+};
 #endif

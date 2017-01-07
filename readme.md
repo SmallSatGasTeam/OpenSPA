@@ -26,9 +26,11 @@ OpenSPA relies on a handful of developer tools. The following is a list of thing
 <!-- ## How to Contribute  -->
 <!-- TODO -->
 ### Set up Vagrant
-OpenSPA uses Vagrant to create a development environment to match the devices that OpenSPA will run on. It also eliminiates "well, it works on my system" bugs. See the [wiki page](https://github.com/SmallSatGasTeam/OpenSPA/wiki/OpenSPA-Development-Environment) for instructions on how to install and use Vagrant. 
+OpenSPA uses Vagrant to create a development environment to match the devices that OpenSPA will run on. It also eliminiates "well, it works on my system" bugs. 
 
-#### TL;DR if you know what you're doing
+**If this is your first time installing the dev environment, see the [wiki page](https://github.com/SmallSatGasTeam/OpenSPA/wiki/OpenSPA-Development-Environment) for instructions.**
+
+#### Otherwise, TL;DR if you know what you're doing
 * Be sure you've cloned in the repository and are in the /OpenSPA directory
 * Install VirtualBox if you haven't already
 * Install Vagrant

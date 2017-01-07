@@ -14,4 +14,7 @@ include_directories(lib)
 add_subdirectory(test)
 add_subdirectory(lib)
 add_subdirectory(src)
+<<<<<<< HEAD
 add_subdirectory(examples/component)
+=======
+>>>>>>> 64e9fd9596af76c2ce7cd1217e7bbc66d102ae79

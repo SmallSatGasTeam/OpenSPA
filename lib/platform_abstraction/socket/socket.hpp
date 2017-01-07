@@ -2,26 +2,33 @@
 #define SOCKET_HPP
 
 #include <cstdint>
+#include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
-#include <netinet/in.h>
 #include <unistd.h>
 
-#include <string>
 #include <iostream>
+#include <string>
 
 #include "socket_address.hpp"
 
-class Socket{
+class Socket
+{
 public:
-  Socket():fd(-1){
-    if(init() == false){
+  Socket() : fd(-1)
+  {
+    if (init() == false)
+    {
       handleFailure();
     }
   }
 
-  virtual ~Socket(){
-    if(fd >= 0) {close(fd);}
+  virtual ~Socket()
+  {
+    if (fd >= 0)
+    {
+      close(fd);
+    }
   }
 
   //! Send message to port
@@ -50,14 +57,17 @@ public:
   }
 
 protected:
-  virtual bool init(){
-    if ( (fd=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1){
+  virtual bool init()
+  {
+    if ((fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
+    {
       return false;
     }
     return true;
   }
 
-  virtual void handleFailure(){
+  virtual void handleFailure()
+  {
     // TODO not sure how to die just yet :)
     std::cout << "Socket Failure" << std::endl;
     exit(1);

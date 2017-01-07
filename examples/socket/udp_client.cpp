@@ -1,12 +1,7 @@
 /*
     Simple udp client
 */
-<<<<<<< HEAD:examples/socket/udp_client.cpp
 #include "../../lib/platform_abstraction/socket/socket.hpp"
-=======
-#include "../lib/platform_abstraction/socket/socket.hpp"
->>>>>>> 64e9fd9596af76c2ce7cd1217e7bbc66d102ae79:examples/udp_client.cpp
-
 #define SERVER "127.0.0.1"
 #define BUFLEN 512 //Max length of buffer
 #define PORT 8888  //The port on which to send data

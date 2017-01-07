@@ -4,11 +4,12 @@
 #include "spa_communicator.hpp"
 #include <memory>
 
-class Component{
+class Component
+{
 public:
   typedef std::shared_ptr<SpaCommunicator> Com;
 
-  Component(Com communicator = nullptr):communicator(communicator){}
+  Component(Com communicator = nullptr) : communicator(communicator) {}
   // virtual ~Component(){}
   virtual void appInit() = 0;
   // virtual void appShutdown();

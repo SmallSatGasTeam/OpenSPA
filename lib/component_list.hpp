@@ -3,9 +3,9 @@
 
 #include <component.hpp>
 
-class ComponentList{
+class ComponentList
+{
 public:
-
 protected:
   std::vector<Component> components;
 };

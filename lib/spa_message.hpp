@@ -5,33 +5,33 @@
 
 #include "logical_address.hpp"
 
-
 //! Class to represent generic spa message. Should be extended by other Spa Message
 //! types
-struct SpaMessage{
+struct SpaMessage
+{
 
   //! Generate a message from a logical address and an opcode
 
   //! \param la - locial address of message
   //! \param opc - message opcode
   SpaMessage(LogicalAddress la, uint8_t opc, uint8_t messageType = 0)
-    :logicalAddress(la), opcode(opc), messageType(messageType){}
-  SpaMessage():opcode(0), messageType(0){}
+      : logicalAddress(la), opcode(opc), messageType(messageType) {}
+  SpaMessage() : opcode(0), messageType(0) {}
 
   //! Generate a message from a byte array
 
   //! \param serialized - array containing serialized message
   //! \param size - length of serialized array
-  SpaMessage(uint8_t* serialized, uint32_t size);
+  SpaMessage(uint8_t *serialized, uint32_t size);
 
   //! Serializes a message to a byte array
 
   //! \param target - pointer where seialized message array will be stored
   //! \return - size of serialized array
-  uint32_t marshal(uint8_t*& target);
+  uint32_t marshal(uint8_t *&target);
 
   //TODO document
-  static std::shared_ptr<SpaMessage> unmarshal(uint8_t* serialized, uint32_t size);
+  static std::shared_ptr<SpaMessage> unmarshal(uint8_t *serialized, uint32_t size);
 
   //! Logical address of component on spa network
   LogicalAddress logicalAddress;

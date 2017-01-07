@@ -15,7 +15,7 @@ TEST_F(SpaMessageTest, marshal)
 {
   LogicalAddress la(1, 1);
   SpaMessage original(la, opcode);
-  uint8_t buff[512];
+  uint8_t* buff = new uint8_t[512];
   uint32_t length = original.marshal(buff);
 
   SpaMessage *clone = reinterpret_cast<SpaMessage *>(buff);

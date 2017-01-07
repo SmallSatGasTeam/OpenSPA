@@ -28,7 +28,7 @@ struct SpaMessage{
 
   //! \param target - pointer where seialized message array will be stored
   //! \return - size of serialized array
-  uint32_t marshal(uint8_t* target);
+  uint32_t marshal(uint8_t*& target);
 
   //TODO document
   static std::shared_ptr<SpaMessage> unmarshal(uint8_t* serialized, uint32_t size);

@@ -5,9 +5,9 @@
 #include "messages/test_type.hpp"
 
 //TODO document
-uint32_t SpaMessage::marshal(uint8_t* target){
-  if(target == nullptr){ return 0; }
+uint32_t SpaMessage::marshal(uint8_t*& target){
   uint32_t length = sizeof(*this);
+  target = new uint8_t[length];
   memcpy(target, reinterpret_cast<uint8_t*>(this), length);
   return length;
 }

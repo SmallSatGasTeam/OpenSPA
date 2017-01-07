@@ -68,16 +68,9 @@ TEST_F(SpaCommunicatorTest, listen)
   spaCom.listen(callback);
 }
 
-/*
-TEST_F(SpaCommunicatorTest, selectCommunicator)
-{
-  // TODO
-}
-*/
-
 class _SpaCommunicator : public SpaCommunicator
 {
-public:
+public: 
   _SpaCommunicator(LogicalAddress currentAddress) : SpaCommunicator(currentAddress) {}
   Com _selectCommunicator(LogicalAddress address, std::vector<Com> const &communicators)
   {
@@ -85,25 +78,21 @@ public:
   }
 };
 
-TEST(SpaCommunicator, selectCommunicator)
+TEST_F(SpaCommunicatorTest, selectCommunicator)
 {
-  LogicalAddress l1(1, 1);
-  LogicalAddress l2(2, 2);
-  LogicalAddress l3(3, 3);
-  PhysicalCommunicator ph_1(l1), ph_2(l2);
-  std::vector<std::shared_ptr<PhysicalCommunicator>> comms;
+  LogicalAddress l1(1, 0); // Local 
+  LogicalAddress l2(2, 0); // Foreign
+  LogicalAddress l3(3, 0); // Nonconnected 
+ 
+  _SpaCommunicator spaCom(l1);
 
-  comms.push_back(std::make_shared<PhysicalCommunicator>(ph_1));
-  comms.push_back(std::make_shared<PhysicalCommunicator>(ph_2));
-
-  _SpaCommunicator com(l1);
-
-  std::shared_ptr<PhysicalCommunicator> selected = com._selectCommunicator(l2, comms);
+  auto selected = spaCom._selectCommunicator(l2, comms);
   EXPECT_TRUE(selected->getSubnetAddress() == l2);
 
-  selected = com._selectCommunicator(l1, comms);
+  selected = spaCom._selectCommunicator(l1, comms);
   EXPECT_TRUE(selected->getSubnetAddress() == l1);
 
-  selected = com._selectCommunicator(l3, comms);
+  selected = spaCom._selectCommunicator(l3, comms);
   EXPECT_TRUE(selected == nullptr);
 }
+

@@ -28,7 +28,8 @@ public:
 TEST_F(SpaCommunicatorTest, send__to_same_network)
 {
   SpaCommunicator spaCom(LogicalAddress(1, 0), comms);
-  EXPECT_CALL(*localCom, send(localMessage)).Times(1);
+  EXPECT_CALL(*localCom, send(localMessage))
+      .Times(1);
 
   bool result = spaCom.send(localMessage);
   EXPECT_TRUE(result);
@@ -37,7 +38,8 @@ TEST_F(SpaCommunicatorTest, send__to_same_network)
 TEST_F(SpaCommunicatorTest, send__to_other_network)
 {
   SpaCommunicator spaCom(LogicalAddress(1, 0), comms);
-  EXPECT_CALL(*foreignCom, send(foreignMessage)).Times(1);
+  EXPECT_CALL(*foreignCom, send(foreignMessage))
+      .Times(1);
 
   bool result = spaCom.send(foreignMessage);
   EXPECT_TRUE(result);
@@ -46,8 +48,10 @@ TEST_F(SpaCommunicatorTest, send__to_other_network)
 TEST_F(SpaCommunicatorTest, send__to_non_connected_network)
 {
   SpaCommunicator spaCom(LogicalAddress(1, 0), comms);
-  EXPECT_CALL(*foreignCom, send(nonConnectedMessage)).Times(0);
-  EXPECT_CALL(*localCom, send(nonConnectedMessage)).Times(0);
+  EXPECT_CALL(*foreignCom, send(nonConnectedMessage))
+      .Times(0);
+  EXPECT_CALL(*localCom, send(nonConnectedMessage))
+      .Times(0);
 
   bool result = spaCom.send(nonConnectedMessage);
   EXPECT_FALSE(result);
@@ -58,7 +62,8 @@ TEST_F(SpaCommunicatorTest, listen)
   SpaCommunicator spaCom(LogicalAddress(1, 0), comms);
 
   PhysicalCommunicator::MessageCallback callback = [](uint8_t *buff, uint32_t size) { return; };
-  EXPECT_CALL(*localCom, listen(callback)).Times(1);
+  EXPECT_CALL(*localCom, listen(callback))
+      .Times(1);
 
   spaCom.listen(callback);
 }

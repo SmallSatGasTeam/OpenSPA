@@ -30,7 +30,7 @@ TEST_F(SpaMessageTest, marshal)
 TEST_F(SpaMessageTest, unmarshal)
 {
   LogicalAddress la(1, 1);
-  TestDerivedMessage original(la, opcode);
+  TestDerivedMessage original(la);
   uint8_t *buff = new uint8_t[512];
   uint32_t length = original.marshal(buff);
 

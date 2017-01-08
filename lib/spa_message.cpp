@@ -16,7 +16,7 @@ uint32_t SpaMessage::marshal(uint8_t *&target)
 std::shared_ptr<SpaMessage> SpaMessage::unmarshal(uint8_t *serialized, uint32_t size)
 {
   auto msg = reinterpret_cast<SpaMessage *>(serialized);
-  switch (msg->messageType)
+  switch (msg->opcode)
   {
   case SpaMessage::TEST_TYPE:
     return std::shared_ptr<TestDerivedMessage>(
@@ -25,5 +25,3 @@ std::shared_ptr<SpaMessage> SpaMessage::unmarshal(uint8_t *serialized, uint32_t 
   }
   return nullptr;
 }
-
-// uint8_t const SpaMessage::TEST_TYPE = 1;

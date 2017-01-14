@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "logical_address.hpp"
+#include "messages/spa_header.hpp"
 
 //! Class to represent generic spa message. Should be extended by other Spa Message
 //! types
@@ -14,9 +15,25 @@ struct SpaMessage
 
   //! \param la - locial address of message
   //! \param opc - message opcode
-  SpaMessage(LogicalAddress la, uint8_t opc)
-      : logicalAddress(la), opcode(opc){}
-  SpaMessage() : opcode(0){}
+  SpaMessage(LogicalAddress destination, uint8_t opcode) //TODO phase out
+    :spaHeader(destination, opcode){}
+
+  SpaMessage(
+    uint8_t version = 0,
+    uint8_t priority = 0,
+    uint16_t length = 0,
+    LogicalAddress destination = LogicalAddress(0,0),
+    LogicalAddress source = LogicalAddress(0,0),
+    uint16_t flags = 0,
+    uint8_t opcode = 0
+  ): spaHeader (
+     version,
+     priority,
+     length,
+     destination,
+     source,
+     flags,
+     opcode){}
 
   //! Generate a message from a byte array
 
@@ -34,15 +51,9 @@ struct SpaMessage
   static std::shared_ptr<SpaMessage> unmarshal(uint8_t *serialized, uint32_t size);
 
   //! Logical address of component on spa network
-  LogicalAddress logicalAddress;
+  LogicalAddress logicalAddress; //NOTE deprecated
 
-  uint8_t version;
-  uint8_t priority;
-  uint16_t length;
-  LogicalAddress destination;
-  LogicalAddress source;
-  uint16_t flags;
-  uint8_t opcode;
+  SpaHeader spaHeader;
 
   static uint8_t const TEST_TYPE = 1;
 };

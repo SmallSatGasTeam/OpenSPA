@@ -47,7 +47,7 @@ bool SpaCommunicator::send(std::shared_ptr<SpaMessage> message)
     return false;
   }
   std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
-      message->logicalAddress,
+      message->spaHeader.destination,
       communicators);
   if (com == nullptr)
   {

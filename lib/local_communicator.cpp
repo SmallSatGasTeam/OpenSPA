@@ -12,7 +12,7 @@ bool LocalCommunicator::send(std::shared_ptr<SpaMessage> message)
   {
     return false;
   }
-  int32_t port = routingTable->getPhysicalAddress(message->logicalAddress);
+  int32_t port = routingTable->getPhysicalAddress(message->spaHeader.destination);
   if (port < 0)
   {
     handleFailure();

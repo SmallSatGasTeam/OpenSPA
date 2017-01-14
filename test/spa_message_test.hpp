@@ -21,9 +21,9 @@ TEST_F(SpaMessageTest, marshal)
   SpaMessage *clone = reinterpret_cast<SpaMessage *>(buff);
 
   EXPECT_TRUE(clone != nullptr);
-  EXPECT_EQ(original.opcode, clone->opcode);
-  EXPECT_EQ(original.logicalAddress.subnetId, clone->logicalAddress.subnetId);
-  EXPECT_EQ(original.logicalAddress.componentId, clone->logicalAddress.componentId);
+  EXPECT_EQ(original.spaHeader.opcode, clone->spaHeader.opcode);
+  EXPECT_EQ(original.spaHeader.destination.subnetId, clone->spaHeader.destination.subnetId);
+  EXPECT_EQ(original.spaHeader.destination.componentId, clone->spaHeader.destination.componentId);
   EXPECT_EQ(length, sizeof(SpaMessage));
 }
 
@@ -37,8 +37,8 @@ TEST_F(SpaMessageTest, unmarshal)
   std::shared_ptr<SpaMessage> clone = SpaMessage::unmarshal(buff, length);
 
   EXPECT_TRUE(clone != nullptr);
-  EXPECT_EQ(original.opcode, clone->opcode);
-  EXPECT_EQ(original.logicalAddress.subnetId, clone->logicalAddress.subnetId);
-  EXPECT_EQ(original.logicalAddress.componentId, clone->logicalAddress.componentId);
+  EXPECT_EQ(original.spaHeader.opcode, clone->spaHeader.opcode);
+  EXPECT_EQ(original.spaHeader.destination.subnetId, clone->spaHeader.destination.subnetId);
+  EXPECT_EQ(original.spaHeader.destination.componentId, clone->spaHeader.destination.componentId);
   EXPECT_EQ(length, sizeof(SpaMessage));
 }

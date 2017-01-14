@@ -1,7 +1,7 @@
 #include <component.hpp>
 #include <iostream>
 #include <local_communicator.hpp>
-#include <messages/test_type.hpp>
+#include <messages/local/local_hello.hpp>
 
 class ExampleComponent : public Component
 {
@@ -11,7 +11,26 @@ public:
   virtual void appInit()
   {
     std::cout << "Example app initializing!" << '\n';
-    std::shared_ptr<TestDerivedMessage> message = std::make_shared<TestDerivedMessage>(LogicalAddress(1, 3), 5);
+
+    uint8_t version = 0;
+    uint8_t priority = 0;
+    LogicalAddress destination(1,3);
+    LogicalAddress source(1,2);
+    uint16_t flags = 0;
+    uint16_t sourcePort = 8888;
+    uint64_t uuid = 1;
+    uint8_t componentType = 1;
+
+    auto message = std::make_shared<LocalHello>(
+      version,
+      priority,
+      destination,
+      source,
+      flags,
+      sourcePort,
+      uuid,
+      componentType
+    );
     sendMsg(message);
   }
 };

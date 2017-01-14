@@ -1,4 +1,4 @@
-#include <messages/test_type.hpp>
+#include <messages/test_derived_message.hpp>
 #include <spa_message.hpp>
 
 class SpaMessageTest : public ::testing::Test

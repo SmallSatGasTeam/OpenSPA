@@ -11,11 +11,7 @@
 struct SpaMessage
 {
 
-  //! Generate a message from a logical address and an opcode
-
-  //! \param la - locial address of message
-  //! \param opc - message opcode
-  SpaMessage(LogicalAddress destination, uint8_t opcode) //TODO phase out
+  SpaMessage(LogicalAddress destination, uint8_t opcode)
     :spaHeader(destination, opcode){}
 
   SpaMessage(

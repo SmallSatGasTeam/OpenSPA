@@ -1,8 +1,8 @@
 #include <cstring>
 #include <iostream>
 
-#include "messages/test_type.hpp"
-#include "spa_message.hpp"
+#include <messages/test_derived_message.hpp>
+#include <spa_message.hpp>
 
 //TODO document
 uint32_t SpaMessage::marshal(uint8_t *&target)

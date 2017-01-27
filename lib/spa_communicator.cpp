@@ -46,16 +46,18 @@ bool SpaCommunicator::send(std::shared_ptr<SpaMessage> message)
   {
     return false;
   }
+
   std::shared_ptr<PhysicalCommunicator> com = selectCommunicator(
       message->spaHeader.destination,
-      communicators);
+     communicators);
+
+
   if (com == nullptr)
   {
     handleFailure();
     return false;
   }
-
-  com->send(message);
+  com->PhysicalCommunicator::send(message);
   return true;
 }
 

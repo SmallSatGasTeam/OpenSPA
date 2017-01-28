@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include <messages/local/local_hello.hpp>
+#include <messages/local/local_ack.hpp>
 #include <spa_message.hpp>
 
 //TODO document
@@ -21,6 +22,10 @@ std::shared_ptr<SpaMessage> SpaMessage::unmarshal(uint8_t *serialized, uint32_t 
   case 0x20:
     return std::shared_ptr<LocalHello>(
         reinterpret_cast<LocalHello *>(serialized));
+    break;
+  case 0x21:
+    return std::shared_ptr<LocalAck>(
+        reinterpret_cast<LocalAck *>(serialized));
     break;
   }
   return nullptr;

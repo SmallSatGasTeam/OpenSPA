@@ -1,7 +1,7 @@
 #include <cstring>
 #include <iostream>
 
-#include <messages/local/local_hellr.hpp>
+#include <messages/local/local_hello.hpp>
 #include <spa_message.hpp>
 
 //TODO document

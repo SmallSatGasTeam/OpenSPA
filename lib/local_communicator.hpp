@@ -23,7 +23,7 @@ public:
       LogicalAddress la) : sock(sock), routingTable(routingTable), PhysicalCommunicator(la) { ; }
 
   virtual void handleFailure();
-  virtual bool send(std::shared_ptr<SpaMessage> message);
+  virtual bool sendMsg(std::shared_ptr<SpaMessage> message);
 
   virtual void listen(PhysicalCommunicator::MessageCallback);
 

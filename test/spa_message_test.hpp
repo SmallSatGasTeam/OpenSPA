@@ -6,7 +6,7 @@ class SpaMessageTest : public ::testing::Test
 public:
   virtual void SetUp()
   {
-    opcode = 0x20;
+    opcode = 0x21;
   }
   uint8_t opcode;
 };

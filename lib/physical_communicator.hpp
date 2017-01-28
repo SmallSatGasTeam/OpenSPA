@@ -13,7 +13,7 @@ public:
   PhysicalCommunicator(LogicalAddress la) : subnetAddress(la) {}
 
   virtual ~PhysicalCommunicator() {}
-  virtual bool send(std::shared_ptr<SpaMessage> message) { return false; }
+  virtual bool sendMsg(std::shared_ptr<SpaMessage> message) { return false; }
   virtual void listen(PhysicalCommunicator::MessageCallback) {}
 
   virtual LogicalAddress getSubnetAddress() { return subnetAddress; }

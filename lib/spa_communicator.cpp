@@ -57,7 +57,7 @@ bool SpaCommunicator::send(std::shared_ptr<SpaMessage> message)
     handleFailure();
     return false;
   }
-  com->PhysicalCommunicator::send(message);
+  com->sendMsg(message);
   return true;
 }
 

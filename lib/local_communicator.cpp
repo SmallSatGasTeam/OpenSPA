@@ -6,13 +6,13 @@ void LocalCommunicator::handleFailure()
   std::cout << "Local Communicator failure" << '\n';
 }
 
-bool LocalCommunicator::send(std::shared_ptr<SpaMessage> message)
+bool LocalCommunicator::sendMsg(std::shared_ptr<SpaMessage> message)
 {
   if (message == nullptr)
   {
     return false;
   }
-  int32_t port = routingTable->getPhysicalAddress(message->logicalAddress);
+  int32_t port = routingTable->getPhysicalAddress(message->spaHeader.destination);
   if (port < 0)
   {
     handleFailure();

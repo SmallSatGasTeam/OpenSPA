@@ -1,8 +1,9 @@
 #include <cstring>
 #include <iostream>
 
-#include "messages/test_type.hpp"
-#include "spa_message.hpp"
+#include <messages/local/local_hello.hpp>
+#include <messages/local/local_ack.hpp>
+#include <spa_message.hpp>
 
 //TODO document
 uint32_t SpaMessage::marshal(uint8_t *&target)
@@ -16,14 +17,16 @@ uint32_t SpaMessage::marshal(uint8_t *&target)
 std::shared_ptr<SpaMessage> SpaMessage::unmarshal(uint8_t *serialized, uint32_t size)
 {
   auto msg = reinterpret_cast<SpaMessage *>(serialized);
-  switch (msg->messageType)
+  switch (msg->spaHeader.opcode)
   {
-  case SpaMessage::TEST_TYPE:
-    return std::shared_ptr<TestDerivedMessage>(
-        reinterpret_cast<TestDerivedMessage *>(serialized));
+  case 0x20:
+    return std::shared_ptr<LocalHello>(
+        reinterpret_cast<LocalHello *>(serialized));
+    break;
+  case 0x21:
+    return std::shared_ptr<LocalAck>(
+        reinterpret_cast<LocalAck *>(serialized));
     break;
   }
   return nullptr;
 }
-
-// uint8_t const SpaMessage::TEST_TYPE = 1;

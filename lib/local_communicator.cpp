@@ -6,7 +6,7 @@ void LocalCommunicator::handleFailure()
   std::cout << "Local Communicator failure" << '\n';
 }
 
-bool LocalCommunicator::send(std::shared_ptr<SpaMessage> message)
+bool LocalCommunicator::sendMsg(std::shared_ptr<SpaMessage> message)
 {
   if (message == nullptr)
   {

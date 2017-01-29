@@ -1,4 +1,4 @@
-#include <messages/test_derived_message.hpp>
+#include <messages/local/local_spa_message.hpp>
 #include <spa_message.hpp>
 
 class SpaMessageTest : public ::testing::Test
@@ -6,7 +6,7 @@ class SpaMessageTest : public ::testing::Test
 public:
   virtual void SetUp()
   {
-    opcode = 9;
+    opcode = 0x21;
   }
   uint8_t opcode;
 };
@@ -27,10 +27,11 @@ TEST_F(SpaMessageTest, marshal)
   EXPECT_EQ(length, sizeof(SpaMessage));
 }
 
-TEST_F(SpaMessageTest, unmarshal)
+TEST_F(SpaMessageTest, unmarshal__local_message)
 {
-  LogicalAddress la(1, 1);
-  TestDerivedMessage original(la);
+  LogicalAddress la1(1, 1);
+  LogicalAddress la2(1, 0);
+  LocalSpaMessage original(1,1,72,la1,la2,0,opcode,1);
   uint8_t *buff = new uint8_t[512];
   uint32_t length = original.marshal(buff);
 

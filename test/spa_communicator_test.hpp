@@ -28,7 +28,7 @@ public:
 TEST_F(SpaCommunicatorTest, send__to_same_network)
 {
   SpaCommunicator spaCom(LogicalAddress(1, 0), comms);
-  EXPECT_CALL(*localCom, send(localMessage))
+  EXPECT_CALL(*localCom, sendMsg(localMessage))
       .Times(1);
 
   bool result = spaCom.send(localMessage);
@@ -38,7 +38,7 @@ TEST_F(SpaCommunicatorTest, send__to_same_network)
 TEST_F(SpaCommunicatorTest, send__to_other_network)
 {
   SpaCommunicator spaCom(LogicalAddress(1, 0), comms);
-  EXPECT_CALL(*foreignCom, send(foreignMessage))
+  EXPECT_CALL(*foreignCom, sendMsg(foreignMessage))
       .Times(1);
 
   bool result = spaCom.send(foreignMessage);
@@ -48,9 +48,9 @@ TEST_F(SpaCommunicatorTest, send__to_other_network)
 TEST_F(SpaCommunicatorTest, send__to_non_connected_network)
 {
   SpaCommunicator spaCom(LogicalAddress(1, 0), comms);
-  EXPECT_CALL(*foreignCom, send(nonConnectedMessage))
+  EXPECT_CALL(*foreignCom, sendMsg(nonConnectedMessage))
       .Times(0);
-  EXPECT_CALL(*localCom, send(nonConnectedMessage))
+  EXPECT_CALL(*localCom, sendMsg(nonConnectedMessage))
       .Times(0);
 
   bool result = spaCom.send(nonConnectedMessage);

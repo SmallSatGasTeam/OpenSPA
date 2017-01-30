@@ -20,10 +20,12 @@ TEST_F(LocalSubnetManagerTest, add_component)
 {
   LogicalAddress source(1, 1);
   LogicalAddress dest(1,0);
-
-  SpaMessage msg(0,0,0,dest,source,0,opcode);
+  auto msg = std::make_shared<SpaMessage>(0,0,0,dest,source,0,opcode);
   LocalSubnetManager lsm(spaCom);
   
+  // Sends LocalHello from a component at (1,1) to the LSM
   lsm.receiveMessage(msg);
+
+  // Passes if the LSM adds the component's address to the ComponentList
   EXPECT_TRUE(lsm.components.getAddress(0) == source);
 }

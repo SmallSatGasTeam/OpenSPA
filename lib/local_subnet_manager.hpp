@@ -12,7 +12,7 @@ class LocalSubnetManager : public SubnetManager
 {
 public:
   LocalSubnetManager(std::shared_ptr<SpaCommunicator> c) :SubnetManager(c) {}
-  void receiveMessage(SpaMessage message);
+  void receiveMessage(std::shared_ptr<SpaMessage> message);
  // receiveMessage(uint8_t *buff, uint32_t bufflen);
   ComponentList components; 
 };

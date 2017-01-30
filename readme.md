@@ -9,6 +9,11 @@ For a brief introduction on the inner workings of OpenSPA, see [this writeup.](h
 For a very detailed look into the machinations of SPA in general, see [Jacob Holt Christensen's dissertation.](http://digitalcommons.usu.edu/etd/1422/)
 
 ## Project Status
+  * Version Alpha 0.0.3
+    * Basic implementations of:
+      * Local SpaMessages
+      * Components
+      * Local Subnet Manager
   * Version Alpha 0.0.2
     * Debian dev environment complete
   * Version Alpha 0.0.1

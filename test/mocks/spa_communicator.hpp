@@ -1,3 +1,5 @@
+#ifndef MOCK_SPA_COMMUNICATOR
+#define MOCK_SPA_COMMUNICATOR
 #include <spa_communicator.hpp>
 
 class MockSpaCommunicator : public SpaCommunicator
@@ -7,3 +9,4 @@ public:
 
   MOCK_METHOD1(listen, void(PhysicalCommunicator::MessageCallback));
 };
+#endif

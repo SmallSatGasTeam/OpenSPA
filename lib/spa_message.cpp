@@ -5,7 +5,7 @@
 #include <messages/local/local_ack.hpp>
 #include <spa_message.hpp>
 
-//TODO document
+/*! Turns the object into a byte array for network transmission */
 uint32_t SpaMessage::marshal(uint8_t *&target)
 {
   uint32_t length = sizeof(*this);
@@ -14,6 +14,7 @@ uint32_t SpaMessage::marshal(uint8_t *&target)
   return length;
 }
 
+/*! Takes a byte array and populates the object's data members */
 std::shared_ptr<SpaMessage> SpaMessage::unmarshal(uint8_t *serialized, uint32_t size)
 {
   auto msg = reinterpret_cast<SpaMessage *>(serialized);

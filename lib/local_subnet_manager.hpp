@@ -5,12 +5,15 @@
 #define LOCAL_SUBNET_MANAGER
 
 #include "subnet_manager.hpp"
+#include "component_list.hpp"
 #include <cstdint>
 
 class LocalSubnetManager : public SubnetManager
 {
 public:
-  recieveMessage(SpaMessage message;);
-  recieveMessage(uint8_t *buff, uint32_t bufflen);
+  LocalSubnetManager(std::shared_ptr<SpaCommunicator> c) :SubnetManager(c) {}
+  void receiveMessage(std::shared_ptr<SpaMessage> message);
+ // receiveMessage(uint8_t *buff, uint32_t bufflen);
+  ComponentList components; 
 };
 #endif

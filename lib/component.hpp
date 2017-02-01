@@ -15,8 +15,9 @@ public:
   // virtual void appShutdown();
   // virtual int32_t publish();
   // virtual void registerRequest();
-  virtual void sendMsg(std::shared_ptr<SpaMessage> message);
+  virtual void sendMsg(std::shared_ptr<SpaMessage>);
   // virtual void receiveMessage(SpaMessage);
+  bool sent = false; 
 protected:
   // LogicalAddress address;
   Com communicator;

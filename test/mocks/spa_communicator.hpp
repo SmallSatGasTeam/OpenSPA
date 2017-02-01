@@ -8,5 +8,6 @@ public:
   MockSpaCommunicator() : SpaCommunicator(LogicalAddress(1, 0)) {}
 
   MOCK_METHOD1(listen, void(PhysicalCommunicator::MessageCallback));
+  MOCK_METHOD1(send, bool(std::shared_ptr<SpaMessage>));
 };
 #endif

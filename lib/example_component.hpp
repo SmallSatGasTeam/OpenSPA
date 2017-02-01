@@ -1,3 +1,6 @@
+#ifndef EXAMPLE_COMPONENT_HPP
+#define EXAMPLE_COMPONENT_HPP
+
 #include <component.hpp>
 #include <iostream>
 #include <local_communicator.hpp>
@@ -10,7 +13,7 @@ public:
 
   virtual void appInit()
   {
-    std::cout << "Example app initializing!" << '\n';
+    std::cout << "Example component initializing!" << '\n';
 
     uint8_t version = 0;
     uint8_t priority = 0;
@@ -31,12 +34,12 @@ public:
       uuid,
       componentType
     );
-    sendMsg(message);
   }
 };
 
-int main()
-{
+/*******************************************/
+/* EXAMPLE SETUP
+*******************************************
   uint16_t port = 8888;
   std::shared_ptr<ServerSocket> sock = std::make_shared<ServerSocket>();
   std::shared_ptr<RoutingTable> routingTable = std::make_shared<RoutingTable>();
@@ -49,5 +52,6 @@ int main()
 
   ExampleComponent comp(spaCom);
   comp.appInit();
-  return 0;
-}
+ */
+
+#endif

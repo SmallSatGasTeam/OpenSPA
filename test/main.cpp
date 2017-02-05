@@ -13,7 +13,7 @@
 #include "spa_message_test.hpp"
 #include "subnet_manager_test.hpp"
 #include "local_subnet_manager_test.hpp"
-
+#include "messages/spa_subscription_request_test.hpp"
 int main(int argc, char **argv)
 {
   testing::InitGoogleTest(&argc, argv);

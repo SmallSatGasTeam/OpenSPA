@@ -1,5 +1,5 @@
-#ifndef SPA_SUBSCRIPTION_MESSAGE_HPP
-#define SPA_SUBSCRIPTION_MESSAGE_HPP
+#ifndef SPA_SUBSCRIPTION_REQUEST_HPP
+#define SPA_SUBSCRIPTION_REQUEST_HPP
 #include <cstdint>
 
 #include <spa_message.hpp>

@@ -15,6 +15,7 @@
 #include "local_subnet_manager_test.hpp"
 #include "messages/spa_subscription_request_test.hpp"
 #include "messages/spa_subscription_reply_test.hpp"
+#include "messages/spa_data_test.hpp"
 
 int main(int argc, char **argv)
 {

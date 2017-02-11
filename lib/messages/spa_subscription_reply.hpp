@@ -15,7 +15,7 @@ struct SpaSubscriptionReply:public SpaMessage{
 		uint16_t dialogId,
 		uint8_t replyType
 		):
-		SpaMessage(version, priority, 24, producerAddress, consumerAddress, 0, 0x47),
+		SpaMessage(version, priority, 48, producerAddress, consumerAddress, 0, 0x47),
 		dialogId(dialogId),
 		replyType(replyType){}
 

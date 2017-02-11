@@ -21,6 +21,6 @@ struct SpaSubscriptionReply:public SpaMessage{
 
 		
 		uint16_t dialogId;
-		uint8_t replyType;
+		uint8_t replyType; // 0 if accepted, 1 if denied, 2 if cancelled
 };
 #endif

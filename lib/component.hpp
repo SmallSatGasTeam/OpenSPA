@@ -9,16 +9,23 @@ class Component
 public:
   typedef std::shared_ptr<SpaCommunicator> Com;
 
-  Component(Com communicator = nullptr) : communicator(communicator) {}
+  Component(Com communicator = nullptr, LogicalAddress address) : 
+    communicator(communicator),
+    address(address) {}
   // virtual ~Component(){}
   virtual void appInit() = 0;
   // virtual void appShutdown();
   // virtual int32_t publish();
   // virtual void registerRequest();
-  virtual void sendMsg(std::shared_ptr<SpaMessage> message);
+
+  template <typename T>
+  virtual void sendMsg(T message);
+  virtual void subscribe(LogicalAddress);
   // virtual void receiveMessage(SpaMessage);
 protected:
-  // LogicalAddress address;
+  LogicalAddress address;
   Com communicator;
+private:
+  uint16_t dialogId;
 };
 #endif

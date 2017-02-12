@@ -11,6 +11,7 @@
 struct SpaMessage
 {
 
+  virtual ~SpaMessage() {}
   SpaMessage(LogicalAddress destination, uint8_t opcode)
     :spaHeader(destination, opcode){}
 
@@ -52,5 +53,6 @@ struct SpaMessage
   SpaHeader spaHeader;
 
   static uint8_t const TEST_TYPE = 1;
+
 };
 #endif

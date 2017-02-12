@@ -1,21 +1,13 @@
 #include <iostream>
 #include <memory>
 #include "component.hpp"
+#include "messages/spa_subscription_reply.hpp"
+#include "messages/spa_subscription_request.hpp"
 #include "logical_address.hpp"
 
-template <typename M>
-void Component::sendMsg(M message)
+void Component::registerSubscriptionRequest_d(std::shared_ptr<SpaMessage> message)
 {
-  if (message == nullptr || communicator == nullptr)
-  {
-    return;
-  }
-  communicator->send(message);
-}
-
-template <typename M>
-void Component::registerSubscriptionRequest(M message)
-{
+  if (message == nullptr) return;
   auto reply = std::make_shared<SpaSubscriptionReply>(
     0, // Version
     0, // Message priority
@@ -28,9 +20,9 @@ void Component::registerSubscriptionRequest(M message)
   sendMsg(reply);
 }
 
-template <typename M>
-void Component::handleSubscriptionReply(M message)
+void Component::handleSubscriptionReply_d(std::shared_ptr<SpaMessage> message)
 {
+  if (message == nullptr) return;
   if (message->replyType != 0) 
   {
     std::cout << "Subscription failed." << std::endl;
@@ -40,22 +32,6 @@ void Component::handleSubscriptionReply(M message)
     std::cout << "Subscription succeeded." << std::endl; 
   }
 }
-
-template <typename M>
-void Component::receiveMessage(M message)
-{
-  if (message == nullptr) return;
-
-  else if (message->opcode == 0x46) // Subscription request
-  {
-    registerSubscriptionRequest(message); 
-  }
-  else if (message->opcode == 0x47) // Subscription reply
-  {
-    handleSubscriptionReply(message);
-  }
-}
-
 void Component::subscribe(
   LogicalAddress producer,
   uint8_t priority,
@@ -80,3 +56,34 @@ void Component::subscribe(
   sendMsg(request);
   ++dialogId;
 }
+
+void Component::registerSubscriptionRequest(std::shared_ptr<SpaMessage> message)
+{
+  registerSubscriptionRequest_d(message);
+}
+
+void Component::handleSubscriptionReply(std::shared_ptr<SpaMessage> message)
+{
+  handleSubscriptionReply_d(message);
+}
+
+void Component::receiveMessage(std::shared_ptr<SpaMessage> message)
+{
+  if (message == nullptr)
+  {
+    return;
+  }
+  else if (message->spaHeader.opcode == 0x46) // Subscription request
+  {
+    registerSubscriptionRequest(message); 
+  }
+  else if (message->spaHeader.opcode == 0x47) // Subscription reply
+  {
+    handleSubscriptionReply(message);
+  }
+  else
+  {
+    std::cout << "Unrecognized message" << std::endl;
+  }
+}
+

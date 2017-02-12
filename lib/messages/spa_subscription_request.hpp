@@ -32,6 +32,8 @@ struct SpaSubscriptionRequest:public SpaMessage
   subscriptionPriority(subscriptionPriority),
   type(type){}
 
+  virtual ~SpaSubscriptionRequest() {}
+
    LogicalAddress producerAddress, consumerAddress, managerAddress;
    uint32_t leasePeriod;
    uint16_t dialogId;

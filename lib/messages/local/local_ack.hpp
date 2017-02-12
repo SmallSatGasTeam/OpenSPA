@@ -7,23 +7,21 @@
 struct LocalAck : public LocalSpaMessage
 {
   LocalAck(
-    uint8_t version,
-    uint8_t priority,
-    LogicalAddress destination,
-    LogicalAddress source,
-    uint16_t flags,
-    uint16_t sourcePort,
-    uint8_t status 
-  ):LocalSpaMessage(
-    version,
-    priority,
-    72,
-    destination,
-    source,
-    flags,
-    0x21,
-    sourcePort
-  ), status(status){}
+      uint8_t version,
+      uint8_t priority,
+      LogicalAddress destination,
+      LogicalAddress source,
+      uint16_t flags,
+      uint16_t sourcePort,
+      uint8_t status) : LocalSpaMessage(version,
+                                        priority,
+                                        72,
+                                        destination,
+                                        source,
+                                        flags,
+                                        0x21,
+                                        sourcePort),
+                        status(status) {}
 
   uint8_t status; // The status of the acknowledgement
 };

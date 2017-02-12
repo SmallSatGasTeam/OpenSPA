@@ -31,7 +31,7 @@ TEST_F(SpaMessageTest, unmarshal__local_message)
 {
   LogicalAddress la1(1, 1);
   LogicalAddress la2(1, 0);
-  LocalSpaMessage original(1,1,72,la1,la2,0,opcode,1);
+  LocalSpaMessage original(1, 1, 72, la1, la2, 0, opcode, 1);
   uint8_t *buff = new uint8_t[512];
   uint32_t length = original.marshal(buff);
 

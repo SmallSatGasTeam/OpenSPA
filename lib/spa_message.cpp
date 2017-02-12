@@ -1,8 +1,8 @@
 #include <cstring>
 #include <iostream>
 
-#include <messages/local/local_hello.hpp>
 #include <messages/local/local_ack.hpp>
+#include <messages/local/local_hello.hpp>
 #include <spa_message.hpp>
 
 /*! Turns the object into a byte array for network transmission */

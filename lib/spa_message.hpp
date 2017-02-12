@@ -11,26 +11,25 @@
 struct SpaMessage
 {
 
-  virtual ~SpaMessage() {}
   SpaMessage(LogicalAddress destination, uint8_t opcode)
-    :spaHeader(destination, opcode){}
+      : spaHeader(destination, opcode) {}
 
   SpaMessage(
-    uint8_t version = 0,
-    uint8_t priority = 0,
-    uint16_t length = 0,
-    LogicalAddress destination = LogicalAddress(0,0),
-    LogicalAddress source = LogicalAddress(0,0),
-    uint16_t flags = 0,
-    uint8_t opcode = 0
-  ): spaHeader (
-     version,
-     priority,
-     length,
-     destination,
-     source,
-     flags,
-     opcode){}
+      uint8_t version = 0,
+      uint8_t priority = 0,
+      uint16_t length = 0,
+      LogicalAddress destination = LogicalAddress(0, 0),
+      LogicalAddress source = LogicalAddress(0, 0),
+      uint16_t flags = 0,
+      uint8_t opcode = 0) : spaHeader(version,
+                                      priority,
+                                      length,
+                                      destination,
+                                      source,
+                                      flags,
+                                      opcode) {}
+
+  virtual ~SpaMessage() {}
 
   //! Generate a message from a byte array
 
@@ -53,6 +52,5 @@ struct SpaMessage
   SpaHeader spaHeader;
 
   static uint8_t const TEST_TYPE = 1;
-
 };
 #endif

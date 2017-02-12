@@ -17,15 +17,17 @@ struct LocalHello : public LocalSpaMessage
       uint16_t flags,
       uint16_t sourcePort,
       uint64_t uuid,
-      uint8_t componentType) : LocalSpaMessage(version,
-                                               priority,
-                                               72,
-                                               destination,
-                                               source,
-                                               flags,
-                                               0x20,
-                                               sourcePort),
-                               uuid(uuid), componentType(componentType) {}
+      uint8_t componentType)
+    : LocalSpaMessage(version,
+                      priority,
+                      72,
+                      destination,
+                      source,
+                      flags,
+                      0x20,
+                      sourcePort),
+      uuid(uuid),
+      componentType(componentType) {}
 
   uint64_t uuid;
   // uint64_t uuidBack; // NOTE c++ standard does not have a 128 bit width integer

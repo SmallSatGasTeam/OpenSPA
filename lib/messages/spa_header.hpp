@@ -10,16 +10,17 @@ struct SpaHeader
       LogicalAddress destination = LogicalAddress(0, 0),
       LogicalAddress source = LogicalAddress(0, 0),
       uint16_t flags = 0,
-      uint8_t opcode = 0) : version(version),
-                            priority(priority),
-                            length(length),
-                            destination(destination),
-                            source(source),
-                            flags(flags),
-                            opcode(opcode) {}
+      uint8_t opcode = 0)
+    : version(version),
+      priority(priority),
+      length(length),
+      destination(destination),
+      source(source),
+      flags(flags),
+      opcode(opcode) {}
 
   SpaHeader(LogicalAddress destination, uint8_t opcode)
-      : destination(destination), opcode(opcode)
+    : destination(destination), opcode(opcode)
   {
     uint8_t version = 0;
     uint8_t priority = 0;

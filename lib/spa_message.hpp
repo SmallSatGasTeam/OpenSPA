@@ -12,7 +12,7 @@ struct SpaMessage
 {
 
   SpaMessage(LogicalAddress destination, uint8_t opcode)
-      : spaHeader(destination, opcode) {}
+    : spaHeader(destination, opcode) {}
 
   SpaMessage(
       uint8_t version = 0,

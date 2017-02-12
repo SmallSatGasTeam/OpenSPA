@@ -4,7 +4,7 @@
 
 SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress) : currentAddress(currentAddress) {}
 SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress, std::vector<Com> comms)
-    : currentAddress(currentAddress) { addCommunicators(comms); }
+  : currentAddress(currentAddress) { addCommunicators(comms); }
 
 void SpaCommunicator::addCommunicators(std::vector<SpaCommunicator::Com> comms)
 {

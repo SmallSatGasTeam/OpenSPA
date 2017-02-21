@@ -3,7 +3,7 @@
 
 #include <cstdint>
 #include <messages/local/local_spa_message.hpp>
-#include <messages/op_codes.hpp
+#include <messages/op_codes.hpp>
 
 struct LocalAck : public LocalSpaMessage
 {

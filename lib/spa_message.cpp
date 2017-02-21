@@ -3,6 +3,7 @@
 
 #include <messages/local/local_ack.hpp>
 #include <messages/local/local_hello.hpp>
+#include <messages/op_codes.hpp>
 #include <spa_message.hpp>
 
 /*! Turns the object into a byte array for network transmission */
@@ -20,11 +21,11 @@ std::shared_ptr<SpaMessage> SpaMessage::unmarshal(uint8_t *serialized, uint32_t 
   auto msg = reinterpret_cast<SpaMessage *>(serialized);
   switch (msg->spaHeader.opcode)
   {
-  case 0x20:
+  case op_LOCAL_HELLO:
     return std::shared_ptr<LocalHello>(
         reinterpret_cast<LocalHello *>(serialized));
     break;
-  case 0x21:
+  case op_LOCAL_ACK:
     return std::shared_ptr<LocalAck>(
         reinterpret_cast<LocalAck *>(serialized));
     break;

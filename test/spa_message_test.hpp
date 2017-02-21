@@ -1,4 +1,5 @@
 #include <messages/local/local_spa_message.hpp>
+#include <messages/op_codes.hpp>
 #include <spa_message.hpp>
 
 class SpaMessageTest : public ::testing::Test
@@ -6,7 +7,7 @@ class SpaMessageTest : public ::testing::Test
 public:
   virtual void SetUp()
   {
-    opcode = 0x21;
+    opcode = op_LOCAL_ACK;
   }
   uint8_t opcode;
 };

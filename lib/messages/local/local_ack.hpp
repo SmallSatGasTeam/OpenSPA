@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <messages/local/local_spa_message.hpp>
+#include <messages/op_codes.hpp
 
 struct LocalAck : public LocalSpaMessage
 {
@@ -19,7 +20,7 @@ struct LocalAck : public LocalSpaMessage
                                         destination,
                                         source,
                                         flags,
-                                        0x21,
+                                        op_LOCAL_ACK,
                                         sourcePort),
                         status(status) {}
 

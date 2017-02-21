@@ -2,6 +2,7 @@
 #define SPA_DATA_HPP
 
 #include <cstdint>
+#include "op_codes.hpp"
 
 template <typename T>
 struct SpaData : public SpaMessage
@@ -16,7 +17,7 @@ struct SpaData : public SpaMessage
       uint16_t sequenceCount,
       uint8_t interfaceId,
       uint8_t messageId,
-      T payload) : SpaMessage(version, priority, 100 + payloadLength, producerAddress, consumerAddress, 0, 0x74),
+      T payload) : SpaMessage(version, priority, 100 + payloadLength, producerAddress, consumerAddress, 0, op_SPA_DATA),
                    dialogId(dialogId),
                    sequenceIndex(sequenceIndex),
                    sequenceCount(sequenceCount),

@@ -9,7 +9,7 @@ class LocalSubnetManagerTest : public ::testing::Test
 public:
   virtual void SetUp()
   {
-    opcode = 0x20;
+    opcode = op_LOCAL_HELLO;
     spaCom = std::make_shared<MockSpaCommunicator>();
   }
   uint8_t opcode;

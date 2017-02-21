@@ -3,6 +3,7 @@
 #include <cstdint>
 
 #include <spa_message.hpp>
+#include <messages/op_codes.hpp>
 
 struct SpaSubscriptionRequest : public SpaMessage
 {
@@ -19,7 +20,7 @@ struct SpaSubscriptionRequest : public SpaMessage
       uint8_t messageId,              // xTEDS message Id
       uint8_t subscriptionPriority,   // Subscription priority, 0 = highest, 255 = lowest
       uint8_t type                    // Message type, 0 = subscription, 1 = unsubscription
-      ) : SpaMessage(version, priority, 96, producerAddress, consumerAddress, 0, 0x46),
+      ) : SpaMessage(version, priority, 96, producerAddress, consumerAddress, 0, op_SPA_SUBSCRIPTION_REQUEST),
           producerAddress(producerAddress),
           consumerAddress(consumerAddress),
           managerAddress(managerAddress),

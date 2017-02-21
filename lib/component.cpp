@@ -2,6 +2,7 @@
 #include "logical_address.hpp"
 #include "messages/spa_subscription_reply.hpp"
 #include "messages/spa_subscription_request.hpp"
+#include "messages/op_codes.hpp"
 #include <iostream>
 #include <memory>
 
@@ -30,6 +31,7 @@ void Component::handleSubscriptionReply(std::shared_ptr<SpaMessage> message)
     return;
   auto castMessage = std::dynamic_pointer_cast<SpaSubscriptionReply>(message);
 
+  // TODO actually implement subscription handling
   if (castMessage->replyType != 0)
   {
     std::cout << "Subscription failed." << std::endl;
@@ -70,11 +72,11 @@ void Component::receiveMessage(std::shared_ptr<SpaMessage> message)
   {
     return;
   }
-  else if (message->spaHeader.opcode == 0x46) // Subscription request
+  else if (message->spaHeader.opcode == op_SPA_SUBSCRIPTION_REQUEST)
   {
     registerSubscriptionRequest(message);
   }
-  else if (message->spaHeader.opcode == 0x47) // Subscription reply
+  else if (message->spaHeader.opcode == op_SPA_SUBSCRIPTION_REPLY)
   {
     handleSubscriptionReply(message);
   }

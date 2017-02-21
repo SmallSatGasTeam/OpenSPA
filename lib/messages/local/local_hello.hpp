@@ -1,6 +1,7 @@
 #ifndef LOCAL_HELLO_HPP
 #define LOCAL_HELLO_HPP
 #include <cstdint>
+#include <messages/op_codes.hpp>
 
 #include <messages/local/local_spa_message.hpp>
 struct LocalHello : public LocalSpaMessage
@@ -24,7 +25,7 @@ struct LocalHello : public LocalSpaMessage
                       destination,
                       source,
                       flags,
-                      0x20,
+                      op_LOCAL_HELLO,
                       sourcePort),
       uuid(uuid),
       componentType(componentType) {}

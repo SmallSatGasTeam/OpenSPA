@@ -7,10 +7,11 @@
 #include "spa_message.hpp"
 #include <iostream>
 #include <memory>
+#include <vector>
 
 struct Subscriber
 {
-  Subscribee(LogicalAddress la, uint16_t d)
+  Subscriber(LogicalAddress la, uint16_t d)
     : subscriberAddress(la), deliveryRateDivisor(d) {}
   LogicalAddress subscriberAddress;
   uint16_t deliveryRateDivisor;
@@ -25,7 +26,8 @@ public:
     : communicator(communicator),
       address(address),
       dialogId(0),
-      publishIter(1),
+      publishIter(1)
+      
       {
         subscribers.reserve(8); // Default to 8 subscribers 
       }
@@ -35,7 +37,7 @@ public:
   // virtual void appShutdown();
   
   virtual void publish();
-  virtual void sendSpaData() = 0;
+  virtual void sendSpaData(LogicalAddress) = 0;
 
   template <typename M>
   void sendMsg(M);
@@ -58,7 +60,7 @@ protected:
   Com communicator;
   uint8_t publishIter;
   uint16_t dialogId;
-  std::vector<Subscribe> subscribers; // Should we make this a vector of pointers?
+  std::vector<Subscriber> subscribers; // Should we make this a vector of pointers?
 };
 
 template <typename M>

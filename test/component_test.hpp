@@ -15,6 +15,17 @@ public:
   {
     return;
   }
+  
+  virtual void sendSpaData(LogicalAddress la)
+  {
+    return;
+  }
+
+  virtual void handleSpaData(std::shared_ptr<SpaMessage> msg)
+  {
+    return;
+  }
+
 };
 
 class ComponentTest : public ::testing::Test

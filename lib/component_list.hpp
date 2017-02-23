@@ -1,9 +1,9 @@
 #ifndef COMPONENT_LIST
 #define COMPONENT_LIST
 
+#include "logical_address.hpp"
 #include <component.hpp>
 #include <vector>
-#include "logical_address.hpp"
 
 struct ComponentInfo
 {
@@ -16,10 +16,10 @@ struct ComponentInfo
 class ComponentList
 {
 public:
-  void add(LogicalAddress la) { list.push_back(ComponentInfo(la,true)); }
-  LogicalAddress getAddress(int i) { return list[i].address; } 
+  void add(LogicalAddress la) { list.push_back(ComponentInfo(la, true)); }
+  LogicalAddress getAddress(int i) { return list[i].address; }
 protected:
   std::vector<ComponentInfo> list;
 };
-  
+
 #endif

@@ -70,7 +70,7 @@ TEST_F(SpaCommunicatorTest, listen)
 
 class _SpaCommunicator : public SpaCommunicator
 {
-public: 
+public:
   _SpaCommunicator(LogicalAddress currentAddress) : SpaCommunicator(currentAddress) {}
   Com _selectCommunicator(LogicalAddress address, std::vector<Com> const &communicators)
   {
@@ -80,10 +80,10 @@ public:
 
 TEST_F(SpaCommunicatorTest, selectCommunicator)
 {
-  LogicalAddress l1(1, 0); // Local 
+  LogicalAddress l1(1, 0); // Local
   LogicalAddress l2(2, 0); // Foreign
-  LogicalAddress l3(3, 0); // Nonconnected 
- 
+  LogicalAddress l3(3, 0); // Nonconnected
+
   _SpaCommunicator spaCom(l1);
 
   auto selected = spaCom._selectCommunicator(l2, comms);
@@ -95,4 +95,3 @@ TEST_F(SpaCommunicatorTest, selectCommunicator)
   selected = spaCom._selectCommunicator(l3, comms);
   EXPECT_TRUE(selected == nullptr);
 }
-

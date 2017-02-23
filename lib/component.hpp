@@ -8,18 +8,34 @@
 #include <iostream>
 #include <memory>
 
+struct Subscriber
+{
+  Subscribee(LogicalAddress la, uint16_t d)
+    : subscriberAddress(la), deliveryRateDivisor(d) {}
+  LogicalAddress subscriberAddress;
+  uint16_t deliveryRateDivisor;
+};
+
 class Component
 {
 public:
   typedef std::shared_ptr<SpaCommunicator> Com;
 
-  Component(Com communicator = nullptr, LogicalAddress address = LogicalAddress(0, 0)) : communicator(communicator),
-                                                                                         address(address),
-                                                                                         dialogId(0) {}
+  Component(Com communicator = nullptr, LogicalAddress address = LogicalAddress(0, 0)) 
+    : communicator(communicator),
+      address(address),
+      dialogId(0),
+      publishIter(1),
+      {
+        subscribers.reserve(8); // Default to 8 subscribers 
+      }
+
   virtual ~Component() {}
   virtual void appInit() = 0;
   // virtual void appShutdown();
-  // virtual int32_t publish();
+  
+  virtual void publish();
+  virtual void sendSpaData() = 0;
 
   template <typename M>
   void sendMsg(M);
@@ -28,6 +44,9 @@ public:
 
   virtual void handleSubscriptionReply(std::shared_ptr<SpaMessage>);
   virtual void registerSubscriptionRequest(std::shared_ptr<SpaMessage>);
+
+  virtual void handleSpaData(std::shared_ptr<SpaMessage>) = 0;
+
   virtual void subscribe(
       LogicalAddress producer,
       uint8_t priority,
@@ -37,9 +56,9 @@ public:
 protected:
   LogicalAddress address;
   Com communicator;
-
-private:
+  uint8_t publishIter;
   uint16_t dialogId;
+  std::vector<Subscribe> subscribers; // Should we make this a vector of pointers?
 };
 
 template <typename M>

@@ -47,6 +47,7 @@ void Component::handleSubscriptionReply(std::shared_ptr<SpaMessage> message)
     std::cout << "Subscription succeeded." << std::endl;
   }
 }
+
 void Component::subscribe(
     LogicalAddress producer,
     uint8_t priority,

@@ -5,7 +5,6 @@
 #include <climits>
 #include "op_codes.hpp"
 
-
 template <typename T>
 struct SpaData : public SpaMessage
 {

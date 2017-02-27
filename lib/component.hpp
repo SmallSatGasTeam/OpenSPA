@@ -21,7 +21,7 @@ class Component
 {
 public:
   typedef std::shared_ptr<SpaCommunicator> Com;
-
+  
   Component(Com communicator = nullptr, LogicalAddress address = LogicalAddress(0, 0)) 
     : communicator(communicator),
       address(address),
@@ -34,13 +34,20 @@ public:
 
   virtual ~Component() {}
   virtual void appInit() = 0;
-  // virtual void appShutdown();
+  //virtual void appShutdown() = 0;
   
   virtual void publish();
   virtual void sendSpaData(LogicalAddress) = 0;
 
-  template <typename M>
-  void sendMsg(M);
+  void sendMsg(std::shared_ptr<SpaMessage> message)
+  {
+    if (message == nullptr || communicator == nullptr)
+    {
+      return;
+    }
+    communicator->send(message);
+  }
+
 
   virtual void receiveMessage(std::shared_ptr<SpaMessage>);
 
@@ -62,15 +69,5 @@ protected:
   uint16_t dialogId;
   std::vector<Subscriber> subscribers; // Should we make this a vector of pointers?
 };
-
-template <typename M>
-void Component::sendMsg(M message)
-{
-  if (message == nullptr || communicator == nullptr)
-  {
-    return;
-  }
-  communicator->send(message);
-}
 
 #endif

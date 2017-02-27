@@ -25,7 +25,6 @@ public:
   {
     return;
   }
-
 };
 
 class ComponentTest : public ::testing::Test
@@ -33,10 +32,9 @@ class ComponentTest : public ::testing::Test
 public:
   virtual void SetUp()
   {
-  }
+    spaCom = std::make_shared<MockSpaCommunicator>();
+    subscriptionReply = std::make_shared<SpaSubscriptionReply>(
 
-  std::shared_ptr<MockSpaCommunicator> spaCom = std::make_shared<MockSpaCommunicator>();
-  std::shared_ptr<SpaSubscriptionReply> subscriptionReply = std::make_shared<SpaSubscriptionReply>(
       0,                    // Version
       0,                    // Message priority
       LogicalAddress(0, 1), // Address of the producer component
@@ -45,7 +43,8 @@ public:
       0                     // 0 = accepted
       );
 
-  std::shared_ptr<SpaSubscriptionRequest> subscriptionRequest = std::make_shared<SpaSubscriptionRequest>(
+    subscriptionRequest = std::make_shared<SpaSubscriptionRequest>(
+
       0,                    // Version
       0,                    // Message priority
       LogicalAddress(1, 0), // Address of the producer component
@@ -59,6 +58,12 @@ public:
       0,                    // Subscription priority
       0                     // Message type (0 = subscription, 1 = unsubscribtion)
       );
+  }
+
+  std::shared_ptr<MockSpaCommunicator> spaCom;
+  std::shared_ptr<SpaSubscriptionReply> subscriptionReply;
+  std::shared_ptr<SpaSubscriptionRequest> subscriptionRequest;
+
 };
 
 TEST_F(ComponentTest, basic_tests)

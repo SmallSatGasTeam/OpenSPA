@@ -21,8 +21,14 @@ public:
   // virtual void appShutdown();
   // virtual int32_t publish();
 
-  template <typename M>
-  void sendMsg(M);
+  void sendMsg(std::shared_ptr<SpaMessage> message)
+  {
+    if (message == nullptr || communicator == nullptr)
+    {
+      return;
+    }
+    communicator->send(message);
+  }
 
   virtual void receiveMessage(std::shared_ptr<SpaMessage>);
 
@@ -41,15 +47,4 @@ protected:
 private:
   uint16_t dialogId;
 };
-
-template <typename M>
-void Component::sendMsg(M message)
-{
-  if (message == nullptr || communicator == nullptr)
-  {
-    return;
-  }
-  communicator->send(message);
-}
-
 #endif

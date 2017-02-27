@@ -1,10 +1,4 @@
 ##
-# Platformio
-##
-.pioenvs
-.piolibdeps
-
-##
 # Vagrant
 ##
 .vagrant
@@ -28,13 +22,6 @@ runTests
 ##
 # Vim
 ##
-.swp
-.swo
-.cpp.swp
-.hpp.swp
-.cpp.swo
-.hpp.swo
-
 *.swp
 *.swo
 

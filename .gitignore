@@ -26,11 +26,7 @@ build/
 runTests
 
 ##
-# Vim 
+# Vim
 ##
-.swp
-.swo
-.cpp.swp
-.hpp.swp
-.cpp.swo
-.hpp.swo
+*.swp
+*.swo

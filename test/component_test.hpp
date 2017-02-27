@@ -15,6 +15,16 @@ public:
   {
     return;
   }
+  
+  virtual void sendSpaData(LogicalAddress la)
+  {
+    return;
+  }
+
+  virtual void handleSpaData(std::shared_ptr<SpaMessage> msg)
+  {
+    return;
+  }
 };
 
 class ComponentTest : public ::testing::Test
@@ -24,6 +34,7 @@ public:
   {
     spaCom = std::make_shared<MockSpaCommunicator>();
     subscriptionReply = std::make_shared<SpaSubscriptionReply>(
+
       0,                    // Version
       0,                    // Message priority
       LogicalAddress(0, 1), // Address of the producer component
@@ -31,7 +42,9 @@ public:
       0,                    // Dialog identifer sent by requester
       0                     // 0 = accepted
       );
+
     subscriptionRequest = std::make_shared<SpaSubscriptionRequest>(
+
       0,                    // Version
       0,                    // Message priority
       LogicalAddress(1, 0), // Address of the producer component
@@ -50,6 +63,7 @@ public:
   std::shared_ptr<MockSpaCommunicator> spaCom;
   std::shared_ptr<SpaSubscriptionReply> subscriptionReply;
   std::shared_ptr<SpaSubscriptionRequest> subscriptionRequest;
+
 };
 
 TEST_F(ComponentTest, basic_tests)

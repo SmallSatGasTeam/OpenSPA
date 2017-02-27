@@ -2,6 +2,7 @@
 #include "logical_address.hpp"
 #include "messages/spa_subscription_reply.hpp"
 #include "messages/spa_subscription_request.hpp"
+#include "messages/spa_data.hpp"
 #include "messages/op_codes.hpp"
 #include <iostream>
 #include <memory>
@@ -9,15 +10,20 @@
 void Component::registerSubscriptionRequest(std::shared_ptr<SpaMessage> message)
 {
   if (message == nullptr)
-    return;
+  {
+    std::cout << "Invalid subscription request" << std::endl;
+  }
 
   auto castMessage = std::dynamic_pointer_cast<SpaSubscriptionRequest>(message);
+
+  // Dynamic memory allocation !!!
+  subscribers.emplace_back(castMessage->consumerAddress, castMessage->deliveryRateDivisor); 
 
   auto reply = std::make_shared<SpaSubscriptionReply>(
       0,                            // Version
       0,                            // Message priority
       address,                      // Address of the producer component
-      castMessage->consumerAddress, // Address of the producer component
+      castMessage->consumerAddress, // Address of the consumer component
       castMessage->dialogId,        // Dialog identifer sent by requester
       0                             // 0 = accepted
       );
@@ -34,13 +40,14 @@ void Component::handleSubscriptionReply(std::shared_ptr<SpaMessage> message)
   // TODO actually implement subscription handling
   if (castMessage->replyType != 0)
   {
-    std::cout << "Subscription failed." << std::endl;
+    std::cout << "SUBSCRIPTION FAILED" << std::endl;
   }
   else
   {
     std::cout << "Subscription succeeded." << std::endl;
   }
 }
+
 void Component::subscribe(
     LogicalAddress producer,
     uint8_t priority,
@@ -49,16 +56,16 @@ void Component::subscribe(
 {
   auto request = std::make_shared<SpaSubscriptionRequest>(
       0,                    // Version
-      0,                    // Message priority
+      0,                    // Message priority TODO 
       producer,             // Address of the producer component
       address,              // Address of the consumer component
-      LogicalAddress(0, 0), // Address of the subscriptions manager component
-      leasePeriod,          // Duration of the subscription
+      LogicalAddress(0, 0), // Address of the subscriptions manager component TODO
+      leasePeriod,          // Duration of the subscription TODO
       dialogId,             // Dialog identifier sent by requester
       deliveryRateDivisor,  // Subscribe to every nth message
-      0,                    // xTEDS interface ID
-      0,                    // xTEDS message Id
-      priority,             // Subscription priority
+      0,                    // xTEDS interface ID TODO
+      0,                    // xTEDS message Id TODO
+      priority,             // Subscription priority TODO
       0                     // Message type (0 = subscription, 1 = unsubscribtion)
       );
 
@@ -72,16 +79,41 @@ void Component::receiveMessage(std::shared_ptr<SpaMessage> message)
   {
     return;
   }
-  else if (message->spaHeader.opcode == op_SPA_SUBSCRIPTION_REQUEST)
+
+  switch (message->spaHeader.opcode)
   {
-    registerSubscriptionRequest(message);
+    case op_SPA_SUBSCRIPTION_REQUEST:
+      registerSubscriptionRequest(message);
+      break;
+
+    case op_SPA_SUBSCRIPTION_REPLY:
+      handleSubscriptionReply(message);
+      break;
+
+    case op_SPA_DATA:
+      handleSpaData(message);
+      break;
+
+    default:
+      std::cout << "Unrecognized message" << std::endl;
+      break;
   }
-  else if (message->spaHeader.opcode == op_SPA_SUBSCRIPTION_REPLY)
+}
+
+void Component::publish()
+{
+  for (auto i = 0u; i < subscribers.size(); ++i)
   {
-    handleSubscriptionReply(message);
+    if (subscribers[i].deliveryRateDivisor % publishIter == 0)
+    {
+      sendSpaData(subscribers[i].subscriberAddress);
+    }
   }
-  else
-  {
-    std::cout << "Unrecognized message" << std::endl;
+
+  ++publishIter;
+
+  if (publishIter == 201)
+  { // Max deliveryRateDivisor is therefore 200
+    publishIter = 1;
   }
 }

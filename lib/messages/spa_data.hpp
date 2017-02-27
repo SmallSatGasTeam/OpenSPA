@@ -2,6 +2,7 @@
 #define SPA_DATA_HPP
 
 #include <cstdint>
+#include <climits>
 #include "op_codes.hpp"
 
 template <typename T>

@@ -9,20 +9,20 @@ For a brief introduction on the inner workings of OpenSPA, see [this writeup.](h
 For a very detailed look into the machinations of SPA in general, see [Jacob Holt Christensen's dissertation.](http://digitalcommons.usu.edu/etd/1422/)
 
 ## Project Status
-  * Version Alpha 0.0.4
-    * Added a basic subscription service
+  * **Version Alpha 0.0.4**
+    * Added a basic subscription service
       * Direct component-to-component subscription
       * Non-prioritized publishing
     * Improvements to message handling
     * Additional tests for components
-  * Version Alpha 0.0.3
+  * **Version Alpha 0.0.3**
     * Basic implementations of:
       * Local SpaMessages
       * Components
       * Local Subnet Manager
-  * Version Alpha 0.0.2
+  * **Version Alpha 0.0.2**
     * Debian dev environment complete
-  * Version Alpha 0.0.1
+  * **Version Alpha 0.0.1**
     * Planning API's and project planning
 
 ## Getting Started

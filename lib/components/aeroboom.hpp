@@ -9,10 +9,12 @@
 class Aeroboom : public Component
 {
 public:
-  Aeroboom()
+  Aeroboom(std::shared_ptr<SpaCommunicator> spaCommunicator, LogicalAddress address)
+     : Component(spaCommunicator, address)
   {
     appInit();
   }
+
   
   ~Aeroboom()
   {

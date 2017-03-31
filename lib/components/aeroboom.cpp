@@ -52,6 +52,10 @@ void Aeroboom::handleSpaData(std::shared_ptr<SpaMessage> message)
   {
     deployRequested = false; 
   }
+  else
+  {
+    std::cout << "Unrecognized message" << std::endl;
+  }
 }
 
 bool Aeroboom::deploy()

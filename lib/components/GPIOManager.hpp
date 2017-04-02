@@ -32,6 +32,12 @@
 
 #define SYSFS_GPIO_DIR "/sys/class/gpio"
 #include <vector>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/epoll.h>
+#include <fstream>
+#include <algorithm>
+
 
 namespace GPIO {
 
@@ -60,7 +66,7 @@ class
         GPIOManager {
  public:
   GPIOManager();
-  virtual ~GPIOManager();
+  ~GPIOManager();
 
   static GPIOManager* getInstance();
   int exportPin(unsigned int gpio);

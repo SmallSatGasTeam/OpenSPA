@@ -55,7 +55,7 @@ class
         GPIOConst {
  public:
   GPIOConst();
-  virtual ~GPIOConst();
+//  virtual ~GPIOConst();
 
   static GPIOConst* getInstance();
   int getGpioByKey(const char *key);

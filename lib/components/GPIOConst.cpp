@@ -29,7 +29,7 @@
  * SOFTWARE.
  */
 
-#include "./GPIOConst.h"
+#include "./GPIOConst.hpp"
 #include <stdio.h>
 #include <string.h>
 
@@ -169,9 +169,9 @@ GPIOConst::GPIOConst() {
 
 /**
  * Destructor
- */
 GPIOConst::~GPIOConst() {
 }
+*/
 
 /**
  * Get gpio pin number by key i.e "P8_10"

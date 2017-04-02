@@ -3,6 +3,7 @@
 
 #include "messages/spa_subscription_reply.hpp"
 #include "messages/spa_subscription_request.hpp"
+#include "messages/spa_data.hpp"
 #include "spa_communicator.hpp"
 #include "spa_message.hpp"
 #include <iostream>
@@ -32,12 +33,15 @@ public:
         subscribers.reserve(8); // Default to 8 subscribers 
       }
 
-  virtual ~Component() {}
-  virtual void appInit() = 0;
+//  ~Component() {}
   //virtual void appShutdown() = 0;
   
-  virtual void publish();
+  void publish();
+
   virtual void sendSpaData(LogicalAddress) = 0;
+  
+  virtual void handleSpaData(std::shared_ptr<SpaMessage>) = 0;
+  virtual void appInit() = 0;
 
   void sendMsg(std::shared_ptr<SpaMessage> message)
   {
@@ -49,14 +53,13 @@ public:
   }
 
 
-  virtual void receiveMessage(std::shared_ptr<SpaMessage>);
+  void receiveMessage(std::shared_ptr<SpaMessage>);
 
-  virtual void handleSubscriptionReply(std::shared_ptr<SpaMessage>);
-  virtual void registerSubscriptionRequest(std::shared_ptr<SpaMessage>);
+  void handleSubscriptionReply(std::shared_ptr<SpaMessage>);
+  void registerSubscriptionRequest(std::shared_ptr<SpaMessage>);
 
-  virtual void handleSpaData(std::shared_ptr<SpaMessage>) = 0;
 
-  virtual void subscribe(
+  void subscribe(
       LogicalAddress producer,
       uint8_t priority,
       uint32_t leasePeriod,

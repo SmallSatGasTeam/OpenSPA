@@ -1,5 +1,0 @@
-[ 77%] Built target OpenSpa
-[ 88%] Building CXX object test/CMakeFiles/tests.dir/main.cpp.o
-test/CMakeFiles/tests.dir/build.make:54: recipe for target 'test/CMakeFiles/tests.dir/main.cpp.o' failed
-CMakeFiles/Makefile2:75: recipe for target 'test/CMakeFiles/tests.dir/all' failed
-Makefile:76: recipe for target 'all' failed

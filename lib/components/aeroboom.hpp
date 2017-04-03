@@ -17,23 +17,18 @@ public:
         appInit();
   }
 
-  // virtual ~Aeroboom() {}
-
-  /*
+   virtual ~Aeroboom()
+   {
     delete manager;
     manager = nullptr;
-    */
+   }
 
   void appInit() 
   { // Pin 10 under P8 header
     manager = GPIO::GPIOManager::getInstance();
-  /*
     pin = GPIO::GPIOConst::getInstance()->getGpioByKey("P8_10");
-    */
-    //auto ioSet = manager->setDirection(pin, GPIO::OUTPUT);
-    /*
+    auto ioSet = manager->setDirection(pin, GPIO::OUTPUT);
     if (!ioSet) std::cout << "GPIO failed" << std::endl;
-    */
   }
 
   void sendSpaData(LogicalAddress destination)

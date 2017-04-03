@@ -45,9 +45,9 @@ bool Aeroboom::deploy()
   boomMessage = "======= ATTEMPTING BOOM DEPLOY... =======";
   sendSpaData(ADDRESS_LOGGING);
 
-//  manager->setValue(pin, GPIO::HIGH);
+  manager->setValue(pin, GPIO::HIGH);
   auto slept = sleep(3);
-//  manager->setValue(pin, GPIO::LOW);
+  manager->setValue(pin, GPIO::LOW);
 
   boomMessage = "=======           DONE            =======";
   sendSpaData(ADDRESS_LOGGING);

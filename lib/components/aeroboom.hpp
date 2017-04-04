@@ -65,6 +65,8 @@ public:
     }
   }
 
+  bool wasConfirmed() { return deployConfirmed; }
+
   //  void setDestination(LogicalAddress);
 private:
   bool shouldDeploy();

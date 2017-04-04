@@ -61,5 +61,5 @@ TEST_F(AeroboomTest, deployment)
 
   boom->handleSpaData(msg);
 
-  EXPECT_TRUE(true);
+  EXPECT_TRUE(boom->wasConfirmed());
 }

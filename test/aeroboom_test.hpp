@@ -17,16 +17,62 @@ public:
         std::make_shared<LocalCommunicator>(sock, routingTable, localAddress)};
     spaCommunicator = std::make_shared<SpaCommunicator>(localAddress, comms);
     addr = std::make_shared<LogicalAddress>(0, 0);
-    boom = std::make_shared<Aeroboom>(spaCommunicator, *addr);
   }
   std::shared_ptr<SpaCommunicator> spaCommunicator;
   std::shared_ptr<LogicalAddress> addr;
-  std::shared_ptr<Aeroboom> boom;
 };
+
+
+TEST_F(AeroboomTest, cancelDeploy)
+{
+  LogicalAddress destination(0, 1);
+
+  std::shared_ptr<Aeroboom> boom;
+  boom = std::make_shared<Aeroboom>(spaCommunicator, *addr);
+
+  std::string payload = "deploy";
+
+  auto msg = std::make_shared<SpaData<std::string>>(
+      0,     // version
+      0,     // priority
+      *addr, // source
+      destination,
+      0,
+      0, // sequeceIndex
+      0, // sequenceCount
+      0, // xTEDS interface ID
+      0, // xTEDS messageID
+      payload);
+
+  boom->handleSpaData(msg);
+
+  payload = "cancel";
+
+  msg = std::make_shared<SpaData<std::string>>(
+      0,     // version
+      0,     // priority
+      *addr, // source
+      destination,
+      0,
+      0, // sequeceIndex
+      0, // sequenceCount
+      0, // xTEDS interface ID
+      0, // xTEDS messageID
+      payload);
+
+
+  boom->handleSpaData(msg);
+
+  EXPECT_FALSE(boom->wasConfirmed());
+}
 
 TEST_F(AeroboomTest, deployment)
 {
   LogicalAddress destination(0, 1);
+
+  std::shared_ptr<Aeroboom> boom;
+  boom = std::make_shared<Aeroboom>(spaCommunicator, *addr);
+
 
   std::string payload = "deploy";
 
@@ -63,3 +109,4 @@ TEST_F(AeroboomTest, deployment)
 
   EXPECT_TRUE(boom->wasConfirmed());
 }
+

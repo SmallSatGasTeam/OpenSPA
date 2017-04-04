@@ -19,8 +19,6 @@ public:
 
    virtual ~Aeroboom()
    {
-    delete manager;
-    manager = nullptr;
    }
 
   void appInit() 
@@ -28,7 +26,7 @@ public:
     manager = GPIO::GPIOManager::getInstance();
     pin = GPIO::GPIOConst::getInstance()->getGpioByKey("P8_10");
     auto ioSet = manager->setDirection(pin, GPIO::OUTPUT);
-    if (!ioSet) std::cout << "GPIO failed" << std::endl;
+    if (ioSet != 0) std::cout << "GPIO failed" << std::endl;
   }
 
   void sendSpaData(LogicalAddress destination)

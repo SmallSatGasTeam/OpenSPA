@@ -42,5 +42,24 @@ TEST_F(AeroboomTest, deployment)
       0, // xTEDS messageID
       payload);
 
-  EXPECT_NO_FATAL_FAILURE(boom->handleSpaData(msg));
+  boom->handleSpaData(msg);
+
+  payload = "confirm";
+
+  msg = std::make_shared<SpaData<std::string>>(
+      0,     // version
+      0,     // priority
+      *addr, // source
+      destination,
+      0,
+      0, // sequeceIndex
+      0, // sequenceCount
+      0, // xTEDS interface ID
+      0, // xTEDS messageID
+      payload);
+
+
+  boom->handleSpaData(msg);
+
+  EXPECT_TRUE(true);
 }

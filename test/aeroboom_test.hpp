@@ -23,7 +23,7 @@ public:
 };
 
 
-TEST_F(AeroboomTest, cancelDeploy)
+TEST_F(AeroboomTest, deployment)
 {
   LogicalAddress destination(0, 1);
 
@@ -63,20 +63,11 @@ TEST_F(AeroboomTest, cancelDeploy)
 
   boom->handleSpaData(msg);
 
-  EXPECT_FALSE(boom->wasConfirmed());
-}
+  auto cancelled = !boom->wasConfirmed();
 
-TEST_F(AeroboomTest, deployment)
-{
-  LogicalAddress destination(0, 1);
+  payload = "deploy";
 
-  std::shared_ptr<Aeroboom> boom;
-  boom = std::make_shared<Aeroboom>(spaCommunicator, *addr);
-
-
-  std::string payload = "deploy";
-
-  auto msg = std::make_shared<SpaData<std::string>>(
+  msg = std::make_shared<SpaData<std::string>>(
       0,     // version
       0,     // priority
       *addr, // source
@@ -107,6 +98,7 @@ TEST_F(AeroboomTest, deployment)
 
   boom->handleSpaData(msg);
 
+  EXPECT_TRUE(cancelled);
   EXPECT_TRUE(boom->wasConfirmed());
 }
 

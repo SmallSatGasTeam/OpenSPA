@@ -33,7 +33,7 @@ public:
         subscribers.reserve(8); // Default to 8 subscribers 
       }
 
-//  ~Component() {}
+  virtual ~Component() {}
   //virtual void appShutdown() = 0;
   
   void publish();

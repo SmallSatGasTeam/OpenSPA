@@ -15,7 +15,7 @@ public:
   {
     return;
   }
-  
+
   virtual void sendSpaData(LogicalAddress la)
   {
     return;

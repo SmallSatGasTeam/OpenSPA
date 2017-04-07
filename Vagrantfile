@@ -47,8 +47,32 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 
   # Set post-vagrant-up message
-	config.vm.post_up_message = "[SUCCESS] OpenSPA dev environment initizaled. You may now access the VM!"
+	config.vm.post_up_message = "
 
+                                      +?II.   
+               .?????????=          ??II~.                                      
+                ,??IIII?????.      ??III,                                      
+                   .:IIIII???I    ??IIII.                                       
+                      :~=IIII?II =?III+                                         
+                         +III7?II??I?..  .=??????????~                          
+             .+III???????????IIIII?II?????????????????IIII                     
+          .7IIIIII?????????????IIIII????IIIIIIIIII777777IIII:                   
+        7777IIIII???~.. ..~??III?I??I?II,IIIIIIII ~II77 .?7777=                 
+      777777IIII.            II??I?II?,~+=                                      
+    .?77777II+                +II~???.                                          
+   :?777777I                                                                    
+  +?I777777      ZOOO7OO$                         OOOOOOO, 78OOOOOOOO8   ,8OOO8 
+ .??777777      8O8   OOO                      .8OO+  ,OO8OO8I ZOO: OO? 8OO~OO.
+ ??I777777     8O8    8O8 .~.,.       ,..,    OOOI    I .O8 . OOO: 8O8,8OO 8O$  
+:III77777,    OOO    .OO7.OOZOO=?OZO=8OO8OO   OOOOO888:  ?   8OOOOOO ?OOOOOOO   
+IIII77777     8O8   ,OO8 88 ~O8ZO+O=$O8 OO.OZ =8888O8OO=     OOZ    8O8   OO,   
+IIII77777,    8OZ  7OOZ $O+,O8 8O? OOO. O888.      :OO8     OO8    8O8   8O8    
+II77777777    +OOOOOO,  OOOOI  .8OO~88  OO$ O8OI?O8OO7      8O7   8O8    OO:    
+I777777777I     .+:    ,O8                   OOOOO8=         $Z    .            
+7777777777II.          7OO                                                      
+77777777.        D E V     E N V I R O N M E N T     I N I T I A L I Z E D                                                                   
+,7777.
+"
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third

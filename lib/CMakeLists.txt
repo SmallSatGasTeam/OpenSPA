@@ -1,5 +1,5 @@
 # Compile all .cpp files
-file(GLOB SOURCES "*.cpp")
+file(GLOB_RECURSE SOURCES "*.cpp")
 
 # Create libOpenSpa.a static library
 add_library(OpenSpa STATIC ${SOURCES})

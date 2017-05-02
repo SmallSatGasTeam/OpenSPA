@@ -84,9 +84,9 @@ OpenSPA uses Google Test testing framework for unit testing.
 
 ## Developer Notes
 ###  Abstraction Layer
-OpenSPA is currently being developed for embedded Linux systems. In order to keep system-portability an option, we employ the use of what we call a "Platform Abstration Layer." Essentially this means that whenever we need to rely on a system call or some system-specific functionality (e.g, a Linux socket), we build a wrapper around that system-specific functionality. This limits the platform dependance to a single file, which allows OpenSPA to be usable on a wide variety of platforms.
+OpenSPA is currently being developed for embedded Linux systems. In order to keep system-portability an option, we employ the use of what we call a "Platform Abstraction Layer." Essentially this means that whenever we need to rely on a system call or some system-specific functionality (e.g, a Linux socket), we build a wrapper around that system-specific functionality. This limits the platform dependance to a single file, which allows OpenSPA to be usable on a wide variety of platforms.
 
-<!-- * Platform Abstrations live ... TODO document where these live -->
+<!-- * Platform Abstractions live ... TODO document where these live -->
 ### Testing
 OpenSPA uses Google Test for unit testing and CMake for a build system. The short version of running tests is this:
 

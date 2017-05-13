@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <string>
-#include "drivers/Adafruit_BNO055/Adafruit_BNO055.h"
 #include "../component.hpp"
 
 enum Index
@@ -18,20 +17,30 @@ enum Index
   CAMERA
 };
 
+
+/*
+ * The idea for this class to support asynchronus messaging is to have data-grabbing functions
+ * for each sensor that operate concurrently. They'll simply update a member variable that'll
+ * then be packaged and sent out with each publication.
+ */
+
 class DataSensors : public Component
 {
 public:
-  DataSensors()
+  DataSensors(std::shared_ptr<SpaCommunicator> spaCom, LogicalAddress address)
+  : Component(spaCom, address), dataPackage(8, "x")
   {
     appInit();
   }
-  void appInit();
+
+  virtual ~DataSensors() {}
+  void appInit() {}
   void sendSpaData(LogicalAddress);
   void handleSpaData(std::shared_ptr<SpaMessage>);
+  void setDataPackage(std::vector<std::string> pkg) { dataPackage = pkg; }
+  std::vector<std::string> getDataPackage() { return dataPackage; }
 private:
-  Adafruit_BNO055 sensor_gyro = Adafruit_BNO055();
-  void initGyro();
-  std::vector<std::string> dataPackage(8, "x"); 
+  std::vector<std::string> dataPackage; 
 };
 
 #endif

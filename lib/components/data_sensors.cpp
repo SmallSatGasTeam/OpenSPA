@@ -1,27 +1,30 @@
-#include <iostream>
-#include "drivers/Adafruit_BNO055/Adafruit_BNO055.h"
 #include "data_sensors.hpp"
-
-void DataSensors::initGyro()
-{
-  while (!sensor_gyro.begin())
-  {
-    std::cerr << "Couldn't detect BNO055 gyroscope!" << std::endl;
-  }
-  sensor_gyro.setExtCrystalUse(true);  
-}
-
-void DataSensors::appInit()
-{
-  initGyro();
-}
+#include "../messages/spa_data.hpp"
+#include <iostream>
 
 void DataSensors::sendSpaData(LogicalAddress destination)
 {
-  return;
+  auto msg = std::make_shared<SpaData<std::vector<std::string>>>(
+      0,       // version
+      0,       // priority
+      address, // source
+      destination,
+      dialogId,
+      0, // sequeceIndex
+      0, // sequenceCount
+      0, // xTEDS interface ID
+      0, // xTEDS messageID
+      dataPackage);
+
+  sendMsg(msg);
+
+  communicator->send(msg);
+  dataPackage = std::vector<std::string>(8, "x");
 }
 
-void DataSensors::handleSpaData(std::shared_ptr<SpaMessage>);
+void DataSensors::handleSpaData(std::shared_ptr<SpaMessage> msg)
 {
+  // if (message->payload == "takephoto") takePhoto();
+  msg = nullptr;
   return;
 }

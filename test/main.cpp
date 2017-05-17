@@ -18,6 +18,7 @@
 #include "spa_message_test.hpp"
 #include "subnet_manager_test.hpp"
 #include "aeroboom_test.hpp"
+#include "data_sensors_test.hpp"
 
 int main(int argc, char **argv)
 {

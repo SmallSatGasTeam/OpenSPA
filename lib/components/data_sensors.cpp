@@ -1,6 +1,7 @@
 #include "data_sensors.hpp"
 #include "../messages/spa_data.hpp"
 #include <iostream>
+#include <fstream>
 
 void DataSensors::sendSpaData(LogicalAddress destination)
 {
@@ -27,4 +28,19 @@ void DataSensors::handleSpaData(std::shared_ptr<SpaMessage> msg)
   // if (message->payload == "takephoto") takePhoto();
   msg = nullptr;
   return;
+}
+
+double readUV(int pin)
+{
+	double datum;
+	unsigned int voltage;
+	std::ifstream file;
+
+	file.open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw");
+	file >> voltage;
+	file.close();
+
+	datum = 5 / 1023.0 * voltage * 10;
+
+	return datum;
 }

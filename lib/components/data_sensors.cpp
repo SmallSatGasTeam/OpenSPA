@@ -30,7 +30,7 @@ void DataSensors::handleSpaData(std::shared_ptr<SpaMessage> msg)
   return;
 }
 
-double readUV(int pin)
+double readUV()
 {
 	double datum;
 	unsigned int voltage;

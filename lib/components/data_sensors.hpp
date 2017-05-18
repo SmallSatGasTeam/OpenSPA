@@ -41,7 +41,7 @@ public:
   std::vector<std::string> getDataPackage() { return dataPackage; }
 private:
   std::vector<std::string> dataPackage; 
-	double readUV(int pin);
+	double readUV();
 };
 
 #endif

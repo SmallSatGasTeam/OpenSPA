@@ -20,7 +20,7 @@ enum Index
 
 /*
  * The idea for this class to support asynchronus messaging is to have data-grabbing functions
- * for each sensor that operate concurrently. They'll simply update a member variable that'll
+ * for each sensor that operate concurrently. They'll simply update a spot in the vector that'll
  * then be packaged and sent out with each publication.
  */
 

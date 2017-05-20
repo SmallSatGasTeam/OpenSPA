@@ -1,7 +1,7 @@
 #include "data_sensors.hpp"
 #include "../messages/spa_data.hpp"
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
 void DataSensors::sendSpaData(LogicalAddress destination)
 {
@@ -32,15 +32,18 @@ void DataSensors::handleSpaData(std::shared_ptr<SpaMessage> msg)
 
 double readUV()
 {
-	double datum;
-	unsigned int voltage;
-	std::ifstream file;
+  double datum;
+  unsigned int voltage;
+  std::ifstream file;
 
-	file.open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw");
-	file >> voltage;
-	file.close();
+  // TODO See if a static filestream will do the trick here
+  file.open("/sys/bus/iio/devices/iio:device0/in_voltage0_raw");
+  file >> voltage;
+  file.close();
 
-	datum = 5 / 1023.0 * voltage * 10;
+  datum = 5 / 1023.0 * voltage * 10;
 
-	return datum;
+  return datum;
 }
+
+void DataSensors::takeUV() { dataPackage[Index::UV] = readUV(); }

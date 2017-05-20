@@ -20,7 +20,7 @@ enum Index
 
 /*
  * The idea for this class to support asynchronus messaging is to have data-grabbing functions
- * for each sensor that operate concurrently. They'll simply update a spot in the vector that'll
+ * for each sensor that operate concurrently via a thread pool. They'll simply update a spot in the vector that'll
  * then be packaged and sent out with each publication.
  */
 
@@ -41,7 +41,14 @@ public:
   std::vector<std::string> getDataPackage() { return dataPackage; }
 private:
   std::vector<std::string> dataPackage; 
-	double readUV();
+//  void takeBaro();
+//  void takeTemp_in();
+//  void takeTemp_ex();
+//  void takeLight();
+  void takeUV();
+//  void takeGyro();
+//  void takeGPS();
+//  void takePhoto();
 };
 
 #endif

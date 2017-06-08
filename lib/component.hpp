@@ -22,24 +22,24 @@ class Component
 {
 public:
   typedef std::shared_ptr<SpaCommunicator> Com;
-  
-  Component(Com communicator = nullptr, LogicalAddress address = LogicalAddress(0, 0)) 
+
+  Component(Com communicator = nullptr, LogicalAddress address = LogicalAddress(0, 0))
     : communicator(communicator),
       address(address),
       dialogId(0),
       publishIter(1)
-      
+
       {
-        subscribers.reserve(8); // Default to 8 subscribers 
+        subscribers.reserve(8); // Default to 8 subscribers
       }
 
   virtual ~Component() {}
   //virtual void appShutdown() = 0;
-  
+
   void publish();
 
   virtual void sendSpaData(LogicalAddress) = 0;
-  
+
   virtual void handleSpaData(std::shared_ptr<SpaMessage>) = 0;
   virtual void appInit() = 0;
 

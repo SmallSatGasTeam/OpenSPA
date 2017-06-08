@@ -1,14 +1,16 @@
 # OpenSPA
 
-OpenSPA is an open-source **Space Plug and Play Architecture (SPA)** services manager for Linux-based (and, eventually, non-Linux) spacecraft systems. OpenSPA allows for a more standardized and streamlined method of handling systems with many connected components by providing the neccesarry network to allow automatic discovery and communication between components. Developed with undergraduate CubeSat teams using systems such as Beaglebone Blacks, Arduinos, and Raspberry Pis in mind, OpenSPA's purpose is to make missions less costly, require less development time, and have higher success rates.
+OpenSPA is a free and open-source **Space Plug and Play Architecture (SPA)** services manager for Linux-based spacecraft systems. OpenSPA allows for a more standardized and streamlined method of handling systems with many connected components by providing the neccesarry network to allow automatic discovery and communication between components. Developed with undergraduate CubeSat teams using systems such as Beaglebone Blacks, Arduinos, and Raspberry Pis in mind, OpenSPA's purpose is to lower the bar of entry for satellite development.
 
-SPA itself is a specification for a kind of modular satellite software architecture. It is a set of standardized protocols based on the Open Systems Interconnection networking model. 
+SPA itself is a specification for a kind of modular satellite software architecture. It has a proven mission-success track record on Air Force and Space Dynamics Laboratory payloads.
 
-For a brief introduction on the inner workings of OpenSPA, see [this writeup.](https://drive.google.com/file/d/0ByiGNyJUAlpISUo5WDFwSkh3YU0/view?usp=sharing)
+For a fun introduction on the inner workings of OpenSPA, see [this illustrated writeup.](https://drive.google.com/file/d/0ByiGNyJUAlpISUo5WDFwSkh3YU0/view?usp=sharing)
 
 For a very detailed look into the machinations of SPA in general, see [Jacob Holt Christensen's dissertation.](http://digitalcommons.usu.edu/etd/1422/)
 
 ## Project Status 
+  * **Version Alpha 0.0.4a** 
+    * Added interfaces for specific hardware components
   * **Version Alpha 0.0.4**
     * Added a basic subscription service
       * Direct component-to-component subscription
@@ -39,7 +41,7 @@ OpenSPA relies on a handful of developer tools. The following is a list of thing
 ### Set up Vagrant
 OpenSPA uses Vagrant to create a development environment to match the devices that OpenSPA will run on. It also eliminiates "well, it works on my system" bugs. 
 
-**If this is your first time installing the dev environment, see the [wiki page](https://github.com/SmallSatGasTeam/OpenSPA/wiki/OpenSPA-Development-Environment) for instructions.**
+**For instructions on getting the dev environment up and running, see the [wiki page](https://github.com/SmallSatGasTeam/OpenSPA/wiki/OpenSPA-Development-Environment) for instructions.**
 
 #### Otherwise, TL;DR if you know what you're doing
 * Be sure you've cloned in the repository and are in the /OpenSPA directory

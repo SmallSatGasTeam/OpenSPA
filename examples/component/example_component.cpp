@@ -8,6 +8,9 @@ class ExampleComponent : public Component
 public:
   ExampleComponent(Component::Com com = nullptr) : Component(com) {}
 
+  virtual void handleSpaData(std::shared_ptr<SpaMessage>){}
+  virtual void sendSpaData(LogicalAddress){}
+
   virtual void appInit()
   {
     std::cout << "Example app initializing!" << '\n';

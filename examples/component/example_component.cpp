@@ -1,6 +1,7 @@
 #include <component.hpp>
 #include <iostream>
 #include <local_communicator.hpp>
+#include <spa_message.hpp>
 #include <messages/local/local_hello.hpp>
 
 class ExampleComponent : public Component
@@ -36,6 +37,14 @@ public:
     );
     sendMsg(message);
   }
+
+  static void messageCallback(uint8_t *buff, uint32_t len)
+  {
+    auto message = SpaMessage::unmarshal(buff, len);
+    std::cout << "Opcode: " << (int)message->spaHeader.opcode << '\n';
+    return;
+  }
+
 };
 
 int main()
@@ -52,5 +61,7 @@ int main()
 
   ExampleComponent comp(spaCom);
   comp.appInit();
+  comp.communicator->listen(ExampleComponent::messageCallback);
+  
   return 0;
 }

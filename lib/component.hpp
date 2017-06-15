@@ -65,9 +65,10 @@ public:
       uint32_t leasePeriod,
       uint16_t deliveryRateDivisor);
 
+  Com communicator;
+
 protected:
   LogicalAddress address;
-  Com communicator;
   uint8_t publishIter;
   uint16_t dialogId;
   std::vector<Subscriber> subscribers; // Should we make this a vector of pointers?

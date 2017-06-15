@@ -8,7 +8,10 @@
 class SubnetManager
 {
 public:
-  SubnetManager(std::shared_ptr<SpaCommunicator> com) : communicator(com) {}
+  SubnetManager(std::shared_ptr<SpaCommunicator> com)
+  {
+    communicator = com;
+  }
 
   static void messageCallback(uint8_t *, uint32_t);
 
@@ -57,7 +60,7 @@ public:
   // void runTask(Func task);
 
 protected:
-  std::shared_ptr<SpaCommunicator> communicator;
+  static std::shared_ptr<SpaCommunicator> communicator;
   // TODO add component list to store data about component health
 };
 #endif

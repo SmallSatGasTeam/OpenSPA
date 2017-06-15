@@ -107,7 +107,8 @@ I777777777I     .+:    ,O8                   OOOOO8=         $Z    .
      apt-get -y install git
      apt-get -y install vim
      apt-get -y install lightdm
-
+     apt-get -y install libboost-all-dev
+     apt-get -y install valgrind
 
   # #=== Installing and configuring GTest/GMock ==
      apt-get -y install google-mock

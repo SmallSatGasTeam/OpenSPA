@@ -2,15 +2,21 @@
 #define SUBNET_MANAGER
 
 #include <memory>
-
+#include <routing_table.hpp>
 #include <spa_communicator.hpp>
+#include <logical_address.hpp>
+#include <functional>
 
 class SubnetManager
 {
 public:
-  SubnetManager(std::shared_ptr<SpaCommunicator> com) : communicator(com) {}
+  SubnetManager(std::shared_ptr<SpaCommunicator> com, LogicalAddress log , uint16_t port)
+  {
+	communicator = com;
+	routingTable = std::make_shared<RoutingTable>(log, port);
+  }
 
-  static void messageCallback(uint8_t *, uint32_t);
+  void messageCallback(uint8_t * a, uint32_t b);
 
   // Specialization methods
   //
@@ -41,7 +47,13 @@ public:
   {
     if (communicator)
     {
-      communicator->listen(messageCallback);
+	  std::function<void(uint8_t *, uint32_t)> func = [=](uint8_t * a, uint32_t b)
+	  {
+		this->messageCallback(a,b);
+	  };
+    
+
+      communicator->listen(func);
     }
   }
 
@@ -58,6 +70,8 @@ public:
 
 protected:
   std::shared_ptr<SpaCommunicator> communicator;
+  std::shared_ptr<RoutingTable> routingTable;
+  
   // TODO add component list to store data about component health
 };
 #endif

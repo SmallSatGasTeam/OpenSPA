@@ -2,6 +2,7 @@
 #include "logical_address.hpp"
 #include "spa_message.hpp"
 #include "messages/op_codes.hpp"
+#include "messages/local/local_ack.hpp"
 #include <memory>
 
 void LocalSubnetManager::receiveMessage(std::shared_ptr<SpaMessage> message)

@@ -3,6 +3,8 @@
 
 #include <memory>
 #include <vector>
+#include <functional>
+
 
 #include "physical_communicator.hpp"
 #include "routing_table.hpp"
@@ -33,7 +35,7 @@ public:
   bool send(std::shared_ptr<SpaMessage> message);
 
   //TODO document
-  virtual void listen(PhysicalCommunicator::MessageCallback);
+  virtual void listen(std::function<void(uint8_t *, uint32_t)>);
 
 protected:
   //! Method called when something unexpected occurs.

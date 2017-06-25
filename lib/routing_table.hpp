@@ -3,11 +3,17 @@
 
 #include "logical_address.hpp"
 #include <map>
+#include <iostream>
+
+
 
 class RoutingTable
 {
 public:
-  bool insert(LogicalAddress log, uint32_t port)
+
+  RoutingTable(LogicalAddress log, uint16_t port){ if (!insert(log, port)) std::cerr << "Routing Table Construction Failure." << std::endl; }
+
+  bool insert(LogicalAddress log, uint16_t port)
   {
     routingTable[log] = port;
     return true;
@@ -22,7 +28,7 @@ public:
     return true;
   }
 
-  int32_t getPhysicalAddress(LogicalAddress log)
+  uint16_t getPhysicalAddress(LogicalAddress log)
   {
     if (exists(log) == true)
     {
@@ -32,7 +38,7 @@ public:
   }
 
 protected:
-  std::map<LogicalAddress, uint32_t, LogicalAddressCompare> routingTable;
+  std::map<LogicalAddress, uint16_t, LogicalAddressCompare> routingTable;
 };
 
 #endif

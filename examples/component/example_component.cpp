@@ -39,7 +39,7 @@ public:
     sendMsg(message);
   }
 
-  void messageCallback(uint8_t *buff, uint32_t len)
+  static void messageCallback(uint8_t *buff, uint32_t len)
   {
 	auto message = SpaMessage::unmarshal(buff, len);
 	std::cout << "Opcode: " << (int)message->spaHeader.opcode << '\n';
@@ -73,7 +73,7 @@ int main()
 
   LogicalAddress localAddress(1,0);
   
-  auto comms = { std::make_shared<LocalCommunicator>(sock, localAddress)};
+  std::vector<SpaCommunicator::Com> comms = { std::make_shared<LocalCommunicator>(sock, localAddress) };
 
   auto spaCom = std::make_shared<SpaCommunicator>(localAddress, comms);
 

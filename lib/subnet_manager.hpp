@@ -69,7 +69,7 @@ public:
   // void runTask(Func task);
 
 protected:
-  std::shared_ptr<SpaCommunicator> communicator;
+  static std::shared_ptr<SpaCommunicator> communicator;
   std::shared_ptr<RoutingTable> routingTable;
   
   // TODO add component list to store data about component health

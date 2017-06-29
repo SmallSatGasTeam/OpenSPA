@@ -5,7 +5,7 @@
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-
+/*
 #include "routing_table_test.hpp"
 #include "spa_communicator_test.hpp"
 // #include "network_communicator_test.hpp"
@@ -18,7 +18,7 @@
 #include "spa_message_test.hpp"
 #include "subnet_manager_test.hpp"
 #include "aeroboom_test.hpp"
-
+*/
 int main(int argc, char **argv)
 {
   testing::InitGoogleTest(&argc, argv);

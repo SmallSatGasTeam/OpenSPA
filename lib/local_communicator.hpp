@@ -6,7 +6,7 @@
 #include <map>
 #include <memory>
 #include <vector>
-
+#include <functional>
 #include "physical_communicator.hpp"
 #include "platform_abstraction/socket/server_socket.hpp"
 #include "routing_table.hpp"
@@ -17,19 +17,25 @@
 class LocalCommunicator : public PhysicalCommunicator
 {
 public:
+  
+  LocalCommunicator(
+      std::shared_ptr<ServerSocket> sock, 
+	  std::shared_ptr<RoutingTable> routingTable,
+      LogicalAddress la) : sock(sock), routingTable(routingTable), PhysicalCommunicator(la) { ; }
+  
   LocalCommunicator(
       std::shared_ptr<ServerSocket> sock,
-      std::shared_ptr<RoutingTable> routingTable,
-      LogicalAddress la) : sock(sock), routingTable(routingTable), PhysicalCommunicator(la) { ; }
-
+      LogicalAddress la) : sock(sock), routingTable(nullptr), PhysicalCommunicator(la) { ; }
+  
   virtual void handleFailure();
   virtual bool sendMsg(std::shared_ptr<SpaMessage> message);
 
-  virtual void listen(PhysicalCommunicator::MessageCallback);
+  virtual void listen(std::function<void(uint8_t *, uint32_t)>);
+  virtual void insertToRoutingTable(LogicalAddress log, uint32_t);
 
 protected:
-  std::shared_ptr<RoutingTable> routingTable;
   std::shared_ptr<ServerSocket> sock;
+  std::shared_ptr<RoutingTable> routingTable;
 };
 
 #endif

@@ -11,14 +11,15 @@ public:
   virtual void handleSpaData(std::shared_ptr<SpaMessage>){}
   virtual void sendSpaData(LogicalAddress){}
 
+
   virtual void appInit()
   {
     std::cout << "Example app initializing!" << '\n';
 
     uint8_t version = 0;
     uint8_t priority = 0;
-    LogicalAddress destination(1,3);
-    LogicalAddress source(1,2);
+    LogicalAddress destination(1,0);
+    LogicalAddress source(1,1);
     uint16_t flags = 0;
     uint16_t sourcePort = 8888;
     uint64_t uuid = 1;
@@ -34,12 +35,22 @@ public:
       uuid,
       componentType
     );
+	// While !ack, spam send message, once message is received. Send spa data. 
     sendMsg(message);
+  }
+
+  static void messageCallback(uint8_t *buff, uint32_t len)
+  {
+	auto message = SpaMessage::unmarshal(buff, len);
+	std::cout << "Opcode: " << (int)message->spaHeader.opcode << '\n';
+	return;
   }
 };
 
 int main()
 {
+
+  /*	
   uint16_t port = 8888;
   std::shared_ptr<ServerSocket> sock = std::make_shared<ServerSocket>();
   std::shared_ptr<RoutingTable> routingTable = std::make_shared<RoutingTable>();
@@ -52,5 +63,25 @@ int main()
 
   ExampleComponent comp(spaCom);
   comp.appInit();
+  std::cout << "Listening..." << std::endl;
+  comp.communicator->listen(ExampleComponent::messageCallback);
+
+  */
+
+  uint16_t port = 8888;
+  std::shared_ptr<ServerSocket> sock = std::make_shared<ServerSocket>();
+
+  LogicalAddress localAddress(1,0);
+  
+  std::vector<SpaCommunicator::Com> comms = { std::make_shared<LocalCommunicator>(sock, localAddress) };
+
+  auto spaCom = std::make_shared<SpaCommunicator>(localAddress, comms);
+
+  ExampleComponent comp(spaCom);
+  comp.appInit();
+  std::cout << "Listening..." << std::endl;
+  comp.communicator->listen(ExampleComponent::messageCallback);
+
+
   return 0;
 }

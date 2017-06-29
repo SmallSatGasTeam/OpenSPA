@@ -11,6 +11,8 @@ class RoutingTable
 {
 public:
 
+	RoutingTable() {}
+
   RoutingTable(LogicalAddress log, uint16_t port){ if (!insert(log, port)) std::cerr << "Routing Table Construction Failure." << std::endl; }
 
   bool insert(LogicalAddress log, uint16_t port)

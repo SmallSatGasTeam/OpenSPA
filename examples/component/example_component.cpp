@@ -21,7 +21,7 @@ public:
     LogicalAddress destination(1,0);
     LogicalAddress source(1,1);
     uint16_t flags = 0;
-    uint16_t sourcePort = 8888;
+    uint16_t sourcePort = 3000;
     uint64_t uuid = 1;
     uint8_t componentType = 1;
 
@@ -68,7 +68,6 @@ int main()
 
   */
 
-  uint16_t port = 8888;
   std::shared_ptr<ServerSocket> sock = std::make_shared<ServerSocket>();
 
   LogicalAddress localAddress(1,0);

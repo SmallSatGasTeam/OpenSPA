@@ -14,7 +14,6 @@ public:
   SubnetManager(std::shared_ptr<SpaCommunicator> com, LogicalAddress log , uint16_t port)
   {
 	communicator = com;
-	routingTable = std::make_shared<RoutingTable>(log, port);
   }
 
   void messageCallback(uint8_t * a, uint32_t b);
@@ -71,7 +70,6 @@ public:
 
 protected:
   static std::shared_ptr<SpaCommunicator> communicator;
-	std::shared_ptr<RoutingTable> routingTable;
   
   // TODO add component list to store data about component health
 };

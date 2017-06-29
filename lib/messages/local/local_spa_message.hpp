@@ -18,6 +18,7 @@ struct LocalSpaMessage : public SpaMessage
       uint16_t sourcePort) : SpaMessage(version, priority, length, destination, source, flags, opcode),
                              spaLocalHeader(sourcePort, length, opcode) {}
 
+	static std::shared_ptr<LocalSpaMessage> unmarshal1(uint8_t *, uint32_t);
   SpaLocalHeader spaLocalHeader;
 };
 #endif

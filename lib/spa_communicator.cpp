@@ -56,7 +56,8 @@ bool SpaCommunicator::send(std::shared_ptr<SpaMessage> message)
     handleFailure();
     return false;
   }
-  com->sendMsg(message);
+  if(!com->sendMsg(message)) std::cout << "DID NOT SEND" << std::endl;
+  else std::cout << "COM SENT" << std::endl;
   return true;
 }
 

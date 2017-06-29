@@ -6,6 +6,7 @@
 #include <spa_communicator.hpp>
 #include <logical_address.hpp>
 #include <functional>
+#include <messages/local/local_spa_message.hpp>
 
 class SubnetManager
 {
@@ -70,7 +71,7 @@ public:
 
 protected:
   static std::shared_ptr<SpaCommunicator> communicator;
-  std::shared_ptr<RoutingTable> routingTable;
+	std::shared_ptr<RoutingTable> routingTable;
   
   // TODO add component list to store data about component health
 };

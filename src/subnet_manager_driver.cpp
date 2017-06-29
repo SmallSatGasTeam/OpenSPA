@@ -1,6 +1,7 @@
 #include <iostream>
 #include <local_communicator.hpp>
 #include <subnet_manager.hpp>
+#include <messages/local/local_spa_message.hpp>
 
 int main(void)
 {

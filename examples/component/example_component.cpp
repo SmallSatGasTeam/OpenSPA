@@ -2,6 +2,7 @@
 #include <iostream>
 #include <local_communicator.hpp>
 #include <messages/local/local_hello.hpp>
+#include <local_component_routing_table.hpp>
 
 class ExampleComponent : public Component
 {
@@ -40,10 +41,8 @@ public:
 
 int main()
 {
-  uint16_t port = 8888;
   std::shared_ptr<ServerSocket> sock = std::make_shared<ServerSocket>();
-  std::shared_ptr<RoutingTable> routingTable = std::make_shared<RoutingTable>();
-  routingTable->insert(LogicalAddress(1, 3), 8888);
+  auto routingTable = std::make_shared<LocalComponentRoutingTable>();
 
   LogicalAddress localAddress(1, 0);
   std::vector<SpaCommunicator::Com> comms = {

@@ -17,7 +17,7 @@ void SubnetManager::messageCallback(uint8_t *buff, uint32_t len)
   if(op_LOCAL_HELLO == message->spaHeader.opcode)
   {
 	//auto castMessage = std::dynamic_pointer_cast<LocalHello>(message); 
-	routingTable->insert(message->spaHeader.source, message->spaLocalHeader.sourcePort);		
+	communicator->getLocalCommunicator()->insertToRoutingTable(message->spaHeader.source, message->spaLocalHeader.sourcePort);		
 	std::cout << "(SubnetManager::messageCallback) inserted " << message->spaHeader.source.subnetId << "," << message->spaHeader.source.componentId << " at " << message->spaLocalHeader.sourcePort << std::endl;
 
 

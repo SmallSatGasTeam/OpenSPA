@@ -20,6 +20,8 @@ public:
 
   virtual LogicalAddress getSubnetAddress() { return subnetAddress; }
 
+  virtual void insertToRoutingTable(LogicalAddress, uint32_t){};
+
   LogicalAddress subnetAddress;
 };
 #endif

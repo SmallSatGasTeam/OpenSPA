@@ -18,8 +18,8 @@ public:
 
     uint8_t version = 0;
     uint8_t priority = 0;
-    LogicalAddress destination(1,3);
-    LogicalAddress source(1,2);
+    LogicalAddress destination(1,0);
+    LogicalAddress source(1,1);
     uint16_t flags = 0;
     uint16_t sourcePort = 8888;
     uint64_t uuid = 1;

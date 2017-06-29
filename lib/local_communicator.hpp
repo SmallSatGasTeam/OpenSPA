@@ -31,6 +31,7 @@ public:
   virtual bool sendMsg(std::shared_ptr<SpaMessage> message);
 
   virtual void listen(std::function<void(uint8_t *, uint32_t)>);
+  virtual void insertToRoutingTable(LogicalAddress log, uint32_t);
 
 protected:
   std::shared_ptr<ServerSocket> sock;

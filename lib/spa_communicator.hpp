@@ -37,6 +37,8 @@ public:
   //TODO document
   virtual void listen(std::function<void(uint8_t *, uint32_t)>);
 
+  Com getLocalCommunicator();
+
 protected:
   //! Method called when something unexpected occurs.
   void handleFailure();
@@ -49,7 +51,6 @@ protected:
   Com selectCommunicator(LogicalAddress address, std::vector<Com> const &communicators);
 
   //TODO document
-  Com getLocalCommunicator();
 
   LogicalAddress currentAddress;
   std::vector<Com> communicators;

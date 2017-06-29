@@ -49,3 +49,8 @@ void LocalCommunicator::listen(std::function<void(uint8_t *, uint32_t)> messageH
   }
   sock->listen(messageHandler);
 }
+
+void LocalCommunicator::insertToRoutingTable(LogicalAddress log, uint32_t port)
+{
+  routingTable->insert(log,port);
+}

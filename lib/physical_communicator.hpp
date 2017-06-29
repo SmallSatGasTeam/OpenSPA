@@ -2,6 +2,8 @@
 #ifndef PHYSICAL_COMMUNICATOR_HPP
 #define PHYSICAL_COMMUNICATOR_HPP
 
+#include <functional>
+
 #include "logical_address.hpp"
 #include "spa_message.hpp"
 
@@ -14,9 +16,11 @@ public:
 
   virtual ~PhysicalCommunicator() {}
   virtual bool sendMsg(std::shared_ptr<SpaMessage> message) { return false; }
-  virtual void listen(PhysicalCommunicator::MessageCallback) {}
+  virtual void listen(std::function<void(uint8_t *, uint32_t)>) {}
 
   virtual LogicalAddress getSubnetAddress() { return subnetAddress; }
+
+  virtual void insertToRoutingTable(LogicalAddress, uint32_t){};
 
   LogicalAddress subnetAddress;
 };

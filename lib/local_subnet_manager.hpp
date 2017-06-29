@@ -11,7 +11,7 @@
 class LocalSubnetManager : public SubnetManager
 {
 public:
-  LocalSubnetManager(std::shared_ptr<SpaCommunicator> c) : SubnetManager(c) {}
+  LocalSubnetManager(std::shared_ptr<SpaCommunicator> c, LogicalAddress log, uint16_t port) : SubnetManager(c, log, port) {}
   void receiveMessage(std::shared_ptr<SpaMessage> message);
   ComponentList components;
 };

@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <functional>
 #include "spa_communicator.hpp"
 
 SpaCommunicator::SpaCommunicator(LogicalAddress currentAddress) : currentAddress(currentAddress) {}
@@ -56,12 +56,13 @@ bool SpaCommunicator::send(std::shared_ptr<SpaMessage> message)
     handleFailure();
     return false;
   }
-  com->sendMsg(message);
+  if(!com->sendMsg(message)) std::cout << "DID NOT SEND" << std::endl;
+  else std::cout << "COM SENT" << std::endl;
   return true;
 }
 
 //TODO document
-void SpaCommunicator::listen(PhysicalCommunicator::MessageCallback messageHandler)
+void SpaCommunicator::listen(std::function<void(uint8_t *, uint32_t)> messageHandler)
 {
   SpaCommunicator::Com com = getLocalCommunicator();
   if (com == nullptr)

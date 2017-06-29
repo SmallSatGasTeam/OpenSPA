@@ -3,7 +3,7 @@
 #include <stdio.h>  //printf
 #include <string.h> //memset
 #include <thread>
-
+#include <functional>
 #include "socket.hpp"
 
 #define BUFLEN 512 //Max length of buffer
@@ -29,7 +29,7 @@ public:
     return true;
   }
 
-  virtual void listen(ServerSocket::MessageCallback connectionHandler)
+  virtual void listen(std::function<void(uint8_t *, uint32_t)> connectionHandler)
   {
     //TODO check fd for errors
     uint8_t buf[BUFLEN];

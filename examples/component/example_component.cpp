@@ -2,6 +2,7 @@
 #include <iostream>
 #include <local_communicator.hpp>
 #include <messages/local/local_hello.hpp>
+#include <local_component_routing_table.hpp>
 
 class ExampleComponent : public Component
 {
@@ -35,7 +36,7 @@ public:
       uuid,
       componentType
     );
-	// While !ack, spam send message, once message is received. Send spa data. 
+	// While !ack, spam send message, once message is received. Send spa data.
     sendMsg(message);
   }
 
@@ -49,12 +50,8 @@ public:
 
 int main()
 {
-
-  /*	
-  uint16_t port = 8888;
   std::shared_ptr<ServerSocket> sock = std::make_shared<ServerSocket>();
-  std::shared_ptr<RoutingTable> routingTable = std::make_shared<RoutingTable>();
-  routingTable->insert(LogicalAddress(1, 3), 8888);
+  auto routingTable = std::make_shared<LocalComponentRoutingTable>();
 
   LogicalAddress localAddress(1, 0);
   std::vector<SpaCommunicator::Com> comms = {
@@ -65,23 +62,6 @@ int main()
   comp.appInit();
   std::cout << "Listening..." << std::endl;
   comp.communicator->listen(ExampleComponent::messageCallback);
-
-  */
-
-  uint16_t port = 8888;
-  std::shared_ptr<ServerSocket> sock = std::make_shared<ServerSocket>();
-
-  LogicalAddress localAddress(1,0);
-  
-  std::vector<SpaCommunicator::Com> comms = { std::make_shared<LocalCommunicator>(sock, localAddress) };
-
-  auto spaCom = std::make_shared<SpaCommunicator>(localAddress, comms);
-
-  ExampleComponent comp(spaCom);
-  comp.appInit();
-  std::cout << "Listening..." << std::endl;
-  comp.communicator->listen(ExampleComponent::messageCallback);
-
 
   return 0;
 }

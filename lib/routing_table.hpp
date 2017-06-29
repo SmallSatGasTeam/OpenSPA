@@ -42,7 +42,7 @@ public:
   }
 */
 
-  uint16_t getPhysicalAddress(LogicalAddress log)
+  virtual int32_t getPhysicalAddress(LogicalAddress log)
   {
     if (exists(log) == true)
     {
